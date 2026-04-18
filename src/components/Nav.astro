@@ -2,17 +2,17 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/olilogo.png';
 const navLinks = [
-  { link: "/OPF-Web/convocatoria", label: "Convocatoria" },
-  { link: "/OPF-Web/recursos",       label: "Recursos" },
-  { link: "/OPF-Web/resultados",     label: "Resultados" },
-  { link: "/OPF-Web/nosotros",       label: "Nosotros" },
+  { link: "/convocatoria", label: "Convocatoria" },
+  { link: "/recursos",       label: "Recursos" },
+  { link: "/resultados",     label: "Resultados" },
+  { link: "/nosotros",       label: "Nosotros" },
 ];
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <div class="bar"></div>
 <nav aria-label="Navegación principal">
-  <a href="/OPF-Web" class:list={[{ active: currentPath === "/OPF-Web" }]} aria-label="Olimpiada Potosina de Física">
+  <a href="/" class:list={[{ active: currentPath === "/" }]} aria-label="Olimpiada Potosina de Física">
     <Image src={logo} alt="OPF" loading="eager" />
   </a>
 
