@@ -1,6 +1,177 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Acá van los puestos chingones
+const ganadores = [
+  { puesto: "1er Lugar", nombre: "[Pendiente]", escuela: "[Pendiente]", medalla: "https://file.garden/aePYyTdpTQfC0KX_/OPFGold.png" },
+  { puesto: "2do Lugar", nombre: "[Pendiente]", escuela: "[Pendiente]", medalla: "https://file.garden/aePYyTdpTQfC0KX_/OPFSilver.png" },
+  { puesto: "3er Lugar", nombre: "[Pendiente]", escuela: "[Pendiente]", medalla: "https://file.garden/aePYyTdpTQfC0KX_/OPFBronze.png" }
+];
+
+// Acá va el resto cfff
+const resultadosGenerales = [
+  { posicion: 4, folio: "[Pendiente]", escuela: "[Pendiente]", resultado: "[Pendiente]" },
+  { posicion: 5, folio: "[Pendiente]", escuela: "[Pendiente]", resultado: "[Pendiente]" },
+  { posicion: 6, folio: "[Pendiente]", escuela: "[Pendiente]", resultado: "[Pendiente]" },
+  { posicion: 7, folio: "[Pendiente]", escuela: "[Pendiente]", resultado: "[Pendiente]" },
+  { posicion: 8, folio: "[Pendiente]", escuela: "[Pendiente]", resultado: "[Pendiente]" }
+];
 ---
 
 <Layout>
+  <main class="contenedor-resultados">
+    <h1 class="titulo">Resultados de la Olimpiada</h1>
+    <p class="subtitulo">Conoce a los perfiles destacados de esta edición.</p>
+
+<section class="podio">
+      {ganadores.map((alumno) => (
+        <div class="tarjeta motion-hover">
+          <div class="medalla">
+            <img src={alumno.medalla} alt={`Medalla de ${alumno.puesto}`} />
+          </div>
+          <h2>{alumno.nombre}</h2>
+          <hr />
+          <p class="escuela">{alumno.escuela}</p>
+        </div>
+      ))}
+    </section>
+
+<section class="seccion-tabla">
+      <h2 class="subtitulo-tabla">Tabla General de Posiciones</h2>
+      
+      <div class="tabla-responsiva">
+        <table class="tabla-resultados">
+          <thead>
+            <tr>
+              <th>Posición</th>
+              <th>Folio</th>
+              <th>Escuela</th>
+              <th>resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {resultadosGenerales.map((alumno) => (
+              <tr>
+                <td><strong>{alumno.posicion}</strong></td>
+                <td>{alumno.folio}</td>
+                <td>{alumno.escuela}</td>
+                <td>{alumno.resultado}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
 </Layout>
+
+
+<! -- Estilo de tabla pq no sé si el Mina ya hizo un estilo estándar para tablas cfff -->
+<style>
+  /* General */
+  .contenedor-resultados {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .titulo {
+    font-size: 2.8rem;
+    color: var(--azul-uaslp);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitulo {
+    color: var(--naranja);
+    font-size: 1.2rem;
+  }
+
+  /* Podio */
+  .podio {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .tarjeta {
+    background-color: var(--crema);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--gris);
+    display: inline-block; 
+    cursor: pointer;
+    flex: 1; 
+  }
+
+  .tarjeta h2 {
+    color: var(--negro);
+    margin-bottom: 0.5rem;
+  }
+
+  .escuela {
+    color: var(--verde);
+    font-weight: bold;
+  }
+
+  .medalla {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .seccion-tabla {
+    text-align: left;
+  }
+
+  .subtitulo-tabla {
+    font-size: 1.8rem;
+    color: var(--azul-uaslp);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .tabla-responsiva {
+    overflow-x: auto;
+    background-color: var(--crema);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--gris);
+  }
+
+  .tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .tabla-resultados th,
+  .tabla-resultados td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid var(--gris);
+  }
+
+  .tabla-resultados th {
+    background-color: var(--azul-uaslp);
+    color: var(--crema);
+    font-weight: 600;
+  }
+
+  .tabla-resultados tbody tr:hover {
+    background-color: var(--crema);
+  }
+
+  .medalla {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .medalla img {
+    width: 66px;
+    height: auto;
+    object-fit: contain;
+  }
+</style>
