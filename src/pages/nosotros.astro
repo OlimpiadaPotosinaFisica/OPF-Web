@@ -1,6 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
+<style>
+  /* Aquí defines toda la apariencia */
+  .cuadro-informativo {
+    border: 2px solid var(--naranja);
+    padding: 20px;
+    background-color: var(#F7F5EF);
+    border-radius: 8px;
+    margin: 10px 0;
+  }
+
+  .cuadro-informativo h2 {
+    margin-top: 0;
+  }
+
+  .cuadro-informativo p {
+    line-height: 1.6;
+  }
+</style> 
 
 <Layout>
+    <div class="cuadro-informativo">
+    <h2>¿Quienes somos?</h2>
+    <p>
+      La <strong>Olimpiadas Potosinas de Física</strong>. 
+      es una competencia a nivel estatal que tiene como objetivo fomentar el
+     interés por la ciencia, detectar talentos jóvenes y encontrar a los que 
+     posteriormente seran representantes de San Luis Potosi en la <strong>Olimpiada Mexicana de Física</strong>
+
+    
+    </p>
+  </div>
 </Layout>
+ 

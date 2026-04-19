@@ -1,6 +1,157 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import qr from '../assets/qr-code.png';
 ---
-
 <Layout>
+  <main class="grid-convocatoria">
+    <div class="columna-izquierda">
+      <section class="seccion-borde verde">
+        <h3 class="titulo">PARTICIPA</h3>
+        <p class="descripcion">
+          Se aplicará un examen selectivo en modalidad <strong>presencial</strong> en la 
+          <strong>Facultad de Ciencias</strong> campus pedregal de la UASLP a todas las personas
+          que se hayan inscrito previamente
+        </p>
+        <div class="tarjeta-crema">
+          <div class="fecha-header">📅 FECHA DEL SELECTIVO</div>
+          <div class="fecha-body">
+            <span>02 / 05 / 2026</span>
+            <span>10:00 am</span>
+          </div>
+        </div>
+        <p class="nota">Para entidades fuera de la capital favor de contactar a un asesor.</p>
+      </section>
+
+      <section class="seccion-borde naranja">
+        <h3 class="titulo">INSCRÍBETE</h3>
+        <p>Regístrate usando el siguiente formulario:</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSflTn_NNWJ7HysPiwiGD6nd9SbzhUTZOJUWtm1ywdAX-19TFg/viewform" class="link">https://forms.gle/Jh9qiGiP3qfuQcAw9</a>
+        <div class="contenedor-qr">
+         <p class="texto-qr">
+      Al registrarte <strong>ten a la mano</strong> tu constancia de estudios vigente 
+      (ciclo escolar 2023-2024), en formato PDF.
+         </p>
+         <Image src={qr} alt="codigo-qr" />
+       </div>
+      </section>
+      
+    </div>
+
+    <div class="columna-derecha">
+      <section class="seccion-borde negro">
+        <h3 class="titulo">BASES</h3>
+        <ol class="lista-bases">
+          <li><span>(1)</span>Estar inscrito en alguna institución de educación secundaria o
+        bachillerato incorporada al plan de estudios vigente del estado de
+        San Luis Potosí, <strong>desde el segundo año de secundaria hasta el
+        penúltimo año de bachillerato.</strong></li>
+          <li><span>(2)</span> No estar inscrito en ninguna institución de educación superior
+        <strong>para noviembre 2026.</strong></li>
+          <li><span>(3)</span>El registro deberá contener: nombre completo, nivel de estudio,
+        institución de procedencia y una <strong>constancia</strong> que avale el nivel
+        de estudio que cursa o su credencial escolar. </li>
+        </ol>
+      </section>
+    </div>
+
+  </main>
 </Layout>
+
+<style>
+    img {width: 200px; height: auto;}
+  /* Estilo de las columnas */
+  .grid-convocatoria {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; 
+    max-width: 1000px;
+    margin: 50px auto;
+    font-family: 'Times New Roman', serif;
+    padding: 30px;
+  }
+
+  /* Estilo base para las secciones con línea lateral */
+  .seccion-borde {
+    padding-left: 20px;
+    margin-bottom: 30px;
+    border-left: 6px solid;
+  }
+
+  /* Colores de las líneas */
+  .verde { border-left-color: var(--verde); }
+  .naranja { border-left-color: var(--naranja); }
+  .negro { border-left-color: var(--negro); }
+
+  .titulo {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+
+  .verde .titulo { color: var(--verde); }
+  .naranja .titulo { color: var(--naranja); }
+
+  /* Ajustes para la tarjeta de fecha */
+  .tarjeta-crema {
+    background: #f1e7d0;
+    border: 1px solid #d4c5a9;
+    border-radius: 10px;
+    max-width: 480px; /* O el ancho que prefieras */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  .fecha-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: var(--naranja); 
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  } 
+
+  .fecha-body {
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    font-size: 1.4rem;
+    background:#f1e7d0;;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  /* Estilo para las bases (Columna derecha) */
+  .lista-bases {
+    list-style: none;
+    padding: 0;
+  }
+
+  .lista-bases li {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: justify; 
+    display: block;
+  }
+
+  .lista-bases span {
+    color: var(--naranja);
+    font-weight: bold;
+    margin-right: 10px;  
+    display: inline;
+  }
+
+  .lista-bases strong {
+  display: inline;     /* Forzamos a que no salte de línea */
+}
+
+  /* Responsive: Si la pantalla es chica, se pone uno debajo de otro */
+  @media (max-width: 768px) {
+    .grid-convocatoria {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

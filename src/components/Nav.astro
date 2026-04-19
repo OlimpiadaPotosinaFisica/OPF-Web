@@ -74,7 +74,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     transform-origin: top center;
     margin-top: -16px;
     z-index: 101;
-    padding: 8px 0.6rem 0;
+    padding: 0 0.6rem;
     background:
       linear-gradient(var(--crema), var(--crema)) padding-box,
       linear-gradient(var(--naranja), var(--naranja)) border-box;
@@ -105,6 +105,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     padding: 0.5rem;
     z-index: 200;
   }
+
   #menu-toggle span {
     display: block;
     width: 26px;
@@ -123,15 +124,23 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
   @media (max-width: 600px) {
     nav {
-      padding: 0.5rem 1rem 0;
+      padding: 0.5em 0rem 0rem 1rem;
       flex-wrap: wrap;
       height: auto;
       min-height: 60px;
       align-items: center;
     }
 
+    img { width: 40px; }
+
+    a.active {
+      margin-top: -26px;
+      padding: 20px 0.6rem 8px;
+    }
+
     #menu-toggle {
       display: flex;
+      padding-right: 1.5em;
     }
 
     /* Menú desplegable */
@@ -140,8 +149,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
       flex-direction: column;
       width: 100%;
       background: var(--crema);
-      border-top: 2px solid var(--naranja);
-      padding: 0.5rem 0 1rem;
+      margin-top: 8px;
       gap: 0;
     }
 
@@ -150,19 +158,16 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     }
 
     #nav-links a {
-      font-size: 1.2em;
-      padding: 0.6rem 1rem;
-      margin-top: 0 !important; /* cancela el active tab en mobile */
-      border-radius: 8px;
+      font-size: 1em;
+      padding: 0.5rem;
+      margin: 0;
     }
 
     /* En mobile el tab activo se muestra como fondo simple */
     #nav-links a.active {
-      margin-top: 0;
-      background: var(--naranja);
-      color: var(--crema);
-      border: none;
-      padding: 0.6rem 1rem;
+      border: solid 4px var(--naranja);
+      border-right: none;
+      border-radius: 8px 0px 0px 8px;
     }
   }
 </style>
