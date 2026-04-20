@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { parse } from 'csv-parse/browser/esm/sync';
+import { Image } from 'astro:assets';
+import Oro from '../assets/medallas/OPFOro.png';
+import Plata from '../assets/medallas/OPFPlata.png';
+import Bronce from '../assets/medallas/OPFBronce.png';
 
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSS80-GOI4CzYSU93h6tAARle7NjcbZGz-YVuArz2rElPvsSj8AsDzTKwqrDy1VhsYyf7TSoKIpIDaK/pub?gid=0&single=true&output=csv';
 
@@ -24,11 +29,8 @@ interface Participante {
 
 const ParticipantesOrdenados = [...RawCal].sort((a, b) => b.cal - a.cal);
 
-const Medallas = [
-  "https://file.garden/aePYyTdpTQfC0KX_/OPFGold.png",
-  "https://file.garden/aePYyTdpTQfC0KX_/OPFSilver.png",
-  "https://file.garden/aePYyTdpTQfC0KX_/OPFBronze.png"
-];
+const Medallas = [Oro, Plata, Bronce];
+const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
 
 const podiog = ParticipantesOrdenados.slice(0, 3).map((participante, index) => ({
   puesto: NPodio[index],
@@ -56,7 +58,7 @@ const GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
           {podiog.map((participante) => (
             <div class="tarjeta motion-hover">
               <div class="medalla">
-                <img src={participante.medalla} alt={`Medalla de ${participante.puesto}`} />
+                <Image src={participante.medalla} alt={`Medalla de ${participante.puesto}`} />
               </div>
               <h2>{participante.nombre}</h2>
               <hr />
