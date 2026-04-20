@@ -30,18 +30,18 @@ const Medallas = [
   "https://file.garden/aePYyTdpTQfC0KX_/OPFBronze.png"
 ];
 
-const podiog = ParticipantesOrdenados.slice(0, 3).map((alumno, index) => ({
+const podiog = ParticipantesOrdenados.slice(0, 3).map((participante, index) => ({
   puesto: NPodio[index],
-  nombre: alumno.nombre,
-  escuela: alumno.escuela,
+  nombre: participante.nombre,
+  escuela: participante.escuela,
   medalla: Medallas[index]
 }));
 
-const GRes = ParticipantesOrdenados.slice(3).map((alumno, index) => ({
+const GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
   posicion: index + 4,
-  folio: alumno.folio,
-  escuela: alumno.escuela,
-  resultado: alumno.cal}));
+  folio: participante.folio,
+  escuela: participante.escuela,
+  resultado: participante.cal}));
 ---
 
 <Layout>
@@ -53,14 +53,14 @@ const GRes = ParticipantesOrdenados.slice(3).map((alumno, index) => ({
         <p class="subtitulo">Conoce a los perfiles destacados de esta edición.</p>
 
         <section class="podio">
-          {podiog.map((alumno) => (
+          {podiog.map((participante) => (
             <div class="tarjeta motion-hover">
               <div class="medalla">
-                <img src={alumno.medalla} alt={`Medalla de ${alumno.puesto}`} />
+                <img src={participante.medalla} alt={`Medalla de ${participante.puesto}`} />
               </div>
-              <h2>{alumno.nombre}</h2>
+              <h2>{participante.nombre}</h2>
               <hr />
-              <p class="escuela">{alumno.escuela}</p>
+              <p class="escuela">{participante.escuela}</p>
             </div>
           ))}
         </section>
