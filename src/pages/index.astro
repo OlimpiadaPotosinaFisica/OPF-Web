@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Etiqueta from '../components/Etiqueta.astro';
+import Tarjeta from '../components/Tarjeta.astro';
 ---
 
 <Layout formulas={false}>
@@ -19,38 +20,34 @@ import Etiqueta from '../components/Etiqueta.astro';
     </div>
   </section>
 
-  <section class="info-general motion-fadein">
-    <div class="contenedor">
-      <h2>¿Qué es la OPF?</h2>
-      <p>
-        La Olimpiada Potosina de Física es un certamen anual dirigido a estudiantes de nivel medio superior en San Luis Potosí. Nuestro objetivo es promover el estudio de la física, identificar talentos jóvenes y seleccionar a los mejores perfiles para conformar la delegación estatal que participará en la Olimpiada Nacional.
-      </p>
-    </div>
-  </section>
+  <Tarjeta>
+    <h2>¿Qué es la OPF?</h2>
+    <p>
+      La Olimpiada Potosina de Física es un certamen anual dirigido a estudiantes de nivel medio superior en San Luis Potosí. Nuestro objetivo es promover el estudio de la física, identificar talentos jóvenes y seleccionar a los mejores perfiles para conformar la delegación estatal que participará en la Olimpiada Nacional.
+    </p>
+  </Tarjeta>
 
   <section class="fechas motion-fadein">
     <div class="contenedor">
       <h2 class="centrado">Fechas Importantes</h2>
       <div class="grid-fechas">
         
-        <div class="tarjeta-fecha">
+        <Tarjeta alineado="center">
           <h3>Cierre de Inscripciones</h3>
           <p class="fecha-texto">[Pendiente]</p>
-        </div>
-
+        </Tarjeta>
 
         <! -- Ejemplo de fecha, pegar las etiquetas faltantes a las otras si quieren cfff -->
-        <div class="tarjeta-fecha destacada motion-hover">
-          <div class="etiqueta-alerta">¡Próximamente!</div>
+        <Tarjeta titulo="¡Próximamente!" acento="naranja" alineado="center" class="motion-hover">
           <h3>Examen Selectivo Estatal</h3>
           <p class="fecha-texto principal">02 / 05 / 2026</p>
           <p class="hora-texto">10:00 a.m.</p>
-        </div>
+        </Tarjeta>
 
-        <div class="tarjeta-fecha">
+        <Tarjeta alineado="center">
           <h3>Inicio de Entrenamientos</h3>
           <p class="fecha-texto">[Pendiente]</p>
-        </div>
+        </Tarjeta>
 
       </div>
     </div>
@@ -153,33 +150,6 @@ import Etiqueta from '../components/Etiqueta.astro';
     gap: 2rem;
     margin-top: 3rem;
   }
-  .tarjeta-fecha {
-    background-color: #ffffff;
-    border: 1px solid var(--gris);
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    position: relative;
-  }
-  .tarjeta-fecha.destacada {
-    border: 2px solid var(--naranja);
-    box-shadow: 0 8px 20px rgba(184, 80, 37, 0.15);
-    transform: translateY(-10px);
-  }
-  .etiqueta-alerta {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--naranja);
-    color: white;
-    padding: 0.2rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    white-space: nowrap;
-  }
   .icono {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -253,9 +223,6 @@ import Etiqueta from '../components/Etiqueta.astro';
   @media (max-width: 640px) {
     section.hero {
       padding: 3rem 1rem;
-    }
-    .tarjeta-fecha.destacada {
-      transform: translateY(0);
     }
   }
 </style>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Tarjeta from '../components/Tarjeta.astro';
 
 const temas = [
   {
@@ -56,7 +57,7 @@ const temas = [
 
     <section class="grid-temas motion-fadein">
       {temas.map((bloque) => (
-        <div class="tarjeta-tema">
+        <Tarjeta>
           <div class="cabecera-tarjeta">
             <h2>{bloque.area}</h2>
           </div>
@@ -67,7 +68,7 @@ const temas = [
               <li>{subtema}</li>
             ))}
           </ul>
-        </div>
+        </Tarjeta>
       ))}
     </section>
 
@@ -124,17 +125,6 @@ const temas = [
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-bottom: 6rem;
-  }
-
-  .tarjeta-tema {
-    background-color: #ffffff;
-    border: 1px solid var(--gris);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-    height: 90%;
-    display: flex;
-    flex-direction: column;
   }
 
   .cabecera-tarjeta {
