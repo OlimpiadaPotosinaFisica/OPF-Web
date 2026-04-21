@@ -6,9 +6,10 @@ import { colores } from "../config/colores";
 interface Props extends HTMLAttributes<'section'> {
   acento?: Color;
   titulo: string;
+  alineacion
 }
 
-const { class: className, acento = "negro", titulo, ...atributos } = Astro.props;
+const { class: className, acento = "negro", titulo, alineacion = "inherit" , ...atributos } = Astro.props;
 ---
 
 <section>
@@ -49,10 +50,10 @@ const { class: className, acento = "negro", titulo, ...atributos } = Astro.props
   });
 </script>
 
-<style define:vars={{ acento: colores[acento] }}>
+<style define:vars={{ acento: colores[acento], alineacion: alineacion }}>
   section {
     display: flex;
-    justify-content: center;
+    justify-content: var(--alineacion);
     gap: 1em;
     margin: 10px;
   }

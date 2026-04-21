@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Etiqueta from '../components/Etiqueta.astro';
 import Boton1 from '../components/Boton1.astro';
 import Tarjeta1 from '../components/Tarjeta1.astro';
+import Tarjeta from '../components/Tarjeta.astro';
 ---
 
 <Layout formulas={false}>
@@ -21,14 +22,12 @@ import Tarjeta1 from '../components/Tarjeta1.astro';
     </div>
   </section>
 
-  <section class="info-general motion-fadein">
-    <div class="contenedor">
-      <h2>¿Qué es la OPF?</h2>
-      <p>
-        La Olimpiada Potosina de Física es un certamen anual dirigido a estudiantes de nivel medio superior en San Luis Potosí. Nuestro objetivo es promover el estudio de la física, identificar talentos jóvenes y seleccionar a los mejores perfiles para conformar la delegación estatal que participará en la Olimpiada Nacional.
-      </p>
-    </div>
-  </section>
+  <Tarjeta>
+    <h2>¿Qué es la OPF?</h2>
+    <p>
+      La Olimpiada Potosina de Física es un certamen anual dirigido a estudiantes de nivel medio superior en San Luis Potosí. Nuestro objetivo es promover el estudio de la física, identificar talentos jóvenes y seleccionar a los mejores perfiles para conformar la delegación estatal que participará en la Olimpiada Nacional.
+    </p>
+  </Tarjeta>
 
   <section class="fechas motion-fadein">
     <div class="contenedor">
@@ -235,9 +234,6 @@ import Tarjeta1 from '../components/Tarjeta1.astro';
   @media (max-width: 640px) {
     section.hero {
       padding: 3rem 1rem;
-    }
-    .tarjeta-fecha.destacada {
-      transform: translateY(0);
     }
   }
 </style>

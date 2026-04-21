@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+import Etiqueta from '../components/Etiqueta.astro';
+import Seccion from '../components/Seccion.astro';
 
 const temas = [
   {
@@ -49,34 +52,32 @@ const temas = [
   <main class="contenedor-temario">
     
     <header class="cabecera motion-fadein">
-      <h1 class="titulo">Temario</h1>
-      <p class="subtitulo">Conoce los conceptos y áreas de estudio que podrían conforman el Examen Selectivo Estatal.</p>
-      <hr />
+      <h1>Temario</h1>
+      <p>Conoce los conceptos y áreas de estudio que podrían conforman el Examen Selectivo Estatal.</p>
     </header>
 
     <section class="grid-temas motion-fadein">
       {temas.map((bloque) => (
-        <div class="tarjeta-tema">
+        <Tarjeta>
           <div class="cabecera-tarjeta">
             <h2>{bloque.area}</h2>
           </div>
           <p class="descripcion-tema">{bloque.descripcion}</p>
           
-          <ul class="lista-subtemas">
+          <ul>
             {bloque.subtemas.map((subtema) => (
               <li>{subtema}</li>
             ))}
           </ul>
-        </div>
+        </Tarjeta>
       ))}
     </section>
 
-    <div class="nota-descarga motion-fadein">
-      <div class="texto-descarga">
-        <h3>¿Prefieres estudiarlo sin conexión?</h3>
-        <p>Descarga el documento completo</p>
-      </div>
-      <a href="/Temario.pdf" target="_blank" class="btn-descarga">Descargar Temario en PDF &darr;</a>
+    <div class="descarga">
+    <Seccion titulo="¿Prefieres estudiarlo sin conexión?">
+      <p>Descarga el documento completo</p>
+    </Seccion>
+    <Etiqueta href="/Temario.pdf" target="_blank" colorFondo="naranja">Descargar Temario en PDF &darr;</a>
     </div>
 
   </main>
@@ -95,23 +96,22 @@ const temas = [
 </script>
 
 <style>
-  .contenedor-temario {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem;
-  }
-
   /* === Cabecera === */
   .cabecera {
     text-align: center;
     margin-bottom: 3rem;
   }
-  .titulo {
+
+  h1 {
     font-size: 3rem;
-    color: var(--azul-uaslp);
     margin-bottom: 0.5rem;
   }
-  .subtitulo {
+
+  h2 {
+    color: var(--azulUaslp)
+  }
+
+  .cabecera p {
     color: var(--naranja);
     font-size: 1.2rem;
     max-width: 600px;
@@ -126,122 +126,47 @@ const temas = [
     margin-bottom: 6rem;
   }
 
-  .tarjeta-tema {
-    background-color: #ffffff;
-    border: 1px solid var(--gris);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cabecera-tarjeta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .icono {
-    font-size: 2.2rem;
-  }
-
-  .tarjeta-tema h2 {
-    color: var(--azul-uaslp);
-    font-size: 1.4rem;
-    margin: 0;
-  }
-
   /* Estilo para la nueva síntesis */
   .descripcion-tema {
     color: var(--negro);
     font-size: 0.95rem;
-    line-height: 1.5;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--gris);
     font-style: italic;
   }
 
-  .lista-subtemas {
+  ul {
     list-style: none;
     padding: 0;
-    margin: 0;
-    flex-grow: 1;
   }
 
-  .lista-subtemas li {
-    color: var(--negro);
+  ul li {
     margin-bottom: 0.8rem;
     padding-left: 1.5rem;
     position: relative;
     line-height: 1.3;
-    font-size: 0.95rem;
   }
 
-  .lista-subtemas li::before {
+  ul li::before {
     content: "•";
     color: var(--dorado);
-    font-weight: bold;
     font-size: 1.5rem;
     position: absolute;
     left: 0;
     top: -5px;
   }
 
-  /* === Zona de Descarga === */
-  .nota-descarga {
-    background-color: var(--crema);
-    border: 2px dashed var(--dorado);
-    border-radius: 12px;
-    padding: 2rem;
+  .descarga { 
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .texto-descarga {
-    flex: 1 1 400px;
-  }
-
-  .texto-descarga h3 {
-    color: var(--azul-uaslp);
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-  }
-
-  .btn-descarga {
-    background-color: var(--naranja);
-    color: #ffffff;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    text-align: center;
   }
 
   /* Ajustes cfff */
-  @media (max-width: 768px) {
-    .nota-descarga {
+  @media (max-width: 780px) {
+    .descarga { 
       flex-direction: column;
-      padding: 1.5rem;
-      gap: 1rem;
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .texto-descarga {
-      flex: none;
-      width: 100%;
-    }
-
-    .btn-descarga {
-      width: 100%;
-      box-sizing: border-box;
     }
   }
 </style>
