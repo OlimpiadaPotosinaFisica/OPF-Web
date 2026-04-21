@@ -1,0 +1,74 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { Color } from "../config/colores";
+import { colores } from "../config/colores";
+
+interface Props extends HTMLAttributes<'section'> {
+  acento?: Color;
+  titulo: string;
+}
+
+const { class: className, acento = "negro", titulo, ...atributos } = Astro.props;
+---
+
+<section>
+  <hr>
+  <div>
+    <h2>{titulo}</h1>
+    <slot />
+  </div>
+</section>
+
+<script>
+  import { inView, animate } from "motion";
+
+  inView("hr", (linea) => {
+    const contenido = linea.nextElementSibling;
+    const h = contenido.scrollHeight;
+
+    // Desaparece el contenido de la seccion
+    animate(contenido, { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { duration: 0 });
+
+    // Aparece linea hacia abajo
+    animate(linea,
+      { height: ["0px", h + "px"] },
+      { duration: 0.35, easing: [0.4, 0, 0.2, 1] }
+    );
+
+    // Aparece contenido hacia la derecha 
+    setTimeout(() => {
+      animate(contenido,
+        {
+          clipPath: ["inset(0 100% 0 0)", "inset(0 0% 0 0)"],
+          opacity: [0, 1],
+          transform: ["translateX(-8px)", "translateX(0px)"],
+        },
+        { duration: 0.48, easing: [0.16, 1, 0.3, 1] }
+      );
+    }, 280);
+  });
+</script>
+
+<style define:vars={{ acento: colores[acento] }}>
+  section {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 10px;
+  }
+
+  div {
+  }
+
+  h2 {
+    color: var(--acento);
+  }
+
+  hr {
+    width: 0;
+    height: auto;
+    border: none;
+    border-left: 4px solid var(--acento);
+    border-radius: 2px;
+  }
+</style>
