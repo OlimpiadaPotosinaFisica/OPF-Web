@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+import Etiqueta from '../components/Etiqueta.astro';
+import Seccion from '../components/Seccion.astro';
+
+const temas = [
+  {
+    area: "Trigonometría",
+    descripcion: "Estudio de las relaciones entre los lados y ángulos de los triángulos.",
+    subtemas: ["Triángulos Rectángulos", "Razones Trigonométricas", "Identidades Pitagóricas", "Círculo Unitario y Radianes", "Leyes de Senos y Cosenos"]
+  },
+  {
+    area: "Geometría Analítica",
+    descripcion: "Líneas, parábolas y todas las figuras geométricas descritas a través de ecuaciones algebraicas.",
+    subtemas: ["El Plano y Parejas Ordenadas", "Distancia entre dos puntos", "La Recta", "Las Cónicas (Circunferencia, Elipse, Parábola, Hipérbola)"]
+  },
+  {
+    area: "Vectores",
+    descripcion: "Cantidades que poseen magnitud y dirección, que explican fuerzas y trayectorias.",
+    subtemas: ["Diferencia entre Vector y Escalar", "Suma y Resta Vectorial", "Componentes Geométricos y Analíticos"]
+  },
+  {
+    area: "Cinemática",
+    descripcion: "El estudio del movimiento puro sin importar qué lo causa.",
+    subtemas: ["Posición, Velocidad y Aceleración", "Caída Libre", "Tiro Parabólico", "MRU y MRUA"]
+  },
+  {
+    area: "Energía",
+    descripcion: "Trabajo, energía y potencia. Un enfoque alternativo (y a veces más sencillo) para resolver sistemas físicos.",
+    subtemas: ["Trabajo Mecánico", "Energía Cinética", "Energía Potencial (Gravitacional y Elástica)", "Conservación de la Energía", "Potencia Mecánica y Eficiencia"]
+  },
+  {
+    area: "Mecánica de Fluidos",
+    descripcion: "El estudio del equilibrio y movimiento de sustancias que se deforman, como líquidos y gases.",
+    subtemas: ["Propiedades: Densidad, Viscosidad y Presión", "Ecuación de Continuidad", "Principio de Pascal", "Ecuación de Bernoulli", "Principio de Arquímedes"]
+  },
+  {
+    area: "Electromagnetismo",
+    descripcion: "La interacción fundamental entre las cargas eléctricas, los voltajes y los campos magnéticos.",
+    subtemas: ["Carga y Ley de Coulomb", "Campo Eléctrico", "Potencial Eléctrico y Voltaje", "Magnetismo", "Ley de Faraday (Inducción)"]
+  },
+  {
+    area: "Termodinámica",
+    descripcion: "Estudio del intercambio de la energía y la temperatura.",
+    subtemas: ["Calor y Temperatura", "Modelo de Gas Ideal", "Variables de Estado", "Las 4 Leyes de la Termodinámica"]
+  }
+];
+---
+
+<Layout formulas={true}>
+  <main class="contenedor-temario">
+    
+    <header class="cabecera motion-fadein">
+      <h1>Temario</h1>
+      <p>Conoce los conceptos y áreas de estudio que podrían conforman el Examen Selectivo Estatal.</p>
+    </header>
+
+    <section class="grid-temas motion-fadein">
+      {temas.map((bloque) => (
+        <Tarjeta>
+          <div class="cabecera-tarjeta">
+            <h2>{bloque.area}</h2>
+          </div>
+          <p class="descripcion-tema">{bloque.descripcion}</p>
+          
+          <ul>
+            {bloque.subtemas.map((subtema) => (
+              <li>{subtema}</li>
+            ))}
+          </ul>
+        </Tarjeta>
+      ))}
+    </section>
+
+    <div class="descarga">
+    <Seccion titulo="¿Prefieres estudiarlo sin conexión?">
+      <p>Descarga el documento completo</p>
+    </Seccion>
+    <Etiqueta href="/Temario.pdf" target="_blank" colorFondo="naranja">Descargar Temario en PDF &darr;</a>
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  import { animate, inView } from "motion"
+  
+  inView(".motion-fadein", (element) => {
+    animate(
+      element,
+      { opacity: [0, 1], y: [15, 0] },
+      { duration: 0.5, easing: [0.22, 1, 0.36, 1] }
+    )
+  })
+</script>
+
+<style>
+  /* === Cabecera === */
+  .cabecera {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    color: var(--azulUaslp)
+  }
+
+  .cabecera p {
+    color: var(--naranja);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem auto;
+  }
+
+  /* === Temas === */
+  .grid-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 6rem;
+  }
+
+  /* Estilo para la nueva síntesis */
+  .descripcion-tema {
+    color: var(--negro);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gris);
+    font-style: italic;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.3;
+  }
+
+  ul li::before {
+    content: "•";
+    color: var(--dorado);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -5px;
+  }
+
+  .descarga { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  /* Ajustes cfff */
+  @media (max-width: 780px) {
+    .descarga { 
+      flex-direction: column;
+    }
+  }
+</style>
