@@ -3,9 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Etiqueta from '../components/Etiqueta.astro';
 import Boton from '../components/Boton.astro';
 import Tarjeta from '../components/Tarjeta.astro';
+import Seccion from '../components/Seccion.astro';
 ---
 
 <Layout formulas={false}>
+
   <section class:list={["hero", "motion-fadein"]}>
     <h1>
       <span>Olimpiada Potosina</span><br>
@@ -15,9 +17,7 @@ import Tarjeta from '../components/Tarjeta.astro';
       Descubre, comprende y desafía las leyes del universo. Únete a la delegación que representará a San Luis Potosí.
     </p>
     <div class="hero-acciones">
-      <Etiqueta href="/convocatoria">
-        Convocatoria Abierta
-      </Etiqueta>
+      <Etiqueta href="/convocatoria">Convocatoria Abierta</Etiqueta>
     </div>
   </section>
 
@@ -32,14 +32,12 @@ import Tarjeta from '../components/Tarjeta.astro';
     <div class="contenedor">
       <h2 class="centrado">Fechas Importantes</h2>
       <div class="grid-fechas">
-        
+
         <Tarjeta>
           <h3>Cierre de Inscripciones</h3>
           <p class="fecha-texto">[Pendiente]</p>
         </Tarjeta>
 
-
-        <! -- Ejemplo de fecha, pegar las etiquetas faltantes a las otras si quieren cfff -->
         <Tarjeta titulo="¡Proximamente!" acento="naranja" alineado="center">
           <h3>Examen Selectivo Estatal</h3>
           <p class="fecha-texto principal">02 / 05 / 2026</p>
@@ -55,18 +53,17 @@ import Tarjeta from '../components/Tarjeta.astro';
     </div>
   </section>
 
-  <section class="recursos motion-fadein">
+  <Seccion titulo="Prepárate para el reto">
     <div class="contenedor flex-recursos">
       <div class="recursos-texto">
-        <h2>Prepárate para el reto</h2>
         <p>No importa si es tu primera vez participando. Ponemos a tu disposición material de estudio, el temario oficial y exámenes de años anteriores para que llegues con la mejor preparación.</p>
       </div>
       <div class="recursos-enlaces">
-        <Boton href="/temario" class="enlace-caja">Ver Temario Oficial &rarr;</Boton1>
-        <Boton href="/material" class="enlace-caja">Exámenes Anteriores &rarr;</Boton1>
+        <Boton href="/temario">Ver Temario Oficial &rarr;</Boton>
+        <Boton href="/material">Exámenes Anteriores &rarr;</Boton>
       </div>
     </div>
-  </section>
+  </Seccion>
 
 </Layout>
 
@@ -81,30 +78,31 @@ import Tarjeta from '../components/Tarjeta.astro';
     )
   })
 </script>
-
 <style>
-  .contenedor {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
   h2 {
     color: var(--azul-uaslp);
     font-size: 2.2rem;
     margin-bottom: 1rem;
   }
-  .centrado {
-    text-align: center;
+
+  .centrado { text-align: center; }
+
+  .gradiente-naranja {
+    background: linear-gradient(to right, var(--naranja), var(--dorado));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
+  /* === Hero === */
   section.hero {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 4rem 1.5rem;
     min-height: 40vh;
-    text-align: center;
   }
   section.hero h1 {
     font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -114,79 +112,22 @@ import Tarjeta from '../components/Tarjeta.astro';
   }
   .hero-subtitulo {
     font-size: 1.2rem;
-    color: var(--negro);
     max-width: 600px;
-    margin-bottom: 2rem;
     line-height: 1.5;
+    margin-bottom: 2rem;
   }
-  .gradiente-naranja {
-    background: linear-gradient(to right, var(--naranja), var(--dorado));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .hero-acciones {
-    margin-top: 1rem;
-  }
-
-  /* === Info General === */
-  section.info-general {
-    padding: 4rem 0;
-    background-color: #ffffff;
-    border-top: 1px solid var(--gris);
-    border-bottom: 1px solid var(--gris);
-  }
-  section.info-general p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--negro);
-  }
+  .hero-acciones { margin-top: 1rem; }
 
   /* === Fechas === */
-  section.fechas {
-    padding: 5rem 0;
-  }
+  section.fechas { padding: 5rem 0; }
   .grid-fechas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
   }
-  .tarjeta-fecha {
-    text-align: center;
-    position: relative;
-  }
-
-  .tarjeta-fecha.destacada {
-    border: 2px solid var(--naranja);
-    box-shadow: 0 8px 20px rgba(184, 80, 37, 0.15);
-    transform: translateY(-10px);
-  }
-  .etiqueta-alerta {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--naranja);
-    color: white;
-    padding: 0.2rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-  .icono {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  .tarjeta-fecha h3 {
-    color: var(--azul-uaslp);
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
   .fecha-texto {
     font-size: 1.1rem;
-    color: var(--negro);
     font-weight: 600;
   }
   .fecha-texto.principal {
@@ -200,18 +141,6 @@ import Tarjeta from '../components/Tarjeta.astro';
   }
 
   /* === Recursos === */
-  section.recursos {
-    padding: 4rem 0;
-    background-color: var(--azul-uaslp);
-    color: white;
-  }
-  section.recursos h2 {
-    color: var(--dorado);
-  }
-  section.recursos p {
-    color: var(--negro);
-    line-height: 1.6;
-  }
   .flex-recursos {
     display: flex;
     align-items: center;
@@ -219,9 +148,7 @@ import Tarjeta from '../components/Tarjeta.astro';
     gap: 3rem;
     flex-wrap: wrap;
   }
-  .recursos-texto {
-    flex: 1 1 400px;
-  }
+  .recursos-texto { flex: 1 1 400px; }
   .recursos-enlaces {
     flex: 1 1 300px;
     display: flex;
@@ -230,8 +157,6 @@ import Tarjeta from '../components/Tarjeta.astro';
   }
 
   @media (max-width: 640px) {
-    section.hero {
-      padding: 3rem 1rem;
-    }
+    section.hero { padding: 3rem 1rem; }
   }
 </style>
