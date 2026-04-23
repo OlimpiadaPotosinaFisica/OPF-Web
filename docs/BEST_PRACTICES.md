@@ -19,7 +19,7 @@ pertenencia.
 - Fetch y Pull: Cada vez que vayas a trabajar en el codigo haz fetch y pull para traer los cambios que los demas 
 han hecho al repo, esto evita conflictos y repeticiones. Trabaja con los demas en mente.
 
-Documentación: Si agregas lógica compleja o tu código requiere más que nombres claros en las variables,
+- Documentación: Si agregas lógica compleja o tu código requiere más que nombres claros en las variables,
 agrega comentarios. Si estos se vuelven muy extensos, considera mover tus explicaciones a un archivo nuevo
 o ya existente en la carpeta docs/.
 
