@@ -5,6 +5,7 @@ export const colores = {
   azul: "#1F6BED",
   dorado: "#C8960C",
   crema: "#F7F5EF",
+  cremaOscuro: "#F1E7D0",
   negro: "#1A1A1A",
   gris: "#DEDAD4",
   blanco: "#FFFFFF",
