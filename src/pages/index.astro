@@ -1,20 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Etiqueta from '../components/Etiqueta.astro';
-import Boton from '../components/Boton.astro';
-import Tarjeta from '../components/Tarjeta.astro';
-import Seccion from '../components/Seccion.astro';
+import Layout from "../layouts/Layout.astro";
+import Etiqueta from "../components/Etiqueta.astro";
+import Boton from "../components/Boton.astro";
+import Tarjeta from "../components/Tarjeta.astro";
+import Seccion from "../components/Seccion.astro";
 ---
 
 <Layout formulas={false}>
-
   <section class:list={["hero", "motion-fadein"]}>
     <h1>
-      <span>Olimpiada Potosina</span><br>
+      <span>Olimpiada Potosina</span><br />
       <span class="gradiente-naranja">de Física</span>
     </h1>
     <p class="hero-subtitulo">
-      Descubre, comprende y desafía las leyes del universo. Únete a la delegación que representará a San Luis Potosí.
+      Descubre, comprende y desafía las leyes del universo. Únete a la
+      delegación que representará a San Luis Potosí.
     </p>
     <div class="hero-acciones">
       <Etiqueta href="/convocatoria">Convocatoria Abierta</Etiqueta>
@@ -24,7 +24,11 @@ import Seccion from '../components/Seccion.astro';
   <Tarjeta class="motion-fadein">
     <h2>¿Qué es la OPF?</h2>
     <p>
-      La Olimpiada Potosina de Física es un certamen anual dirigido a estudiantes de nivel medio superior en San Luis Potosí. Nuestro objetivo es promover el estudio de la física, identificar talentos jóvenes y seleccionar a los mejores perfiles para conformar la delegación estatal que participará en la Olimpiada Nacional.
+      La Olimpiada Potosina de Física es un certamen anual dirigido a
+      estudiantes de nivel medio superior en San Luis Potosí. Nuestro objetivo
+      es promover el estudio de la física, identificar talentos jóvenes y
+      seleccionar a los mejores perfiles para conformar la delegación estatal
+      que participará en la Olimpiada Nacional.
     </p>
   </Tarjeta>
 
@@ -32,7 +36,6 @@ import Seccion from '../components/Seccion.astro';
     <div class="contenedor">
       <h2 class="centrado">Fechas Importantes</h2>
       <div class="grid-fechas">
-
         <Tarjeta>
           <h3>Cierre de Inscripciones</h3>
           <p class="fecha-texto">[Pendiente]</p>
@@ -48,7 +51,6 @@ import Seccion from '../components/Seccion.astro';
           <h3>Inicio de Entrenamientos</h3>
           <p class="fecha-texto">[Pendiente]</p>
         </Tarjeta>
-
       </div>
     </div>
   </section>
@@ -56,7 +58,11 @@ import Seccion from '../components/Seccion.astro';
   <Seccion titulo="Prepárate para el reto">
     <div class="contenedor flex-recursos">
       <div class="recursos-texto">
-        <p>No importa si es tu primera vez participando. Ponemos a tu disposición material de estudio, el temario oficial y exámenes de años anteriores para que llegues con la mejor preparación.</p>
+        <p>
+          No importa si es tu primera vez participando. Ponemos a tu disposición
+          material de estudio, el temario oficial y exámenes de años anteriores
+          para que llegues con la mejor preparación.
+        </p>
       </div>
       <div class="recursos-enlaces">
         <Boton href="/recursos/temario">Ver Temario Oficial &rarr;</Boton>
@@ -64,19 +70,18 @@ import Seccion from '../components/Seccion.astro';
       </div>
     </div>
   </Seccion>
-
 </Layout>
 
 <script>
-  import { animate, inView } from "motion"
-  
+  import { animate, inView } from "motion";
+
   inView(".motion-fadein", (element) => {
     animate(
       element,
       { opacity: [0, 1], y: [20, 0] },
-      { duration: 0.6, easing: [0.22, 1, 0.36, 1] }
-    )
-  })
+      { duration: 0.6, easing: [0.22, 1, 0.36, 1] },
+    );
+  });
 </script>
 <style>
   h2 {
@@ -85,7 +90,9 @@ import Seccion from '../components/Seccion.astro';
     margin-bottom: 1rem;
   }
 
-  .centrado { text-align: center; }
+  .centrado {
+    text-align: center;
+  }
 
   .gradiente-naranja {
     background: linear-gradient(to right, var(--naranja), var(--dorado));
@@ -116,10 +123,14 @@ import Seccion from '../components/Seccion.astro';
     line-height: 1.5;
     margin-bottom: 2rem;
   }
-  .hero-acciones { margin-top: 1rem; }
+  .hero-acciones {
+    margin-top: 1rem;
+  }
 
   /* === Fechas === */
-  section.fechas { padding: 5rem 0; }
+  section.fechas {
+    padding: 5rem 0;
+  }
   .grid-fechas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -148,7 +159,9 @@ import Seccion from '../components/Seccion.astro';
     gap: 3rem;
     flex-wrap: wrap;
   }
-  .recursos-texto { flex: 1 1 400px; }
+  .recursos-texto {
+    flex: 1 1 400px;
+  }
   .recursos-enlaces {
     flex: 1 1 300px;
     display: flex;
@@ -157,6 +170,8 @@ import Seccion from '../components/Seccion.astro';
   }
 
   @media (max-width: 640px) {
-    section.hero { padding: 3rem 1rem; }
+    section.hero {
+      padding: 3rem 1rem;
+    }
   }
 </style>

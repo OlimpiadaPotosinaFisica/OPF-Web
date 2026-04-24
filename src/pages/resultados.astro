@@ -1,13 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { parse } from 'csv-parse/browser/esm/sync';
-import { Image } from 'astro:assets';
-import Tarjeta from '../components/Tarjeta.astro';
-import Oro from '../assets/medallas/OPFOro.png';
-import Plata from '../assets/medallas/OPFPlata.png';
-import Bronce from '../assets/medallas/OPFBronce.png';
+import Layout from "../layouts/Layout.astro";
+import { parse } from "csv-parse/browser/esm/sync";
+import { Image } from "astro:assets";
+import Tarjeta from "../components/Tarjeta.astro";
+import Oro from "../assets/medallas/OPFOro.png";
+import Plata from "../assets/medallas/OPFPlata.png";
+import Bronce from "../assets/medallas/OPFBronce.png";
 
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSS80-GOI4CzYSU93h6tAARle7NjcbZGz-YVuArz2rElPvsSj8AsDzTKwqrDy1VhsYyf7TSoKIpIDaK/pub?gid=0&single=true&output=csv';
+const SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSS80-GOI4CzYSU93h6tAARle7NjcbZGz-YVuArz2rElPvsSj8AsDzTKwqrDy1VhsYyf7TSoKIpIDaK/pub?gid=0&single=true&output=csv";
 
 // CAMBIAR A TRUE PARA PUBLICAR RESULTADOS
 const resultadosPublicados = false;
@@ -23,91 +24,104 @@ let GRes: any[] = [];
 const Medallas = [Oro, Plata, Bronce];
 const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
 
-if (resultadosPublicados) { try{
-  const response = await fetch(SHEET_URL);
-  const csvContent = await response.text();
+if (resultadosPublicados) {
+  try {
+    const response = await fetch(SHEET_URL);
+    const csvContent = await response.text();
 
-  const RawCal = parse(csvContent, {
-    columns: true,
-    skip_empty_lines: true,
-    cast: true
-  });
+    const RawCal = parse(csvContent, {
+      columns: true,
+      skip_empty_lines: true,
+      cast: true,
+    });
 
-  const ParticipantesOrdenados = [...RawCal].sort((a, b) => b.cal - a.cal);
+    const ParticipantesOrdenados = [...RawCal].sort((a, b) => b.cal - a.cal);
 
-  podiog = ParticipantesOrdenados.slice(0, 3).map((participante, index) => ({
-    puesto: NPodio[index],
-    nombre: participante.nombre,
-    escuela: participante.escuela,
-    medalla: Medallas[index]
-  }));
+    podiog = ParticipantesOrdenados.slice(0, 3).map((participante, index) => ({
+      puesto: NPodio[index],
+      nombre: participante.nombre,
+      escuela: participante.escuela,
+      medalla: Medallas[index],
+    }));
 
-  GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
-    posicion: index + 4,
-    nombre: participante.nombre,
-    escuela: participante.escuela,
-  }));
-} catch (error) {
-  console.error("Error al cargar los resultados:", error); //Por si las dudas, ya luego lo reparan
-}}
+    GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
+      posicion: index + 4,
+      nombre: participante.nombre,
+      escuela: participante.escuela,
+    }));
+  } catch (error) {
+    console.error("Error al cargar los resultados:", error); //Por si las dudas, ya luego lo reparan
+  }
+}
 ---
 
 <Layout>
   <main class="contenedor-resultados">
     <h1 class="titulo">Resultados de la Olimpiada</h1>
-    
-    {resultadosPublicados ? (
-      <>
-        <p class="subtitulo">Conoce a los perfiles destacados de esta edición.</p>
 
-        <section class="podio">
-          {podiog.map((participante) => (
-            <Tarjeta hover={true}>
-              <div class="medalla">
-                <Image src={participante.medalla} alt={`Medalla de ${participante.puesto}`} />
-              </div>
-              <h2>{participante.nombre}</h2>
-              <hr />
-              <p class="escuela">{participante.escuela}</p>
-              <p class="puesto-texto">{participante.puesto}</p>
-            </Tarjeta>
-          ))}
-        </section>
+    {
+      resultadosPublicados ? (
+        <>
+          <p class="subtitulo">
+            Conoce a los perfiles destacados de esta edición.
+          </p>
 
-        <section class="seccion-tabla">
-          <h2 class="subtitulo-tabla">Tabla General de Posiciones</h2>
-          
-          <div class="tabla-responsiva">
-            <table class="tabla-resultados">
-              <thead>
-                <tr>
-                  <th>Posición</th>
-                  <th>Nombre</th>
-                  <th>Escuela</th>
-                </tr>
-              </thead>
-              <tbody>
-                {GRes.map((alumno) => (
+          <section class="podio">
+            {podiog.map((participante) => (
+              <Tarjeta hover={true}>
+                <div class="medalla">
+                  <Image
+                    src={participante.medalla}
+                    alt={`Medalla de ${participante.puesto}`}
+                  />
+                </div>
+                <h2>{participante.nombre}</h2>
+                <hr />
+                <p class="escuela">{participante.escuela}</p>
+                <p class="puesto-texto">{participante.puesto}</p>
+              </Tarjeta>
+            ))}
+          </section>
+
+          <section class="seccion-tabla">
+            <h2 class="subtitulo-tabla">Tabla General de Posiciones</h2>
+
+            <div class="tabla-responsiva">
+              <table class="tabla-resultados">
+                <thead>
                   <tr>
-                    <td><strong>{alumno.posicion}</strong></td>
-                    <td>{alumno.nombre}</td>
-                    <td>{alumno.escuela}</td>
+                    <th>Posición</th>
+                    <th>Nombre</th>
+                    <th>Escuela</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </>
-    ) : (
-      /* --- VISTA DE ESPERA (Si es FALSE) --- */
-      <Tarjeta class="proximamente">
-        <div class="icono-espera">⏳</div>
-        <h2 class="titulo-espera">¡Próximamente!</h2>
-        <p class="texto-espera">Estamos afinando los últimos detalles y calculando los puntajes. Vuelve pronto para conocer a los ganadores de esta edición.</p>
-      </Tarjeta>
-    )}
-
+                </thead>
+                <tbody>
+                  {GRes.map((alumno) => (
+                    <tr>
+                      <td>
+                        <strong>{alumno.posicion}</strong>
+                      </td>
+                      <td>{alumno.nombre}</td>
+                      <td>{alumno.escuela}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>
+      ) : (
+        /* --- VISTA DE ESPERA (Si es FALSE) --- */
+        <Tarjeta class="proximamente">
+          <div class="icono-espera">⏳</div>
+          <h2 class="titulo-espera">¡Próximamente!</h2>
+          <p class="texto-espera">
+            Estamos afinando los últimos detalles y calculando los puntajes.
+            Vuelve pronto para conocer a los ganadores de esta edición.
+          </p>
+        </Tarjeta>
+      )
+    }
   </main>
 </Layout>
 
@@ -195,7 +209,8 @@ if (resultadosPublicados) { try{
   .tabla-resultados th {
     background-color: var(--naranja);
     color: #fff;
-    text-align: left;}
+    text-align: left;
+  }
 
   .tabla-resultados tbody tr:hover {
     background-color: var(--crema);

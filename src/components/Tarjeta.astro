@@ -8,10 +8,15 @@ interface Props {
   class: String;
 }
 
-const { acento = "gris" , titulo, alineado = "inherit", class: className } = Astro.props;
+const {
+  acento = "gris",
+  titulo,
+  alineado = "inherit",
+  class: className,
+} = Astro.props;
 ---
 
-<div class:list={[className, { resaltada : titulo }]}>
+<div class:list={[className, { resaltada: titulo }]}>
   {titulo && <h3>{titulo}</h3>}
   <slot />
 </div>
@@ -24,7 +29,7 @@ const { acento = "gris" , titulo, alineado = "inherit", class: className } = Ast
     border: 1px solid var(--acento);
     padding: 2rem;
     text-align: var(--alineado);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     position: relative;
   }
 
@@ -46,5 +51,4 @@ const { acento = "gris" , titulo, alineado = "inherit", class: className } = Ast
     font-weight: bold;
     white-space: nowrap;
   }
-
 </style>

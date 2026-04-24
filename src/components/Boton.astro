@@ -8,7 +8,7 @@ interface Props {
 const { href, class: className, target } = Astro.props;
 ---
 
-<a href={href} target={target} class:list={['boton-base', className]}>
+<a href={href} target={target} class:list={["boton-base", className]}>
   <slot />
 </a>
 
@@ -21,7 +21,7 @@ const { href, class: className, target } = Astro.props;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: .3s;
+    transition: 0.3s;
     text-align: center;
     border: none;
   }

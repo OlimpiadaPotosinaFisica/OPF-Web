@@ -1,22 +1,20 @@
 ---
 const FORMULAS = [
-  { text: "E = mc²"          },
-  { text: "F = ma"           },
-  { text: "∇ × B = μ₀J"     },
-  { text: "PV = nRT"         },
-  { text: "λ = h/p"          },
-  { text: "ΔS ≥ 0"           },
-  { text: "∇·E = ρ/ε₀"      },
-  { text: "Ĥψ = Eψ"          },
+  { text: "E = mc²" },
+  { text: "F = ma" },
+  { text: "∇ × B = μ₀J" },
+  { text: "PV = nRT" },
+  { text: "λ = h/p" },
+  { text: "ΔS ≥ 0" },
+  { text: "∇·E = ρ/ε₀" },
+  { text: "Ĥψ = Eψ" },
   { text: "v² = v₀² + 2aΔx" },
-  { text: "F = −kx"          },
+  { text: "F = −kx" },
 ];
 ---
 
 <div class="formulas-bg" aria-hidden="true">
-  {FORMULAS.map(({ text }) => (
-    <span class="formula-item">{text}</span>
-  ))}
+  {FORMULAS.map(({ text }) => <span class="formula-item">{text}</span>)}
 </div>
 
 <style>
@@ -34,7 +32,7 @@ const FORMULAS = [
     left: 0;
     font-style: italic;
     opacity: 0.36;
-    color: var(--negro, #1A1A1A);
+    color: var(--negro, #1a1a1a);
     white-space: nowrap;
     user-select: none;
     will-change: transform;
@@ -54,7 +52,7 @@ const FORMULAS = [
   }
 
   const spans = Array.from(
-    document.querySelectorAll<HTMLElement>(".formula-item")
+    document.querySelectorAll<HTMLElement>(".formula-item"),
   );
 
   if (spans.length === 0) throw new Error("No formula spans found");
@@ -74,10 +72,10 @@ const FORMULAS = [
   function generateState(W: number, H: number): FormulaState[] {
     const speed = 30;
     return spans.map(() => ({
-      x:    Math.random() * W * 0.9,
-      y:    Math.random() * H * 0.9,
-      vx:   (Math.random() - 0.5) * speed * 2,
-      vy:   (Math.random() - 0.5) * speed * 2,
+      x: Math.random() * W * 0.9,
+      y: Math.random() * H * 0.9,
+      vx: (Math.random() - 0.5) * speed * 2,
+      vy: (Math.random() - 0.5) * speed * 2,
       size: parseFloat((0.7 + Math.random() * 1.4).toFixed(2)),
     }));
   }
@@ -106,8 +104,8 @@ const FORMULAS = [
     const scaleY = newH / H;
 
     for (const s of state) {
-      s.x  *= scaleX;
-      s.y  *= scaleY;
+      s.x *= scaleX;
+      s.y *= scaleY;
       s.vx *= scaleX;
       s.vy *= scaleY;
     }
@@ -126,7 +124,9 @@ const FORMULAS = [
   let lastSave = performance.now();
 
   function tick(now: number) {
-    if (lastTime === null) { lastTime = now; }
+    if (lastTime === null) {
+      lastTime = now;
+    }
     const dt = Math.min((now - lastTime) / 1000, 0.1);
     lastTime = now;
 
@@ -139,10 +139,22 @@ const FORMULAS = [
       const maxX = W - spans[i].offsetWidth;
       const maxY = H - spans[i].offsetHeight;
 
-      if (s.x < 0)    { s.x = 0;    s.vx =  Math.abs(s.vx); }
-      if (s.x > maxX) { s.x = maxX; s.vx = -Math.abs(s.vx); }
-      if (s.y < 0)    { s.y = 0;    s.vy =  Math.abs(s.vy); }
-      if (s.y > maxY) { s.y = maxY; s.vy = -Math.abs(s.vy); }
+      if (s.x < 0) {
+        s.x = 0;
+        s.vx = Math.abs(s.vx);
+      }
+      if (s.x > maxX) {
+        s.x = maxX;
+        s.vx = -Math.abs(s.vx);
+      }
+      if (s.y < 0) {
+        s.y = 0;
+        s.vy = Math.abs(s.vy);
+      }
+      if (s.y > maxY) {
+        s.y = maxY;
+        s.vy = -Math.abs(s.vy);
+      }
 
       spans[i].style.transform = `translate(${s.x}px, ${s.y}px)`;
     }

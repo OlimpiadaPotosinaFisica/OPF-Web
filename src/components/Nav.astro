@@ -1,18 +1,22 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/olilogo.png';
+import { Image } from "astro:assets";
+import logo from "../assets/olilogo.png";
 const navLinks = [
   { link: "/convocatoria", label: "Convocatoria" },
-  { link: "/recursos",       label: "Recursos" },
-  { link: "/resultados",     label: "Resultados" },
-  { link: "/nosotros",       label: "Nosotros" },
+  { link: "/recursos", label: "Recursos" },
+  { link: "/resultados", label: "Resultados" },
+  { link: "/nosotros", label: "Nosotros" },
 ];
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <div class="bar"></div>
 <nav aria-label="Navegación principal">
-  <a href="/" class:list={[{ active: currentPath === "/" }]} aria-label="Olimpiada Potosina de Física">
+  <a
+    href="/"
+    class:list={[{ active: currentPath === "/" }]}
+    aria-label="Olimpiada Potosina de Física"
+  >
     <Image src={logo} alt="OPF" loading="eager" />
   </a>
 
@@ -22,11 +26,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   </button>
 
   <div id="nav-links">
-    {navLinks.map(({ link, label }) => (
-      <a href={link} class:list={[{ active: currentPath === link }]}>
-        {label}
-      </a>
-    ))}
+    {
+      navLinks.map(({ link, label }) => (
+        <a href={link} class:list={[{ active: currentPath === link }]}>
+          {label}
+        </a>
+      ))
+    }
   </div>
 </nav>
 
@@ -83,7 +89,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     border-radius: 0 0 10px 10px;
   }
 
-  img { width: 50px; height: auto; }
+  img {
+    width: 50px;
+    height: auto;
+  }
 
   .bar {
     position: sticky;
@@ -131,7 +140,9 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
       align-items: center;
     }
 
-    img { width: 40px; }
+    img {
+      width: 40px;
+    }
 
     a.active {
       margin-top: -26px;

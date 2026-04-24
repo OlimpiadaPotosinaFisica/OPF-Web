@@ -1,24 +1,27 @@
 ---
-import { Image } from 'astro:assets';
-import facebook from '../assets/facebook.svg';
-import gmail from '../assets/gmail.svg';
-import youtube from '../assets/youtube.svg';
+import { Image } from "astro:assets";
+import facebook from "../assets/facebook.svg";
+import gmail from "../assets/gmail.svg";
+import youtube from "../assets/youtube.svg";
 const footerLinks = [
   { link: "mailto:omfslp@gmail.com", icon: gmail },
   { link: "https://www.facebook.com/omfslp", icon: facebook },
   { link: "https://www.youtube.com/@olimpiadadefisicaslp4634", icon: youtube },
 ];
 ---
+
 <footer>
   <div class:list={["footer-tab"]}>
     <ul>
-      {footerLinks.map(({ link, icon }) => (
-      <li>
-          <a href={link} class:list={["motion-hover"]}>
+      {
+        footerLinks.map(({ link, icon }) => (
+          <li>
+            <a href={link} class:list={["motion-hover"]}>
               <Image src={icon} alt={link} loading="lazy" />
-          </a>
-      </li>
-      ))}
+            </a>
+          </li>
+        ))
+      }
     </ul>
     <p>Olimpiada Potosina de Física</p>
   </div>
@@ -47,7 +50,7 @@ const footerLinks = [
     border-bottom: none;
     border-radius: 12px 12px 0px 0px;
   }
-  
+
   ul {
     list-style: none;
     padding: 0;
@@ -80,7 +83,7 @@ const footerLinks = [
 
   @media (max-width: 600px) {
     .footer-tab {
-        padding: 1em;
+      padding: 1em;
     }
     img {
       width: 15px;

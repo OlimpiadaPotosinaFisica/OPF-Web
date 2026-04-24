@@ -1,17 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Seccion from '../components/Seccion.astro';
-import { Image } from 'astro:assets';
-import qr from '../assets/qr-code.png';
+import Layout from "../layouts/Layout.astro";
+import Seccion from "../components/Seccion.astro";
+import { Image } from "astro:assets";
+import qr from "../assets/qr-code.png";
 ---
+
 <Layout>
   <main class="grid-convocatoria">
     <div class="columna-izquierda">
       <Seccion titulo="Participa" acento="verde">
         <p class="descripcion">
-          Se aplicará un examen selectivo en modalidad <strong>presencial</strong> en la 
-          <strong>Facultad de Ciencias</strong> campus pedregal de la UASLP a todas las personas
-          que se hayan inscrito previamente
+          Se aplicará un examen selectivo en modalidad <strong
+            >presencial</strong
+          > en la
+          <strong>Facultad de Ciencias</strong> campus pedregal de la UASLP a todas
+          las personas que se hayan inscrito previamente
         </p>
         <div class="tarjeta-crema">
           <div class="fecha-header">📅 FECHA DEL SELECTIVO</div>
@@ -20,48 +23,63 @@ import qr from '../assets/qr-code.png';
             <span>10:00 am</span>
           </div>
         </div>
-        <p class="nota">Para entidades fuera de la capital favor de contactar a un asesor.</p>
+        <p class="nota">
+          Para entidades fuera de la capital favor de contactar a un asesor.
+        </p>
       </Seccion>
 
       <Seccion titulo="Inscríbete" acento="naranja">
         <p>Regístrate usando el siguiente formulario:</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSflTn_NNWJ7HysPiwiGD6nd9SbzhUTZOJUWtm1ywdAX-19TFg/viewform" class="link">https://forms.gle/Jh9qiGiP3qfuQcAw9</a>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSflTn_NNWJ7HysPiwiGD6nd9SbzhUTZOJUWtm1ywdAX-19TFg/viewform"
+          class="link">https://forms.gle/Jh9qiGiP3qfuQcAw9</a
+        >
         <div class="contenedor-qr">
-         <p class="texto-qr">
-      Al registrarte <strong>ten a la mano</strong> tu constancia de estudios vigente 
-      (ciclo escolar 2023-2024), en formato PDF.
-         </p>
-         <Image src={qr} alt="codigo-qr" loading="eager" />
-       </div>
+          <p class="texto-qr">
+            Al registrarte <strong>ten a la mano</strong> tu constancia de estudios
+            vigente (ciclo escolar 2023-2024), en formato PDF.
+          </p>
+          <Image src={qr} alt="codigo-qr" loading="eager" />
+        </div>
       </Seccion>
-      
     </div>
 
     <div class="columna-derecha">
       <Seccion titulo="Bases" acento="negro">
         <ol class="lista-bases">
-          <li><span>(1)</span>Estar inscrito en alguna institución de educación secundaria o
-        bachillerato incorporada al plan de estudios vigente del estado de
-        San Luis Potosí, <strong>desde el segundo año de secundaria hasta el
-        penúltimo año de bachillerato.</strong></li>
-          <li><span>(2)</span> No estar inscrito en ninguna institución de educación superior
-        <strong>para noviembre 2026.</strong></li>
-          <li><span>(3)</span>El registro deberá contener: nombre completo, nivel de estudio,
-        institución de procedencia y una <strong>constancia</strong> que avale el nivel
-        de estudio que cursa o su credencial escolar. </li>
+          <li>
+            <span>(1)</span>Estar inscrito en alguna institución de educación
+            secundaria o bachillerato incorporada al plan de estudios vigente
+            del estado de San Luis Potosí, <strong
+              >desde el segundo año de secundaria hasta el penúltimo año de
+              bachillerato.</strong>
+          </li>
+          <li>
+            <span>(2)</span> No estar inscrito en ninguna institución de educación
+            superior
+            <strong>para noviembre 2026.</strong>
+          </li>
+          <li>
+            <span>(3)</span>El registro deberá contener: nombre completo, nivel
+            de estudio, institución de procedencia y una <strong
+              >constancia</strong
+            > que avale el nivel de estudio que cursa o su credencial escolar.
+          </li>
         </ol>
       </Seccion>
     </div>
-
   </main>
 </Layout>
 
 <style>
-    img {width: 200px; height: auto;}
+  img {
+    width: 200px;
+    height: auto;
+  }
   /* Estilo de las columnas */
   .grid-convocatoria {
     display: grid;
-    grid-template-columns: 1.2fr 1fr; 
+    grid-template-columns: 1.2fr 1fr;
     max-width: 1000px;
     margin: 50px auto;
     padding: 30px;
@@ -83,19 +101,19 @@ import qr from '../assets/qr-code.png';
     justify-content: center;
     align-items: center;
     gap: 8px;
-    color: var(--naranja); 
+    color: var(--naranja);
     font-weight: bold;
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 10px;
-  } 
+  }
 
   .fecha-body {
     display: flex;
     justify-content: space-around;
     font-weight: bold;
     font-size: 1.4rem;
-    background:#f1e7d0;;
+    background: #f1e7d0;
     padding: 10px;
     border-radius: 5px;
   }
@@ -109,20 +127,20 @@ import qr from '../assets/qr-code.png';
   .lista-bases li {
     margin-bottom: 20px;
     line-height: 1.6;
-    text-align: justify; 
+    text-align: justify;
     display: block;
   }
 
   .lista-bases span {
     color: var(--naranja);
     font-weight: bold;
-    margin-right: 10px;  
+    margin-right: 10px;
     display: inline;
   }
 
   .lista-bases strong {
-  display: inline;     /* Forzamos a que no salte de línea */
-}
+    display: inline; /* Forzamos a que no salte de línea */
+  }
 
   /* Responsive: Si la pantalla es chica, se pone uno debajo de otro */
   @media (max-width: 768px) {

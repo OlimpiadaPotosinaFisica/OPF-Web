@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Tarjeta from '../../components/Tarjeta.astro';
+import Layout from "../../layouts/Layout.astro";
+import Tarjeta from "../../components/Tarjeta.astro";
 
 interface Recurso {
   ruta: string;
@@ -9,32 +9,38 @@ interface Recurso {
 }
 
 // todos los paths de los .astro files en este directorio
-const todosAstros = Object.entries(import.meta.glob('./*.astro', { eager: true }));
+const todosAstros = Object.entries(
+  import.meta.glob("./*.astro", { eager: true }),
+);
 
 // los archivos astros que tengan lo necesario convertidos en recursos interface
 const todosRecursos = todosAstros.flatMap(([ruta, archivo]) => {
   if (!archivo.titulo || !archivo.descripcion) return []; // omite los que no cumplan con lo necesario
-  return [{
-  ruta: "/recursos" + ruta.replace(".", "").replace(".astro", ""),
-    titulo: archivo.titulo,
-    descripcion: archivo.descripcion 
-  }];
+  return [
+    {
+      ruta: "/recursos" + ruta.replace(".", "").replace(".astro", ""),
+      titulo: archivo.titulo,
+      descripcion: archivo.descripcion,
+    },
+  ];
 });
 ---
 
 <Layout>
-    {todosRecursos.map(({ ruta, titulo, descripcion }) => (
-    <a href={ruta}>
-      <Tarjeta>
+  {
+    todosRecursos.map(({ ruta, titulo, descripcion }) => (
+      <a href={ruta}>
+        <Tarjeta>
           <h2>{titulo}</h2>
-        <p>{descripcion}</p>
-      </Tarjeta>
-    </a>
-  ))}
+          <p>{descripcion}</p>
+        </Tarjeta>
+      </a>
+    ))
+  }
 </Layout>
 
 <style>
-  * { 
+  * {
     /*
      * como todo esta dentro de a le quitamos el color y underline de a tag 
      * en el futuro deberiamos actualizar <Tarjeta> o repensar el pensar el formato de esta pagina
