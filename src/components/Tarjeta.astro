@@ -4,12 +4,14 @@ import { colores } from "../config/colores";
 
 interface Props {
   acento?: Color;
+  colorFondo?: Color;
   titulo?: string;
   class: String;
 }
 
 const {
   acento = "gris",
+  colorFondo = "blanco",
   titulo,
   alineado = "inherit",
   class: className,
@@ -21,10 +23,16 @@ const {
   <slot />
 </div>
 
-<style define:vars={{ acento: colores[acento], alineado: alineado }}>
+<style
+  define:vars={{
+    acento: colores[acento],
+    colorFondo: colores[colorFondo],
+    alineado: alineado,
+  }}
+>
   div {
     z-index: 1;
-    background-color: #ffffff;
+    background-color: var(--colorFondo);
     border-radius: 12px;
     border: 1px solid var(--acento);
     padding: 2rem;
