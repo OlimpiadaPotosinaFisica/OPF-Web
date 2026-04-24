@@ -1,13 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Seccion from "../components/Seccion.astro";
+import Tarjeta from "../components/Tarjeta.astro";
 import { Image } from "astro:assets";
 import qr from "../assets/qr-code.png";
 ---
 
 <Layout>
-  <main class="grid-convocatoria">
-    <div class="columna-izquierda">
+  <main>
+    <div>
       <Seccion titulo="Participa" acento="verde">
         <p class="descripcion">
           Se aplicará un examen selectivo en modalidad <strong
@@ -16,37 +17,35 @@ import qr from "../assets/qr-code.png";
           <strong>Facultad de Ciencias</strong> campus pedregal de la UASLP a todas
           las personas que se hayan inscrito previamente
         </p>
-        <div class="tarjeta-crema">
-          <div class="fecha-header">📅 FECHA DEL SELECTIVO</div>
-          <div class="fecha-body">
+        <Tarjeta colorFondo="cremaOscuro" class="fecha" alineado="center">
+          <h3>📅 FECHA DEL SELECTIVO</h3>
+          <p>
             <span>02 / 05 / 2026</span>
             <span>10:00 am</span>
-          </div>
-        </div>
-        <p class="nota">
+          </p>
+        </Tarjeta>
+        <p>
           Para entidades fuera de la capital favor de contactar a un asesor.
         </p>
       </Seccion>
-
       <Seccion titulo="Inscríbete" acento="naranja">
         <p>Regístrate usando el siguiente formulario:</p>
+
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSflTn_NNWJ7HysPiwiGD6nd9SbzhUTZOJUWtm1ywdAX-19TFg/viewform"
-          class="link">https://forms.gle/Jh9qiGiP3qfuQcAw9</a
+          >https://forms.gle/Jh9qiGiP3qfuQcAw9</a
         >
-        <div class="contenedor-qr">
-          <p class="texto-qr">
-            Al registrarte <strong>ten a la mano</strong> tu constancia de estudios
-            vigente (ciclo escolar 2023-2024), en formato PDF.
-          </p>
-          <Image src={qr} alt="codigo-qr" loading="eager" />
-        </div>
+        <p>
+          Al registrarte <strong>ten a la mano</strong> tu constancia de estudios
+          vigente (ciclo escolar 2023-2024), en formato PDF.
+        </p>
+        <Image src={qr} alt="codigo-qr" loading="eager" />
       </Seccion>
     </div>
 
-    <div class="columna-derecha">
+    <div>
       <Seccion titulo="Bases" acento="negro">
-        <ol class="lista-bases">
+        <ol>
           <li>
             <span>(1)</span>Estar inscrito en alguna institución de educación
             secundaria o bachillerato incorporada al plan de estudios vigente
@@ -77,8 +76,8 @@ import qr from "../assets/qr-code.png";
     width: 200px;
     height: auto;
   }
-  /* Estilo de las columnas */
-  .grid-convocatoria {
+
+  main {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     max-width: 1000px;
@@ -86,66 +85,42 @@ import qr from "../assets/qr-code.png";
     padding: 30px;
   }
 
-  /* Ajustes para la tarjeta de fecha */
-  .tarjeta-crema {
-    background: #f1e7d0;
-    border: 1px solid #d4c5a9;
-    border-radius: 10px;
-    max-width: 480px; /* O el ancho que prefieras */
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+  :global(.fecha) {
+    max-width: 400px;
+    height: 60px;
   }
 
-  .fecha-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  :global(.fecha h3) {
     color: var(--naranja);
     font-weight: bold;
     font-size: 0.8rem;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin: 0px;
   }
 
-  .fecha-body {
-    display: flex;
-    justify-content: space-around;
-    font-weight: bold;
-    font-size: 1.4rem;
-    background: #f1e7d0;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  /* Estilo para las bases (Columna derecha) */
-  .lista-bases {
+  /* Estilo para las bases */
+  ol {
     list-style: none;
     padding: 0;
   }
-
-  .lista-bases li {
+  ol li {
     margin-bottom: 20px;
     line-height: 1.6;
     text-align: justify;
     display: block;
   }
-
-  .lista-bases span {
+  ol span {
     color: var(--naranja);
     font-weight: bold;
     margin-right: 10px;
     display: inline;
   }
-
-  .lista-bases strong {
-    display: inline; /* Forzamos a que no salte de línea */
+  ol strong {
+    display: inline;
   }
 
-  /* Responsive: Si la pantalla es chica, se pone uno debajo de otro */
   @media (max-width: 768px) {
-    .grid-convocatoria {
+    main {
       grid-template-columns: 1fr;
     }
   }
