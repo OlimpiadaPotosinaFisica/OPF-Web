@@ -33,7 +33,7 @@ const { formulas = true, title = "OPF" } = Astro.props;
     </main>
     <Footer />
   </body><script>
-  import { animate, hover, inView } from "motion";
+    import { animate, hover, inView } from "motion";
 
     hover(".motion-hover", (element) => {
       animate(element, { scale: 1.5 });
@@ -41,13 +41,13 @@ const { formulas = true, title = "OPF" } = Astro.props;
       return () => animate(element, { scale: 1 });
     });
 
-  inView(".motion-fadein", (element) => {
-    animate(
-      element,
-      { opacity: [0, 1], y: [15, 0] },
-      { duration: 0.5, easing: [0.22, 1, 0.36, 1] },
-    );
-  });
+    inView(".motion-fadein", (element) => {
+      animate(
+        element,
+        { opacity: [0, 1], y: [15, 0] },
+        { duration: 0.5, easing: [0.22, 1, 0.36, 1] },
+      );
+    });
   </script>
   <style define:vars={{ ...colores }} is:global>
     body {
