@@ -31,7 +31,7 @@ const {
 
   inView("hr", (linea) => {
     const contenido = linea.nextElementSibling;
-    const h = contenido.scrollHeight;
+    const h = contenido.offsetHeight;
 
     // Desaparece el contenido de la seccion
     animate(
@@ -66,11 +66,9 @@ const {
   section {
     display: flex;
     justify-content: var(--alineacion);
+    align-items: flex-start;
     gap: 1em;
     margin: 10px;
-  }
-
-  div {
   }
 
   h2 {
