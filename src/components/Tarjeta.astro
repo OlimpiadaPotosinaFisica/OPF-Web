@@ -5,6 +5,7 @@ import { colores } from "../config/colores";
 interface Props {
   acento?: Color;
   colorFondo?: Color;
+  colorTitulo?: Color;
   titulo?: string;
   class: String;
 }
@@ -12,6 +13,7 @@ interface Props {
 const {
   acento = "gris",
   colorFondo = "blanco",
+  colorTitulo = "blanco",
   titulo,
   alineado = "inherit",
   class: className,
@@ -27,6 +29,7 @@ const {
   define:vars={{
     acento: colores[acento],
     colorFondo: colores[colorFondo],
+    colorTitulo: colores[colorTitulo],
     alineado: alineado,
   }}
 >
@@ -52,7 +55,7 @@ const {
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--acento);
-    color: white;
+    color: var(--colorTitulo);
     padding: 0.2rem 1rem;
     border-radius: 20px;
     font-size: 0.8rem;
