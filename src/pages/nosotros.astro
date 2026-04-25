@@ -1,36 +1,93 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Seccion from "../components/Seccion.astro";
+import { Image } from "astro:assets";
+import Nosotros from "../assets/nosotros.jpg";
+import MhAlvaro from "../assets/reconocimientos/mh-alvaro.jpg";
+import MhMariano from "../assets/reconocimientos/mh-mariano.jpg";
 ---
 
+<Layout>
+  <main>
+    <div class="flex">
+      <Image src={Nosotros} alt="nosotros" loading="eager" />
+      <Seccion titulo="¿Quienes somos?">
+        <p>
+          La <strong>Olimpiada Potosina de Física</strong> es una competencia a nivel
+          estatal que tiene como objetivo fomentar el interés por la ciencia, detectar
+          talentos jóvenes y encontrar a los que posteriormente seran representantes
+          de San Luis Potosi en la <strong>Olimpiada Mexicana de Física</strong>
+          El equipo de la olimpiada está conformado por la delegada del estado, la
+          doctora Stephanie Velázquez Pérez y estudiantes de la licenciatura en física:
+          Diego Mina Santos, Leonardo Flores Cerna, Emir Antonio Moctezuma Soto y
+          Hugo Ángel Molina Rodríguez.
+        </p>
+      </Seccion>
+    </div>
+
+    <div class="flex">
+      <Seccion titulo="Recientemente..." acento="azul">
+        <p>
+          En la edición pasada de la <strong
+            >Olimpiada Mexicana de Física</strong
+          > (2025) obtuvimos dos menciones honoríficas. Es un gran logro no solo para
+          el equipo, sino que para todo el estado de San Luis Potosí. Los estudiantes
+          que conformaron la selección de 2025 fueron:
+          <ul>
+            <li>Sergio Armando Revolloso Bravo</li>
+            <li>Álvaro Abraham Badillo Ramírez</li>
+            <li>Debra Osuna Hernández</li>
+            <li>Mariano José Calderón Alvarado</li>
+          </ul>
+        </p>
+      </Seccion>
+
+      <div>
+        <Image
+          src={MhAlvaro}
+          alt="nosotros"
+          loading="eager"
+          class="reconocimiento"
+        />
+        <Image
+          src={MhMariano}
+          alt="nosotros"
+          loading="eager"
+          class="reconocimiento"
+        />
+      </div>
+    </div>
+  </main>
+</Layout>
+
 <style>
-  /* Aquí defines toda la apariencia */
-  .cuadro-informativo {
-    border: 2px solid var(--naranja);
-    padding: 20px;
-    background-color: var(#f7f5ef);
-    border-radius: 8px;
-    margin: 10px 0;
+  main {
+    display: flex;
+    flex-direction: column;
+    max-width: 50em;
+    margin: 0 auto;
   }
 
-  .cuadro-informativo h2 {
-    margin-top: 0;
+  .flex {
+    display: flex;
+    padding: 1rem;
   }
 
-  .cuadro-informativo p {
-    line-height: 1.6;
+  img {
+    max-height: 300px;
+    width: auto;
+    max-width: 300px;
+    border-radius: 20px;
+  }
+
+  .reconocimiento {
+    height: 200px;
+  }
+
+  @media (max-width: 50em) {
+    .flex {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 </style>
-
-<Layout>
-  <div class="cuadro-informativo">
-    <h2>¿Quienes somos?</h2>
-    <p>
-      La <strong>Olimpiadas Potosinas de Física</strong>. es una competencia a
-      nivel estatal que tiene como objetivo fomentar el interés por la ciencia,
-      detectar talentos jóvenes y encontrar a los que posteriormente seran
-      representantes de San Luis Potosi en la <strong
-        >Olimpiada Mexicana de Física</strong
-      >
-    </p>
-  </div>
-</Layout>
