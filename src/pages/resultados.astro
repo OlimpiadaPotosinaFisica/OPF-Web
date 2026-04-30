@@ -24,21 +24,25 @@ const Medallas = [Oro, Plata, Bronce];
 const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
 
 if (resultadosPublicados) {
-    const ParticipantesOrdenados = [...RawCal].sort((a: Participante, b: Participante) => b.cal - a.cal);
+  const ParticipantesOrdenados = [...RawCal].sort(
+    (a: Participante, b: Participante) => b.cal - a.cal,
+  );
 
-    podiog = ParticipantesOrdenados.slice(0, 3).map((participante: Participante, index: number) => ({
+  podiog = ParticipantesOrdenados.slice(0, 3).map(
+    (participante: Participante, index: number) => ({
       puesto: NPodio[index],
       nombre: participante.nombre,
       escuela: participante.escuela,
       medalla: Medallas[index],
-    }));
+    }),
+  );
 
-    GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
-      posicion: index + 4,
-      nombre: participante.nombre,
-      escuela: participante.escuela,
-    }));
-  }
+  GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
+    posicion: index + 4,
+    nombre: participante.nombre,
+    escuela: participante.escuela,
+  }));
+}
 ---
 
 <Layout>
