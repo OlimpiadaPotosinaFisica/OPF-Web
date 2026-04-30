@@ -1,0 +1,52 @@
+[
+  {
+    "nombre": "Nombre 1",
+    "escuela": "Escuela 1",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 2",
+    "escuela": "Escuela 2",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 3",
+    "escuela": "Escuela 3",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 4",
+    "escuela": "Escuela 4",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 5",
+    "escuela": "Escuela 5",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 6",
+    "escuela": "Escuela 6",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 7",
+    "escuela": "Escuela 7",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 8",
+    "escuela": "Escuela 8",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 9",
+    "escuela": "Escuela 9",
+    "cal": 100
+  },
+  {
+    "nombre": "Nombre 10",
+    "escuela": "Escuela 10",
+    "cal": 100
+  }
+]
