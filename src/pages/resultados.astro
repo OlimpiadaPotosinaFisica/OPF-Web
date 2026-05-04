@@ -249,4 +249,35 @@ if (resultadosPublicados) {
     font-size: 1.2rem;
     line-height: 1.6;
   }
+  /* Ajustes para moviles que se veía qlero */
+  @media (max-width: 768px) {
+    .titulo {
+      font-size: 2.2rem;
+    }
+
+    .subtitulo {
+      font-size: 1rem;
+    }
+
+    .podio {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .podio > * {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .subtitulo-tabla {
+      font-size: 1.5rem;
+    }
+
+    .tabla-resultados th,
+    .tabla-resultados td {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
 </style>
