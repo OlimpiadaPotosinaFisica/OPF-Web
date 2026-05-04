@@ -1,14 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { parse } from "csv-parse/browser/esm/sync";
 import { Image } from "astro:assets";
+import { createClient } from "@supabase/supabase-js";
 import Tarjeta from "../components/Tarjeta.astro";
 import Oro from "../assets/medallas/OPFOro.png";
 import Plata from "../assets/medallas/OPFPlata.png";
 import Bronce from "../assets/medallas/OPFBronce.png";
 
-const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSS80-GOI4CzYSU93h6tAARle7NjcbZGz-YVuArz2rElPvsSj8AsDzTKwqrDy1VhsYyf7TSoKIpIDaK/pub?gid=0&single=true&output=csv";
+// Ruta de las calis
+//import RawCal from "../data/resultados.json";
 
 // CAMBIAR A TRUE PARA PUBLICAR RESULTADOS
 const resultadosPublicados = false;
@@ -24,33 +24,38 @@ let GRes: any[] = [];
 const Medallas = [Oro, Plata, Bronce];
 const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
 
+const supabaseUrl = import.meta.env.SUPABASE_URL;
+const supabaseKey = import.meta.env.SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 if (resultadosPublicados) {
-  try {
-    const response = await fetch(SHEET_URL);
-    const csvContent = await response.text();
+  const { data: RawCal, error } = await supabase
+    .from("OPF Resultados")
+    .select("nombre, escuela, cal");
 
-    const RawCal = parse(csvContent, {
-      columns: true,
-      skip_empty_lines: true,
-      cast: true,
-    });
+  if (error) {
+    console.error("Error al obtener datos de Supabase:", error);
+  }
 
-    const ParticipantesOrdenados = [...RawCal].sort((a, b) => b.cal - a.cal);
+  if (RawCal) {
+    const ParticipantesOrdenados = [...RawCal].sort(
+      (a: Participante, b: Participante) => b.cal - a.cal,
+    );
 
-    podiog = ParticipantesOrdenados.slice(0, 3).map((participante, index) => ({
-      puesto: NPodio[index],
-      nombre: participante.nombre,
-      escuela: participante.escuela,
-      medalla: Medallas[index],
-    }));
+    podiog = ParticipantesOrdenados.slice(0, 3).map(
+      (participante: Participante, index: number) => ({
+        puesto: NPodio[index],
+        nombre: participante.nombre,
+        escuela: participante.escuela,
+        medalla: Medallas[index],
+      }),
+    );
 
     GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
       posicion: index + 4,
       nombre: participante.nombre,
       escuela: participante.escuela,
     }));
-  } catch (error) {
-    console.error("Error al cargar los resultados:", error); //Por si las dudas, ya luego lo reparan
   }
 }
 ---

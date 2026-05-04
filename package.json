@@ -15,8 +15,8 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.1",
     "astro": "^6.1.6",
-    "csv-parse": "^6.2.1",
     "motion": "^12.38.0"
   },
   "devDependencies": {
