@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { createClient } from "@supabase/supabase-js";
 import Tarjeta from "../components/Tarjeta.astro";
+import Etiqueta from "../components/Etiqueta.astro";
 import Seccion from "../components/Seccion.astro";
 import Oro from "../assets/medallas/OPFOro.png";
 import Plata from "../assets/medallas/OPFPlata.png";
@@ -21,7 +22,11 @@ let podiog: any[] = [];
 let GRes: any[] = [];
 const Medallas = [Oro, Plata, Bronce];
 const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
-const Color = ["dorado", "gris", "naranja"];
+const Gradientes = [
+  "linear-gradient(135deg, #ffd700, #fdb931)", // oro
+  "linear-gradient(135deg, #e0e0e0, #9e9e9e)", // plata
+  "linear-gradient(135deg, #fb995d, #c6704e)", // bronce
+];
 
 const supabaseUrl = import.meta.env.SUPABASE_URL;
 const supabaseKey = import.meta.env.SUPABASE_ANON_KEY;
@@ -45,7 +50,7 @@ if (resultadosPublicados) {
       (participante: Participante, index: number) => ({
         puesto: NPodio[index],
         posicion: index,
-        color: Color[index],
+        gradiente: Gradientes[index],
         nombre: participante.nombre,
         escuela: participante.escuela,
         medalla: Medallas[index],
@@ -79,60 +84,63 @@ if (resultadosPublicados) {
             <strong>Conoce a los perfiles destacados de esta edición.</strong>
           </Seccion>
 
-          <h1>Podio</h1>
+          <h1 class="titulo-podio">Podio</h1>
 
-          <section class="podio">
-            {podiog.map((participante) => (
-              <div class={`podio-item puesto-${participante.posicion + 1}`}>
-                <Tarjeta
-                  hover={true}
-                  acento={participante.color}
-                  colorTitulo={
-                    participante.color == "gris" ? "negro" : "blanco"
-                  }
-                  titulo={participante.puesto}
+          <div class="escenario-podio">
+            <section class="podio">
+              {podiog.map((participante) => (
+                <div
+                  class={`columna-podio puesto-${participante.posicion + 1}`}
                 >
-                  <div class="puesto-contenido">
-                    <div class="medalla">
-                      <Image
-                        src={participante.medalla}
-                        alt={`Medalla de ${participante.puesto}`}
-                      />
-                    </div>
-                    <h2>{participante.nombre}</h2>
-                    <p class="escuela">{participante.escuela}</p>
+                  <div
+                    class="pilar-fondo"
+                    style={`--gradiente: ${participante.gradiente}`}
+                  />
+                  <div class="info-ganador">
+                    <Image
+                      src={participante.medalla}
+                      alt={`medalla de ${participante.puesto}`}
+                      class="img-medalla"
+                    />
+                    <h2 class="nombre-ganador">{participante.nombre}</h2>
+                    <p class="escuela-ganador">{participante.escuela}</p>
+                    <Etiqueta colorFondo="negro" decoraciones={false}>
+                      {participante.puesto}
+                    </Etiqueta>
                   </div>
-                </Tarjeta>
-              </div>
-            ))}
-          </section>
+                </div>
+              ))}
+            </section>
 
-          <section class="seccion-tabla">
-            <h1>Tabla General de Posiciones</h1>
+            <section class="seccion-tabla">
+              <Etiqueta colorFondo="blanco" colorTexto="negro">
+                Tabla General de Posiciones
+              </Etiqueta>
 
-            <div class="tabla-responsiva">
-              <table class="tabla-resultados">
-                <thead>
-                  <tr>
-                    <th>Posición</th>
-                    <th>Nombre</th>
-                    <th>Escuela</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {GRes.map((alumno) => (
+              <div class="tabla-responsiva">
+                <table class="tabla-resultados">
+                  <thead>
                     <tr>
-                      <td>
-                        <strong>{alumno.posicion}</strong>
-                      </td>
-                      <td>{alumno.nombre}</td>
-                      <td>{alumno.escuela}</td>
+                      <th>Posición</th>
+                      <th>Nombre</th>
+                      <th>Escuela</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+                  </thead>
+                  <tbody>
+                    {GRes.map((alumno) => (
+                      <tr>
+                        <td>
+                          <strong>{alumno.posicion}</strong>
+                        </td>
+                        <td>{alumno.nombre}</td>
+                        <td>{alumno.escuela}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
         </>
       ) : (
         /* --- VISTA DE ESPERA (Si es FALSE) --- */
@@ -155,160 +163,194 @@ if (resultadosPublicados) {
     padding: 2rem;
   }
 
-  .podio {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-  }
-
-  .puesto-1 {
-    width: 200px;
-  }
-
-  .puesto-2 {
-    width: 200px;
-  }
-
-  .puesto-3 {
-    width: 200px;
-  }
-
-  .puesto-contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .escuela {
-    color: var(--grisOscuro);
-    font-weight: bold;
-    margin-top: 0.5rem;
-  }
-
-  .puesto-texto {
-    color: var(--dorado);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
-
-  .medalla {
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  .medalla img {
-    width: 80px;
-    height: auto;
-  }
-
-  .seccion-tabla {
-    text-align: left;
-    margin-top: 4rem;
-  }
-
-  h1 {
+  .titulo-podio {
     font-size: 2rem;
     color: var(--negro);
     margin-bottom: 2rem;
     text-align: center;
   }
 
+  /* DISEÑO ACÁ CABRÓN DEL PODIO */
+  /* El z-index es para separar capas pijes */
+  .escenario-podio {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 2rem;
+  }
+
+  .podio {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  }
+
+  .columna-podio {
+    position: relative;
+    width: 32%;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 !important;
+    }
+  }
+
+  .pilar-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1000px;
+    background: var(--gradiente);
+    border-radius: 60px 60px 0 0;
+    z-index: 1;
+    mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 40%,
+      transparent 60%
+    );
+    box-shadow:
+      inset 0 4px 15px rgba(255, 255, 255, 0.4),
+      0 10px 20px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      height: 100%;
+      mask-image: none;
+      border-radius: 16px;
+    }
+  }
+
+  /* CONSIDEREN HACER UN NUEVO COMPONENTE CON ESTO */
+  .info-ganador {
+    position: relative;
+    z-index: 2;
+    padding: 2rem 2rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .img-medalla {
+    width: 90px;
+    height: auto;
+    margin-bottom: 0.8rem;
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25));
+  }
+
+  .nombre-ganador {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 1.6rem 0.5rem 1.6rem;
+    line-height: 1.2;
+  }
+
+  .escuela-ganador {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 1rem 0;
+  }
+
+  /* ==================================== */
+
+  /*Prosigamos... */
+  .puesto-1 {
+    z-index: 1;
+    margin-top: 0; /* Mero arriba */
+
+    @media (max-width: 768px) {
+      order: 1;
+    }
+  } /** Este wey por ejemplo está en la capa 1 */
+
+  .puesto-2 {
+    z-index: 2;
+    margin-top: 70px;
+    margin-right: -20px;
+
+    @media (max-width: 768px) {
+      order: 2;
+    }
+  } /** Y este otro wey en la capa 2 */
+
+  .puesto-3 {
+    z-index: 3;
+    margin-top: 130px; /*Mero abajo, PD: te amo Abigail*/
+    margin-left: -20px;
+
+    @media (max-width: 768px) {
+      order: 3;
+    }
+  }
+
+  /* TABLA */
+  .seccion-tabla {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-top: 0.2rem;
+
+    @media (max-width: 768px) {
+      margin-top: 2rem;
+    }
+  }
+
   .tabla-responsiva {
     overflow-x: auto;
     border-radius: 12px;
     border: 1px solid var(--gris);
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   }
 
   .tabla-resultados {
     width: 100%;
     border-collapse: collapse;
-  }
-
-  .tabla-resultados th,
-  .tabla-resultados td {
-    padding: 1.2rem;
-    border-bottom: 1px solid var(--gris);
-  }
-
-  .tabla-resultados th {
-    background-color: var(--verde);
-    color: #fff;
     text-align: left;
+
+    & th,
+    & td {
+      padding: 1.2rem;
+      border-bottom: 1px solid var(--gris);
+
+      @media (max-width: 768px) {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    & th {
+      background-color: var(--verde);
+      color: #fff;
+    }
+
+    & tbody tr:hover {
+      background-color: var(--crema);
+    }
   }
 
-  .tabla-resultados tbody tr:hover {
-    background-color: var(--crema);
-  }
-
-  .proximamente {
-    margin-top: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5rem 2rem;
-  }
-
+  /* VISTA DE ESPERA */
   .icono-espera {
     font-size: 4rem;
     margin-bottom: 1.5rem;
   }
 
-  .titulo-espera {
-    color: var(--negro);
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-  }
-
   .texto-espera {
     font-size: 1.2rem;
     line-height: 1.6;
-  }
-  /* Ajustes para moviles que se veía qlero */
-  @media (max-width: 768px) {
-    .titulo {
-      font-size: 2.2rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
-
-    .podio {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .podio > * {
-      width: 100%;
-      max-width: 320px;
-    }
-
-    .podio-item.puesto-1 {
-      order: 1;
-    }
-
-    .podio-item.puesto-2 {
-      order: 2;
-    }
-
-    .podio-item.puesto-3 {
-      order: 3;
-    }
-
-    .subtitulo-tabla {
-      font-size: 1.5rem;
-    }
-
-    .tabla-resultados th,
-    .tabla-resultados td {
-      padding: 0.8rem;
-      font-size: 0.9rem;
-    }
   }
 </style>

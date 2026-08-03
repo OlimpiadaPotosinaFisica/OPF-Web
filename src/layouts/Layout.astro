@@ -9,9 +9,10 @@ import { colores } from "../config/colores";
 
 interface Props {
   formulas?: boolean;
+  latex?: boolean;
   title?: string;
 }
-const { formulas = true, title = "OPF" } = Astro.props;
+const { formulas = true, latex = false, title = "OPF" } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,6 +25,31 @@ const { formulas = true, title = "OPF" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <Font cssVariable="--font-new-cm" />
     <title>OPF</title>
+
+    {
+      /* Cambiar solo cuando se requiera (latex={true} en la etiqueta <Layout>) */
+    }
+    {
+      latex && (
+        <>
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+          />
+          <script
+            is:inline
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+          />
+          <script
+            is:inline
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"
+          />
+        </>
+      )
+    }
   </head>
   <body>
     <Nav />

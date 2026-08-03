@@ -4,12 +4,14 @@ import type { Color } from "../config/colores";
 import { colores } from "../config/colores";
 
 interface Props extends HTMLAttributes<"a"> {
+  decoraciones?: boolean;
   colorFondo?: Color;
   colorTexto?: Color;
   href?: string;
 }
 
 const {
+  decoraciones = true,
   class: className,
   colorFondo = "azul",
   colorTexto = "blanco",
@@ -23,7 +25,7 @@ const Tag = href ? "a" : "p";
 <div>
   <Tag
     href={href || undefined}
-    class:list={[className, { "motion-hover": !!href }]}
+    class:list={[className, { "motion-hover": !!href, decor: decoraciones }]}
     {...atributos}
   >
     <slot />
@@ -53,12 +55,11 @@ const Tag = href ? "a" : "p";
     text-decoration: none;
   }
 
-  a::before,
-  p::before {
+  .decor::after {
     content: "✦";
   }
-  a::after,
-  p::after {
+
+  .decor::before {
     content: "✦";
   }
 </style>

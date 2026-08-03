@@ -3,7 +3,6 @@ import Layout from "../../../layouts/Layout.astro";
 import Tarjeta from "../../../components/Tarjeta.astro";
 import Seccion from "../../../components/Seccion.astro";
 import Etiqueta from "../../../components/Etiqueta.astro";
-import { subtemas } from "./termodinámica.astro";
 
 export const titulo = "Temario";
 export const descripcion =
@@ -22,18 +21,19 @@ const todosAstros = Object.entries(
 
 // 2. Filtramos y armamos la lista de temas
 const temas = todosAstros.flatMap(([ruta, archivo]) => {
+  const modulo = archivo as Record<string, any>;
   if (ruta.includes("index.astro")) return [];
 
   // Omitimos si a algún archivo se le olvidó poner titulo o descripcion
-  if (!archivo.titulo || !archivo.descripcion) return [];
+  if (!modulo.titulo || !modulo.descripcion) return [];
 
   return [
     {
       // Limpiamos la ruta
       ruta: "/recursos/temario" + ruta.replace(".", "").replace(".astro", ""),
-      titulo: archivo.titulo,
-      descripcion: archivo.descripcion,
-      subtemas: archivo.subtemas || [],
+      titulo: modulo.titulo,
+      descripcion: modulo.descripcion,
+      subtemas: modulo.subtemas || [],
     },
   ];
 });
@@ -68,7 +68,10 @@ const temas = todosAstros.flatMap(([ruta, archivo]) => {
     </section>
 
     <div class="descarga">
-      <Seccion titulo="¿Prefieres estudiarlo sin conexión?">
+      <Seccion
+        titulo="¿Prefieres estudiarlo sin conexión?"
+        alineacion="izquierda"
+      >
         <p>Descarga el documento completo</p>
       </Seccion>
       <Etiqueta href="/Temario.pdf" colorFondo="naranja"

@@ -1,0 +1,76 @@
+---
+export const titulo = "Álgebra elemental";
+export const descripcion =
+  "La forma más antigua y básica de álgebra. Una generalización de la aritmética que se basa en variables.";
+export const subtemas = [
+  "Notación",
+  "Conceptos básicos",
+  "Ecuaciones",
+  "Sistemas de ecuaciones",
+];
+import Layout from "../../../layouts/Layout.astro";
+import Seccion from "../../../components/Seccion.astro";
+---
+
+<Layout latex={true}>
+  <main class="contenedor-tema">
+    <h1>{titulo}</h1>
+    <p class="intro">{descripcion}</p>
+
+    <Seccion titulo="Notación">
+      <p>
+        Un coeficiente es un número, o una letra que representa una constante
+        numérica, que multiplica una variable (el operador se omite). Un término
+        es un sumando, un grupo de coeficientes, variables, constantes y
+        exponentes que pueden separarse de los demás términos mediante los
+        operadores ($+$) y ($-$).<sup>1</sup> Las letras representan variables y constantes.
+        Por convención, las letras al principio del alfabeto (p. ej. $a,b,c$) se utilizan
+        normalmente para representar constantes, y las que están hacia el final del
+        alfabeto (p. ej. $x,y,z$) se utilizan para representar variables.<sup
+          >2</sup
+        >
+      </p>
+      <p>
+        Las operaciones algebraicas funcionan igual que las operaciones
+        aritméticas. Los símbolos de multiplicar se omiten usualmente, por
+        ejemplo $4\times x^6$ se escribe como $4x^6$.
+      </p>
+    </Seccion>
+
+    <Seccion titulo="Conceptos">
+      <h3>Variables</h3>
+      <p></p>
+
+      <h3>Expresiones simplificadas</h3>
+
+      <h3>Ecuaciones</h3>
+    </Seccion>
+
+    <Seccion titulo="Resolviendo ecuaciones" />
+
+    <Seccion titulo="Resolviendo sistemas de ecuaciones" />
+
+    <Seccion titulo="Bibliografía">
+      <ol>
+        <li>
+          Richard N. Aufmann, Joanne Lockwood, Introductory Algebra: An Applied
+          Approach, Publisher Cengage Learning, 2010, ISBN 1439046042,
+          9781439046043, p. 78
+        </li>
+        <li>
+          William L. Hosch (editor), The Britannica Guide to Algebra and
+          Trigonometry, Britannica Educational Publishing, The Rosen Publishing
+          Group, 2010, ISBN 1615302190, p. 71
+        </li>
+      </ol>
+    </Seccion>
+  </main>
+</Layout>
+
+<style>
+  .contenedor-tema {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>
