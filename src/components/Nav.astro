@@ -16,6 +16,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     href="/"
     class:list={[{ active: currentPath === "/" }]}
     aria-label="Olimpiada Potosina de Física"
+    data-astro-prefetch
   >
     <Image src={logo} alt="OPF" loading="eager" />
   </a>
@@ -37,6 +38,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
                 currentPath === link || currentPath.startsWith(link + "/"),
             },
           ]}
+          data-astro-prefetch
         >
           {label}
         </a>

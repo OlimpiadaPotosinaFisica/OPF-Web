@@ -8,6 +8,7 @@ interface Props extends HTMLAttributes<"a"> {
   colorFondo?: Color;
   colorTexto?: Color;
   href?: string;
+  prefetch?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   colorFondo = "azul",
   colorTexto = "blanco",
   href,
+  prefetch,
   ...atributos
 } = Astro.props;
 
@@ -26,6 +28,7 @@ const Tag = href ? "a" : "p";
   <Tag
     href={href || undefined}
     class:list={[className, { "motion-hover": !!href, decor: decoraciones }]}
+    data-astro-prefetch={prefetch ? "hover" : "false"}
     {...atributos}
   >
     <slot />
