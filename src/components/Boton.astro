@@ -3,12 +3,18 @@ interface Props {
   href: string;
   class?: string;
   target?: string;
+  prefetch?: boolean;
 }
 
-const { href, class: className, target } = Astro.props;
+const { href, class: className, target, prefetch } = Astro.props;
 ---
 
-<a href={href} target={target} class:list={["boton-base", className]}>
+<a
+  href={href}
+  target={target}
+  class:list={["boton-base", className]}
+  data-astro-prefetch={prefetch ? "hover" : "false"}
+>
   <slot />
 </a>
 

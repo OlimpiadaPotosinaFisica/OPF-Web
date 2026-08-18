@@ -49,7 +49,7 @@ const temas = todosAstros.flatMap(([ruta, archivo]) => {
     <section class="grid-temas motion-fadein">
       {
         temas.map((bloque) => (
-          <a href={bloque.ruta} class="tema-link">
+          <a href={bloque.ruta} class="tema-link" data-astro-prefetch>
             <Tarjeta>
               <div class="cabecera-tarjeta">
                 <h2>{bloque.titulo}</h2>

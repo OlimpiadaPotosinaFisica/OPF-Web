@@ -17,7 +17,7 @@ import Seccion from "../components/Seccion.astro";
       delegación que representará a San Luis Potosí.
     </p>
     <div class="hero-acciones">
-      <Etiqueta href="/resultados">Resultados Disponibles</Etiqueta>
+      <Etiqueta href="/resultados" prefetch>Resultados Disponibles</Etiqueta>
     </div>
   </section>
 
@@ -75,8 +75,12 @@ import Seccion from "../components/Seccion.astro";
         </p>
       </div>
       <div class="recursos-enlaces">
-        <Boton href="/recursos/temario">Ver Temario Oficial &rarr;</Boton>
-        <Boton href="/recursos/selectivos">Exámenes Anteriores &rarr;</Boton>
+        <Boton href="/recursos/temario" prefetch
+          >Ver Temario Oficial &rarr;</Boton
+        >
+        <Boton href="/recursos/selectivos" prefetch
+          >Exámenes Anteriores &rarr;</Boton
+        >
       </div>
     </div>
   </Seccion>

@@ -45,7 +45,7 @@ const todosRecursos = [
     <section>
       {
         todosRecursos.map(({ ruta, titulo, descripcion }) => (
-          <a href={ruta}>
+          <a href={ruta} data-astro-prefetch>
             <Tarjeta hover>
               <h2>{titulo}</h2>
               <p>{descripcion}</p>
