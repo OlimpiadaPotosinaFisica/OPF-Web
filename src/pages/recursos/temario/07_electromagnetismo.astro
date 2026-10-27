@@ -9,30 +9,128 @@ export const subtemas = [
   "Magnetismo",
   "Ley de Faraday (Inducción)",
 ];
-export const disponible = false;
-import Layout from "../../../layouts/Layout.astro";
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const InfografiaId = "1-oGQ2pwr0VyijxcoxyRTd3wub2_wtFmA";
+const ProblemasId = "1Lr2re1lmfrP_CAJbQXN4kqP_qh2-lJnS";
+const SolucionarioId = "11Lz_g6DlE-QyngqTWllr4CQyseq_njzP";
 ---
 
-<Layout>
-  <main class="contenedor-tema">
-    <h1>{titulo}</h1>
-    <p class="intro">{descripcion}</p>
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
+  <Seccion titulo="Unidades" acento="naranja">
+    <p>
+      Las siguientes unidades son necesarias para el estudio del electromagnetismo
+    </p>
+  </Seccion>
 
-    <Seccion titulo="Titulo" />
+  <ul>
+    <li><strong>Coulomb</strong> (C): Carga eléctrica.</li>
+    <li><strong>Newton</strong> (N): Fuerza.</li>
+    <li><strong>Metro</strong> (m): Distancia.</li>
+    <li><strong>Faradios</strong> (F): capacitancia.</li>
+    <li><strong>Volts</strong> (V): diferencia de potencial.</li>
+  </ul>
 
-    <Seccion titulo="Titulo" />
+  <Seccion titulo="Carga y Ley de Coulomb" acento="azulUaslp">
+    <p>Dos de los conceptos mas importantes del electromagnetismo.</p>
+  </Seccion>
 
-    <Seccion titulo="Titulo" />
+  <Etiqueta colorFondo="azulUaslp">Carga</Etiqueta>
+  <p>
+    La <strong>Carga Electrica</strong> es una propiedad física de la 
+    materia que permite que las partículas experimenten fuerzas eléctricas de atracción o repulsión, 
+    esto dependiendo de si su carga es positiva o negativa, las cargas iguales se atraen y las contrarias se atraen .
+  </p>
+  <Etiqueta colorFondo="azulUaslp">Ley de Coulomb</Etiqueta>
+  <p>
+    La <strong>Ley de Coulomb</strong> establece que la fuerza eléctrica entre dos cargas puntuales es directamente proporcional 
+    al producto de las magnitudes de sus cargas e inversamente proporcional al cuadrado de la distancia que las separa
+  </p>
+  <p>
+    {String.raw`$$F = k \frac{|q_1 q_2|}{r^2}$$`}
+  </p>
 
-    <Seccion titulo="Titulo" />
-  </main>
-</Layout>
+  <Seccion titulo="Campo Eléctrico" acento="azul">
+    <p>
+      Movimiento con velocidad inicial $v_0$ a un ángulo $\theta$ sobre la
+      horizontal.
+    </p>
+  </Seccion>
 
-<style>
-  .contenedor-tema {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>
+  <p>
+    Los ejes $x$ y $y$ son <em>independientes</em>: en $x$ hay MRU y en $y$ hay
+    MRUA con $a = -g$.
+  </p>
+  <ul>
+    <li>
+      <strong>Eje $x$</strong>:
+      {String.raw`$v_{0x} = v_0\cos\theta, \quad x = x_0 + v_{0x}t$`}
+    </li>
+    <li>
+      <strong>Eje $y$</strong>:
+      {
+        String.raw`$v_{0y} = v_0\sin\theta, \quad y = y_0 + v_{0y}t - \frac{1}{2}gt^2, \quad v_y = v_{0y} - gt$`
+      }
+    </li>
+  </ul>
+  <p>De estas ecuaciones se obtienen tres resultados útiles:</p>
+  <Tarjeta acento="azul" titulo="ecuaciones tiro parabolico">
+    Tiempo de vuelo: {String.raw`$t_\text{vuelo} = \dfrac{2v_{0y}}{g}$`}
+    <br />
+    Alcance máximo: {String.raw`$R = \dfrac{v_0^2\sin(2\theta)}{g}$`}
+    <br />
+    Altura máxima: {String.raw`$h_\text{max} = \dfrac{v_{0y}^2}{2g}$`}
+  </Tarjeta>
+
+  <Seccion titulo="Leyes de Newton" acento="verde">
+    <p>
+      Una <strong>fuerza</strong> es una interacción capaz de cambiar el estado de
+      movimiento de un cuerpo. Se mide en newtons: {
+        String.raw`$1\text{ N} = 1\text{ kg}\cdot\text{m/s}^2$`
+      }.
+    </p>
+  </Seccion>
+
+  <p>
+    <strong>Primera ley (inercia).</strong> Todo cuerpo persevera en su estado de
+    reposo o movimiento uniforme y rectilíneo, a no ser que sea obligado a cambiar
+    dicho estado por fuerzas impresas sobre él. Válida solo en marcos de referencia
+    inerciales.
+  </p>
+
+  <p>
+    <strong>Segunda ley.</strong> La aceleración de un cuerpo es proporcional a la
+    fuerza neta ejercida sobre él, e inversamente proporcional a su masa:
+  </p>
+  <p>$$\sum F = ma$$</p>
+  <p>
+    Un caso importante es el <strong>peso</strong>, la fuerza con la que la
+    gravedad atrae a un cuerpo: $W = mg$.
+  </p>
+
+  <p>
+    <strong>Tercera ley.</strong> Las acciones mutuas entre dos cuerpos son siempre
+    iguales y están dirigidas en sentidos opuestos:
+  </p>
+  <p>{String.raw`$$F_{12} = -F_{21}$$`}</p>
+
+  <Seccion titulo="Conservación del momento" acento="dorado">
+    <p>El momento de una partícula se define como $p = mv$.</p>
+  </Seccion>
+
+  <p>
+    Si no hay fuerzas externas, la suma de los momentos de un número de
+    partículas permanece constante:
+  </p>
+  <Tarjeta titulo="Conservación" acento="dorado" colorTitulo="crema">
+    {String.raw`$$m_1v_1 + m_2v_2 + \dots = \text{una constante}$$`}
+  </Tarjeta>
+</Tema>
+
