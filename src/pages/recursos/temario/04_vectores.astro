@@ -1,36 +1,278 @@
 ---
 export const titulo = "Vectores";
 export const descripcion =
-  "Cantidades que poseen magnitud y dirección, que explican fuerzas y trayectorias.";
+  "Magnitud, álgebra de vectores, producto punto y producto cruz.";
 export const subtemas = [
-  "Diferencia entre Vector y Escalar",
-  "Suma y Resta Vectorial",
-  "Componentes Geométricos y Analíticos",
+  "Definiciones e introducción",
+  "Álgebra de vectores",
+  "Producto punto",
+  "Producto cruz",
 ];
-export const disponible = false;
-import Layout from "../../../layouts/Layout.astro";
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const L = String.raw;
+
+const InfografiaId = "1lcw2N0R4evsV0RATlgQfX7OsbBmZcvZc";
+const ProblemasId = "1eJb_DdfLhw4YGVvKVuuaib0d4JleLuJz";
+const SolucionarioId = "13x5yu01TY7HOmqvaeN-YVx5HmSenZKt5";
 ---
 
-<Layout>
-  <main class="contenedor-tema">
-    <h1>{titulo}</h1>
-    <p class="intro">{descripcion}</p>
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
 
-    <Seccion titulo="Titulo" />
+  <Seccion titulo="Antecedentes" acento="dorado">
+    <p>
+      El estudio de vectores se encuentra dentro de una rama de las matemáticas
+      conocida como álgebra lineal, aunque esto escapa el alcance de este breve
+      curso, obviando definiciones tales como: espacio vectorial, subespacio,
+      ortogonalización, etc. Se presupone que el alumno tiene conocimientos
+      básicos previos de geometría, tabulación, graficación, trigonometría y
+      funciones al menos en el plano.
+    </p>
+  </Seccion>
 
-    <Seccion titulo="Titulo" />
+  <Seccion titulo="Definiciones" acento="naranja">
+    <p>
+      Las siguientes definiciones son temporales y carecen de rigor, sin embargo
+      marcan un buen punto de partida para este curso.
+    </p>
+  </Seccion>
 
-    <Seccion titulo="Titulo" />
+  <ul>
+    <li>
+      <strong>Magnitud</strong>: cantidad real positiva que representa alguna
+      cantidad física.
+    </li>
+    <li>
+      <strong>Dirección (física)</strong>: orientación relativa a algún punto de
+      referencia.
+    </li>
+    <li>
+      <strong>Sentido</strong>: dentro de una dirección, hacia dónde se dirige
+      algún objeto.
+    </li>
+    <li>
+      <strong>Vector</strong>: es un objeto con magnitud, sentido y dirección.
+    </li>
+    <li>
+      <strong>Rotación</strong>: cambiar la dirección de algún objeto, vectores
+      en este caso.
+    </li>
+    <li>
+      <strong>Escalar</strong>: número real, es decir, una cantidad que solo
+      tiene magnitud (y signo).
+    </li>
+  </ul>
 
-    <Seccion titulo="Titulo" />
-  </main>
-</Layout>
+  <Seccion titulo="Introducción" acento="azulUaslp">
+    <p>
+      Para la física es de particular interés los espacios cartesianos de 2 y 3
+      dimensiones a los que se les llama {L`$\mathbb{R}^2$`} y {
+        L`$\mathbb{R}^3$`
+      }.
+    </p>
+  </Seccion>
 
-<style>
-  .contenedor-tema {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>
+  <p>
+    El alumno debería tener cierta familiaridad con el primero, que también se
+    le conoce como el plano cartesiano. En dicho espacio un vector se escribe
+    como un par ordenado análogo a la notación de puntos en el espacio; la
+    diferencia se marca colocando una flecha sobre el vector:
+  </p>
+  <p>{L`$$\vec{v} = (a, b)$$`}</p>
+  <p>
+    La representación geométrica del vector consiste en una flecha que comienza
+    en el origen y cuya punta se encuentra en el punto $(a, b)$. Dicho vector
+    puede representar fuerza, posición, velocidad, etc. y no necesariamente
+    comenzar en el origen.
+  </p>
+  <p>
+    La magnitud de este vector puede obtenerse mediante el teorema de Pitágoras
+    y se define de la siguiente forma:
+  </p>
+  <p>{L`$$|\vec{v}| = \sqrt{a^2 + b^2}$$`}</p>
+  <p>
+    En este caso la hipotenusa es la magnitud del vector y los catetos las
+    componentes horizontal y vertical; la magnitud siempre es un número real no
+    negativo. Dicha definición se expande a 3 dimensiones de manera directa: sea
+    un vector {L`$\vec{v} \in \mathbb{R}^3$`}, {L`$\vec{v} = (a, b, c)$`}.
+  </p>
+  <p>{L`$$|\vec{v}| = \sqrt{a^2 + b^2 + c^2}$$`}</p>
+  <Tarjeta titulo="Ejemplo" acento="azulUaslp">
+    {
+      L`$$|(3, 4)| = \sqrt{9 + 16} = 5 \qquad |(1, 2, 2)| = \sqrt{1 + 4 + 4} = 3$$`
+    }
+  </Tarjeta>
+
+  <Etiqueta colorFondo="azulUaslp">Ejemplos de física</Etiqueta>
+  <ul>
+    <li>
+      <strong>Desplazamiento</strong>: la magnitud del vector de desplazamiento
+      representa la cantidad total que se ha movido el objeto, sin importar
+      hacia dónde.
+    </li>
+    <li>
+      <strong>Velocidad</strong>: su magnitud es la rapidez y su sentido indica
+      hacia dónde se mueve el objeto.
+    </li>
+    <li>
+      <strong>Fuerza</strong>: su magnitud es la intensidad del empujón o jalón
+      y su sentido, hacia dónde se aplica.
+    </li>
+  </ul>
+
+  <Seccion titulo="Álgebra de vectores" acento="verde">
+    <p>
+      Sean {L`$\vec{u} = (u_1, u_2)$`}, {L`$\vec{v} = (v_1, v_2)$`} y {
+        L`$c \in \mathbb{R}$`
+      } un escalar. Las operaciones se realizan <strong
+        >componente a componente</strong
+      >:
+    </p>
+  </Seccion>
+
+  <ul>
+    <li>
+      <strong>Suma:</strong>
+      {L`$\vec{u} + \vec{v} = (u_1 + v_1, u_2 + v_2)$`}
+    </li>
+    <li>
+      <strong>Resta:</strong>
+      {L`$\vec{u} - \vec{v} = (u_1 - v_1, u_2 - v_2)$`}
+    </li>
+    <li>
+      <strong>Producto por escalar:</strong>
+      {L`$c\vec{v} = (cv_1, cv_2)$`}
+    </li>
+  </ul>
+  <p>
+    Geométricamente, para sumar se coloca la cola de {L`$\vec{v}$`} en la punta de
+    {L`$\vec{u}$`} y el resultado va del origen a la nueva punta.
+  </p>
+  <p>
+    El escalar $c$ estira ($|c| > 1$) o encoge ({L`$|c| < 1$`}) al vector, y si {
+      L`$c < 0$`
+    } invierte su sentido. Dos vectores son <strong>paralelos</strong> si uno es múltiplo
+    escalar del otro.
+  </p>
+  <p>
+    Un vector de magnitud 1 se llama <strong>unitario</strong>. Cualquier vector
+    no nulo {L`$\vec{v}$`} tiene uno en su misma dirección y sentido:
+  </p>
+  <p>{L`$$\hat{v} = \frac{\vec{v}}{|\vec{v}|}$$`}</p>
+
+  <Tarjeta titulo="¡Cuidado!" acento="naranja">
+    <strong>No existe la división entre vectores.</strong> Expresiones como {
+      L`$\dfrac{1}{\vec{v}}$`
+    } o {L`$\dfrac{\vec{u}}{\vec{v}}$`} no están definidas. Lo único permitido es
+    dividir un vector entre un <strong>escalar</strong>, que equivale a
+    multiplicar por su inverso:
+    {L`$$\frac{\vec{v}}{c} = \frac{1}{c}\vec{v}$$`}
+    Tampoco se pueden sumar un vector y un escalar: {L`$\vec{v} + 3$`} no tiene sentido.
+  </Tarjeta>
+
+  <Etiqueta colorFondo="verde">Ejemplo de física: velocidad relativa</Etiqueta>
+  <p>
+    Un observador $O'$ se mueve con velocidad constante {L`$\vec{V}$`} respecto a
+    $O$ y ambos coinciden en $t = 0$. En el instante $t$ el origen de $O'$ está en
+    {L`$\vec{V}t$`}, por lo que una partícula que $O$ ve en {L`$\vec{r}$`} la ve $O'$
+    en:
+  </p>
+  <p>{L`$$\vec{r}' = \vec{r} - \vec{V}t, \qquad t' = t$$`}</p>
+  <p>
+    Entre dos instantes, {
+      L`$\Delta\vec{r}' = \Delta\vec{r} - \vec{V}\Delta t$`
+    }. Dividiendo entre el escalar $\Delta t$:
+  </p>
+  <Tarjeta titulo="Transformación de Galileo" acento="verde">
+    {L`$$\vec{v}' = \vec{v} - \vec{V}$$`}
+  </Tarjeta>
+
+  <Seccion titulo="Producto punto" acento="dorado">
+    <p>El producto punto de dos vectores es un escalar.</p>
+  </Seccion>
+
+  <p>
+    {L`$$\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3$$`}
+    (en {L`$\mathbb{R}^2$`} se omite el último término). Geométricamente:
+  </p>
+  <p>{L`$$\vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}|\cos\theta$$`}</p>
+  <p>donde $\theta$ es el ángulo entre los vectores. De aquí se obtiene:</p>
+  <p>
+    {
+      L`$$\vec{v} \cdot \vec{v} = |\vec{v}|^2 \qquad \cos\theta = \frac{\vec{u} \cdot \vec{v}}{|\vec{u}||\vec{v}|}$$`
+    }
+  </p>
+  <p>y, si ambos son no nulos:</p>
+  <p>{L`$$\vec{u} \perp \vec{v} \iff \vec{u} \cdot \vec{v} = 0$$`}</p>
+  <Tarjeta titulo="Ejemplo" acento="dorado">
+    {L`$$(2, 3) \cdot (-3, 2) = -6 + 6 = 0$$`}
+    Así que son perpendiculares.
+  </Tarjeta>
+  <Tarjeta titulo="Física" acento="dorado">
+    El trabajo de una fuerza es {L`$W = \vec{F} \cdot \vec{d}$`}.
+  </Tarjeta>
+
+  <Seccion titulo="Producto cruz" acento="naranja">
+    <p>
+      Solo está definido en {L`$\mathbb{R}^3$`} y su resultado es un pseudo-vector.
+    </p>
+  </Seccion>
+
+  <p>
+    {
+      L`$$\vec{u} \times \vec{v} = \begin{vmatrix} \hat{i} & u_1 & v_1 \\ \hat{j} & u_2 & v_2 \\ \hat{k} & u_3 & v_3 \end{vmatrix}$$`
+    }
+    es decir:
+    {
+      L`$$\vec{u} \times \vec{v} = \begin{pmatrix} u_2 v_3 - u_3 v_2 \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{pmatrix}$$`
+    }
+  </p>
+  <p>Propiedades:</p>
+  <ul>
+    <li>
+      Es perpendicular a {L`$\vec{u}$`} y a {L`$\vec{v}$`}; su sentido lo da la
+      regla de la mano derecha.
+    </li>
+    <li>
+      {L`$|\vec{u} \times \vec{v}| = |\vec{u}||\vec{v}|\sin\theta$`}, que es el
+      área del paralelogramo formado por ambos.
+    </li>
+    <li>
+      Es anti-conmutativo: {
+        L`$\vec{u} \times \vec{v} = -\vec{v} \times \vec{u}$`
+      }.
+    </li>
+    <li>
+      {L`$\vec{u} \times \vec{v} = \vec{0}$`} si y solo si son paralelos.
+    </li>
+  </ul>
+  <Tarjeta titulo="Física" acento="naranja">
+    El torque es {L`$\vec{\tau} = \vec{r} \times \vec{F}$`}.
+  </Tarjeta>
+
+  <Seccion titulo="Ejercicios propuestos" acento="azul">
+    <ul>
+      <li>
+        Sean {L`$\vec{u} = (1, -2, 2)$`} y {L`$\vec{v} = (2, 0, -1)$`}. Calcule {
+          L`$\vec{u} + 2\vec{v}$`
+        }, {L`$|\vec{u}|$`} y {L`$\vec{u} \cdot \vec{v}$`}.
+      </li>
+      <li>Calcule el ángulo entre $(1, 0)$ y $(1, 1)$.</li>
+      <li>
+        Calcule {L`$\vec{u} \times \vec{v}$`} con los vectores del primer ejercicio
+        y compruebe que es perpendicular a ambos.
+      </li>
+      <li>
+        Un avión vuela a 200 km/h hacia el este y sopla un viento de 50 km/h
+        hacia el norte. Encuentre la velocidad resultante y su magnitud.
+      </li>
+    </ul>
+  </Seccion>
+</Tema>

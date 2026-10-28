@@ -1,0 +1,456 @@
+---
+export const titulo = "Precálculo";
+export const descripcion = "El estudio de las funciones y sus propiedades.";
+export const subtemas = [
+  "Notación y conjuntos",
+  "Funciones",
+  "Operaciones y transformaciones",
+  "Composición de funciones",
+  "Función inversa",
+];
+export const disponible = true;
+
+import Tema from "../../../layouts/Tema.astro";
+import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const InfografiaId = "166zR0H87py3tlEDaHRshmw1GJPObZZlU";
+const ProblemasId = "1juPehKT5GCxsRvs4L7zqujNFVrweKXRQ";
+const SolucionarioId = "1wNlIvjrxTpm0ZlCZP5uCbFPUTqTApw1Z";
+
+const R = String.raw`$\mathbb{R}$`;
+const finv = String.raw`$f^{-1}$`;
+---
+
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
+
+  <Seccion titulo="Notación y conjuntos" acento="dorado">
+    <p>
+      Si un elemento pertenece a un conjunto, se escribe $x \in S$. Si no
+      pertenece, se escribe $x \notin S$.
+    </p>
+  </Seccion>
+
+  <p>
+    Para dos conjuntos $A$ y $B$, dentro de un universo $U$, podemos definir las
+    siguientes operaciones:
+  </p>
+
+  <Tarjeta acento="dorado">
+    <strong>Unión:</strong> elementos que pertenecen a $A$ o a $B$. $$A \cup B$$
+
+    <strong>Intersección:</strong> elementos comunes a ambos conjuntos. $$A \cap B$$
+
+    <strong>Diferencia:</strong> elementos de $A$ que no pertenecen a $B$. $$A - B$$
+
+    <strong>Diferencia simétrica:</strong> elementos que pertenecen a exactamente
+    uno de los dos conjuntos. $$A \oplus B$$
+
+    <strong>Complemento:</strong> elementos del universo que no pertenecen a $A$.
+    $$A^c = U - A$$
+  </Tarjeta>
+
+  <Seccion titulo="Funciones" acento="naranja">
+    <p>
+      Una <strong>función</strong> $f$ de un conjunto $X$ a un conjunto $Y$ asigna
+      a cada elemento de $X$ exactamente un elemento de $Y$:
+    </p>
+    $$f:X \to Y, \qquad y=f(x)$$
+  </Seccion>
+
+  <p>
+    $X$ es el <strong>dominio</strong> y $Y$ es el
+    <strong>codominio</strong>. El <strong>rango</strong> es el conjunto de valores
+    que la función toma efectivamente.
+  </p>
+
+  <Tarjeta acento="naranja">
+    <strong>Dominio:</strong> valores permitidos de $x$.
+    {String.raw`$$\operatorname{Dom}(f)$$`}
+
+    <strong>Rango:</strong> valores obtenidos de $f(x)$.
+    {String.raw`$$\operatorname{Ran}(f) \subseteq Y$$`}
+  </Tarjeta>
+
+  <Tarjeta titulo="Ejemplo" acento="naranja">
+    Considera {String.raw`$f:\mathbb{R}\to\mathbb{R}$`} definida por $f(x)=x^2$. Su
+    dominio es {R}, pero su rango es $[0,\infty)$, porque el cuadrado de un
+    número real nunca es negativo.
+    {String.raw`$$\operatorname{Dom}(f)=\mathbb{R}$$`}
+    {String.raw`$$\operatorname{Ran}(f)=[0,\infty)$$`}
+  </Tarjeta>
+
+  <p>
+    Para graficar una función a mano, se eligen valores de $x$, se calcula
+    $y=f(x)$, se representan los pares $(x,y)$ y se unen los puntos de manera
+    razonable. Una separación menor entre los valores de $x$ permite obtener un
+    trazo más fiel.
+  </p>
+
+  <!-- ---------- Polinomios ---------- -->
+
+  <h3>Polinomios</h3>
+  <p>
+    Los polinomios se clasifican por su grado. Los casos principales presentados
+    en el material son:
+  </p>
+
+  <Etiqueta colorFondo="azulUaslp">Grado 0</Etiqueta>
+  <p>
+    <strong>Función constante.</strong> Su gráfica es una recta horizontal. El dominio
+    es {R} y el rango contiene únicamente el valor constante $C$.
+  </p>
+  {String.raw`$$y=C, \qquad \operatorname{Ran}(f)=\{C\}$$`}
+
+  <Etiqueta colorFondo="azulUaslp">Grado 1</Etiqueta>
+  <p>
+    <strong>Función lineal.</strong> Su gráfica es una recta no horizontal cuando
+    $a\ne 0$.
+  </p>
+  $$y=ax+b, \qquad a\ne 0$$
+  {String.raw`$$\operatorname{Dom}(f)=\operatorname{Ran}(f)=\mathbb{R}$$`}
+
+  <Etiqueta colorFondo="azulUaslp">Grado 2</Etiqueta>
+  <p>
+    <strong>Función cuadrática.</strong> Su gráfica es una parábola. En la forma presentada,
+    el vértice está en $(-a,b)$ y la parábola abre hacia arriba.
+  </p>
+  $$y=(x+a)^2+b$$
+  {
+    String.raw`$$\operatorname{Dom}(f)=\mathbb{R}, \qquad \operatorname{Ran}(f)=[b,\infty)$$`
+  }
+
+  <Tarjeta titulo="Regla general" acento="azulUaslp">
+    Si el grado de un polinomio es impar, su dominio y rango son {R}. Si el
+    grado es par, el dominio es {R}, pero el rango debe determinarse según el
+    polinomio.
+  </Tarjeta>
+
+  <h3>Funciones racionales</h3>
+  <p>Una función racional es el cociente de dos polinomios:</p>
+  {String.raw`$$f(x)=\frac{P(x)}{Q(x)}$$`}
+
+  <p>
+    El dominio excluye todos los valores de $x$ para los cuales $Q(x)=0$, porque
+    no se permite dividir entre cero.
+  </p>
+
+  <Tarjeta titulo="Ejemplo" acento="verde">
+    Considera:
+    {String.raw`$$f(x)=\frac{x+2}{x-3}$$`}
+
+    El denominador se anula cuando $x=3$. Por tanto:
+    {String.raw`$$\operatorname{Dom}(f)=\mathbb{R}\setminus\{3\}$$`}
+    $$=(-\infty,3)\cup(3,\infty)$$
+  </Tarjeta>
+
+  <p>
+    Un denominador de grado $n$ puede tener hasta $n$ raíces reales distintas,
+    que deben excluirse del dominio cuando son ceros del denominador.
+  </p>
+
+  <h3>Funciones de raíz</h3>
+  <p>
+    Las funciones de raíz se expresan mediante potencias fraccionarias. Su
+    dominio y rango dependen de si el índice de la raíz es par o impar.
+  </p>
+
+  <Etiqueta colorFondo="dorado">Raíz cuadrada</Etiqueta>
+  {String.raw`$$y=\sqrt{x}=x^{1/2}$$`}
+  <p>
+    Para valores reales, el radicando debe ser no negativo y la raíz cuadrada
+    principal también es no negativa.
+  </p>
+  {String.raw`$$\operatorname{Dom}(f)=\operatorname{Ran}(f)=[0,\infty)$$`}
+
+  <Etiqueta colorFondo="dorado">Raíz cúbica</Etiqueta>
+  {String.raw`$$y=\sqrt[3]{x}=x^{1/3}$$`}
+  <p>
+    La raíz cúbica está definida para cualquier número real, incluidos los
+    negativos.
+  </p>
+  {String.raw`$$\operatorname{Dom}(f)=\operatorname{Ran}(f)=\mathbb{R}$$`}
+
+  <Tarjeta acento="dorado">
+    <strong>Regla para raíces de índice $n$:</strong>
+
+    Si $n$ es par, el dominio y el rango de la función raíz principal son
+    $[0,\infty)$. Si $n$ es impar, el dominio y el rango son {R}.
+  </Tarjeta>
+
+  <h3>Funciones trascendentales</h3>
+  <p>
+    Entre las funciones trascendentales del material se encuentran las
+    exponenciales y los logaritmos.
+  </p>
+
+  <Etiqueta colorFondo="naranja">Exponencial</Etiqueta>
+  <p>La función exponencial natural es:</p>
+  $$f(x)=e^x=\exp(x)$$
+
+  <p>Sus valores característicos incluyen:</p>
+  $$e^0=1, \qquad e^1=e\approx 2.71828$$
+
+  <Tarjeta acento="naranja">
+    {String.raw`$$\operatorname{Dom}(f)=\mathbb{R}$$`}
+    {String.raw`$$\operatorname{Ran}(f)=(0,\infty)$$`}
+  </Tarjeta>
+
+  <Etiqueta colorFondo="naranja">Logaritmo</Etiqueta>
+  <p>
+    El logaritmo de base $b$ es la función inversa de la exponencial de esa
+    base. Se define mediante:
+  </p>
+  $$y=\log_b(x) \iff b^y=x$$
+
+  <p>
+    Para una base real positiva $b\ne 1$, el dominio del logaritmo es positivo y
+    su rango es todo {R}.
+  </p>
+  {String.raw`$$\operatorname{Dom}(f)=(0,\infty)$$`}
+  {String.raw`$$\operatorname{Ran}(f)=\mathbb{R}$$`}
+
+  <Tarjeta titulo="Logaritmo natural" acento="naranja">
+    El logaritmo natural corresponde a la base $e$: $$\ln(x)=\log_e(x)$$ Es la
+    inversa de $e^x$.
+  </Tarjeta>
+
+  <h3>Funciones trigonométricas</h3>
+  <p>
+    Las funciones seno y coseno tienen dominio real y rango acotado entre $-1$ y
+    $1$.
+  </p>
+
+  <Tabla
+    acento="azul"
+    encabezados={["Función", "Dominio", "Rango"]}
+    filas={[
+      ["$\\sin(x)$", "$\\mathbb{R}$", "$[-1,1]$"],
+      ["$\\cos(x)$", "$\\mathbb{R}$", "$[-1,1]$"],
+      [
+        "$\\tan(x)$",
+        "$\\mathbb{R}\\setminus\\{\\frac{\\pi}{2}+n\\pi\\}$",
+        "$\\mathbb{R}$",
+      ],
+      [
+        "$\\sec(x)$",
+        "$\\mathbb{R}\\setminus\\{\\frac{\\pi}{2}+n\\pi\\}$",
+        "$(-\\infty,-1]\\cup[1,\\infty)$",
+      ],
+      ["$\\cot(x)$", "$\\mathbb{R}\\setminus\\{n\\pi\\}$", "$\\mathbb{R}$"],
+      [
+        "$\\csc(x)$",
+        "$\\mathbb{R}\\setminus\\{n\\pi\\}$",
+        "$(-\\infty,-1]\\cup[1,\\infty)$",
+      ],
+    ]}
+  />
+
+  <p>
+    En las restricciones del dominio, {String.raw`$n\in\mathbb{Z}$`}. Las
+    funciones trigonométricas restantes se definen mediante cocientes o
+    recíprocos:
+  </p>
+
+  <Tarjeta acento="azul">
+    {String.raw`$$\tan(x)=\frac{\sin(x)}{\cos(x)}$$`}
+    {String.raw`$$\cot(x)=\frac{\cos(x)}{\sin(x)}$$`}
+    {String.raw`$$\sec(x)=\frac{1}{\cos(x)}$$`}
+    {String.raw`$$\csc(x)=\frac{1}{\sin(x)}$$`}
+  </Tarjeta>
+
+  <p>La tangente y la secante no están definidas cuando $\cos(x)=0$:</p>
+  {String.raw`$$x=\frac{\pi}{2}+n\pi,\qquad n\in\mathbb{Z}$$`}
+
+  <p>La cotangente y la cosecante no están definidas cuando $\sin(x)=0$:</p>
+  {String.raw`$$x=n\pi,\qquad n\in\mathbb{Z}$$`}
+
+  <Tarjeta titulo="Rangos de las funciones recíprocas" acento="azul">
+    Como $|\cos(x)|\leq 1$ y $|\sin(x)|\leq 1$, sus recíprocos, donde están
+    definidos, no toman valores estrictamente entre $-1$ y $1$.
+    {String.raw`$$\operatorname{Ran}(\sec)=\operatorname{Ran}(\csc)$$`}
+    $$=(-\infty,-1]\cup[1,\infty)$$
+  </Tarjeta>
+
+  <h3>Funciones especiales</h3>
+  <p>
+    Algunas funciones se definen mediante reglas particulares, en lugar de una
+    sola expresión algebraica.
+  </p>
+
+  <Etiqueta colorFondo="verde">Funciones a trozos</Etiqueta>
+  <p>
+    Una función a trozos utiliza expresiones diferentes en distintos intervalos
+    de su dominio.
+  </p>
+
+  <Tarjeta acento="verde">
+    {
+      String.raw`$$v(t)=\begin{cases}
+      t, & t\in[0,3]\\
+      C, & t\in(3,\infty)
+    \end{cases}$$`
+    }
+  </Tarjeta>
+
+  <Etiqueta colorFondo="verde">Piso y techo</Etiqueta>
+  <p>La función piso asigna el mayor entero menor o igual que $x$:</p>
+  {String.raw`$$\lfloor x\rfloor=\max\{m\in\mathbb{Z}:m\leq x\}$$`}
+
+  <p>La función techo asigna el menor entero mayor o igual que $x$:</p>
+  {String.raw`$$\lceil x\rceil=\min\{m\in\mathbb{Z}:m\geq x\}$$`}
+
+  <Etiqueta colorFondo="verde">Valor absoluto y signo</Etiqueta>
+  <p>El valor absoluto se define por partes:</p>
+  {
+    String.raw`$$|x|=\begin{cases}
+    x, & x\geq 0\\
+    -x, & x<0
+  \end{cases}$$`
+  }
+
+  <p>La función signo distingue los valores negativos, cero y positivos:</p>
+  {
+    String.raw`$$\operatorname{sgn}(x)=\begin{cases}
+    -1, & x<0\\
+    0, & x=0\\
+    1, & x>0
+  \end{cases}$$`
+  }
+
+  <Tabla
+    acento="verde"
+    encabezados={["Función", "Dominio", "Rango"]}
+    filas={[
+      ["$\\lfloor x\\rfloor$", "$\\mathbb{R}$", "$\\mathbb{Z}$"],
+      ["$\\lceil x\\rceil$", "$\\mathbb{R}$", "$\\mathbb{Z}$"],
+      ["$|x|$", "$\\mathbb{R}$", "$[0,\\infty)$"],
+      ["$\\operatorname{sgn}(x)$", "$\\mathbb{R}$", "$\\{-1,0,1\\}$"],
+    ]}
+  />
+
+  <Seccion titulo="Operaciones y transformaciones" acento="dorado">
+    <p>
+      Dadas dos funciones $f$ y $g$, podemos sumarlas, restarlas, multiplicarlas
+      o dividirlas.
+    </p>
+  </Seccion>
+
+  <Tarjeta acento="dorado">
+    <strong>Suma</strong>
+    $$ (f+g)(x)=f(x)+g(x) $$
+
+    <strong>Resta</strong>
+    $$ (f-g)(x)=f(x)-g(x) $$
+
+    <strong>Producto</strong>
+    $$ (fg)(x)=f(x)g(x) $$
+
+    <strong>Cociente</strong>
+    {String.raw`$$(\frac{f}{g})(x)=\frac{f(x)}{g(x)},\qquad g(x)\ne 0$$`}
+  </Tarjeta>
+
+  <p>
+    Para la suma, la resta y el producto, el dominio resultante es la
+    intersección de los dominios originales. Para el cociente, además, se
+    excluyen los valores donde $g(x)=0$.
+  </p>
+
+  <Tarjeta titulo="Desplazamientos y escalamientos" acento="dorado">
+    <strong>Escala vertical:</strong> $\alpha f(x)$. Si $\alpha\gt 1$, aumenta la
+    escala vertical; si $0\lt\alpha\lt 1$, la gráfica se comprime verticalmente.<br
+    />
+
+    <strong>Escala horizontal:</strong> $f(\alpha x)$. Si $\alpha\gt 1$, la gráfica
+    se comprime horizontalmente; si $0\lt\alpha\lt 1$, se ensancha.<br />
+
+    <strong>Desplazamiento vertical:</strong> $f(x)+c$. Si $c\gt 0$, se desplaza hacia
+    arriba; si $c\lt 0$, hacia abajo.<br />
+
+    <strong>Desplazamiento horizontal:</strong> $f(x+c)$. Si $c\gt 0$, se desplaza
+    a la izquierda; si $c\lt 0$, a la derecha.
+  </Tarjeta>
+
+  <Tarjeta titulo="Ejemplo de transformación" acento="dorado">
+    Compara la función original con una versión desplazada: $$f(x)=x^2$$
+    $$g(x)=(x+1)^2-2$$ La gráfica de $g$ se obtiene desplazando la parábola una
+    unidad a la izquierda y dos unidades hacia abajo.
+  </Tarjeta>
+
+  <Seccion titulo="Composición de funciones" acento="naranja">
+    <p>
+      La composición consiste en aplicar una función al resultado de otra. Para
+      dos funciones $f$ y $g$:
+    </p>
+    $$ (f\circ g)(x)=f(g(x)) $$
+  </Seccion>
+
+  <Tarjeta titulo="Ejemplo 1" acento="naranja">
+    Si $f(x)=x^2$ y $g(x)=\sin(x)$, entonces: $$ (f\circ g)(x)=\sin^2(x) $$
+  </Tarjeta>
+
+  <Tarjeta titulo="Ejemplo 2" acento="naranja">
+    Si $f(x)=e^x$ y $g(x)=x^3+1$, entonces:
+    {String.raw`$$ (f\circ g)(x)=e^{x^3+1} $$`}
+  </Tarjeta>
+
+  <Tarjeta titulo="Ejemplo 3" acento="naranja">
+    Si $f(x)=\ln(x)$ y {String.raw`$g(x)=\sqrt{x}$`}, entonces:
+    {String.raw`$$ (f\circ g)(x)=\ln(\sqrt{x}) $$`}
+    Para valores reales, esta composición requiere $x>0$.
+  </Tarjeta>
+
+  <Tarjeta titulo="Composición de tres funciones" acento="naranja">
+    Si $f(x)=x^4$, $g(x)=\cos(x)$ y $h(x)=\ln(x)$, entonces: $$ (f\circ g\circ
+    h)(x)=\cos^4(\ln(x)) $$ Su dominio real es $x>0$, debido al logaritmo
+    natural.
+  </Tarjeta>
+
+  <Seccion titulo="Función inversa" acento="azulUaslp">
+    <p>
+      La inversa de una función deshace la operación realizada por la función
+      original. Se denota por {finv}.
+    </p>
+  </Seccion>
+
+  <p>
+    Cuando existe la inversa, las composiciones en ambos órdenes recuperan la
+    entrada:
+  </p>
+  {String.raw`$$f\circ f^{-1}=I,\qquad f^{-1}\circ f=I$$`}
+
+  <p>
+    Para que una función tenga inversa definida sobre todo su codominio, debe
+    ser biyectiva. Es decir, debe ser inyectiva y sobreyectiva. Si existe, la
+    inversa es única.
+  </p>
+
+  <Tarjeta acento="azulUaslp">
+    <strong>Propiedades</strong>
+
+    La inversa de la inversa devuelve la función original:
+    {String.raw`$$ (f^{-1})^{-1}=f $$`}
+
+    Para la composición, el orden se invierte:
+    {String.raw`$$ (f\circ g)^{-1}=g^{-1}\circ f^{-1} $$`}
+  </Tarjeta>
+
+  <p>
+    <strong>Procedimiento para encontrar una inversa:</strong>
+    escribe $y=f(x)$, intercambia $x$ y $y$, y despeja $y$. La expresión resultante
+    es {String.raw`$f^{-1}(x)$`}.
+  </p>
+
+  <Tarjeta titulo="Ejemplo" acento="azulUaslp">
+    Encuentra la inversa de: $$f(x)=x^3+5$$ Primero, escribe la función:
+    $$y=x^3+5$$ Intercambia $x$ y $y$: $$x=y^3+5$$ Despeja $y$: $$y^3=x-5$$
+    {String.raw`$$y=\sqrt[3]{x-5}$$`}
+
+    Por tanto:
+    {String.raw`$$f^{-1}(x)=\sqrt[3]{x-5}$$`}
+  </Tarjeta>
+</Tema>

@@ -1,71 +1,284 @@
 ---
-export const titulo = "Álgebra elemental";
+export const titulo = "Álgebra";
 export const descripcion =
-  "La forma más antigua y básica de álgebra. Una generalización de la aritmética que se basa en variables.";
+  "Números reales, propiedades, exponentes, valor absoluto e intervalos.";
 export const subtemas = [
-  "Notación",
-  "Conceptos básicos",
-  "Ecuaciones",
-  "Sistemas de ecuaciones",
+  "Números y lenguaje algebraico",
+  "Propiedades y operaciones",
+  "Exponentes, valor absoluto e intervalos",
 ];
-export const disponible = false;
+export const disponible = true;
 import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
 
-const InfografiaId = "1-oGQ2pwr0VyijxcoxyRTd3wub2_wtFmA";
-const ProblemasId = "1Lr2re1lmfrP_CAJbQXN4kqP_qh2-lJnS";
-const SolucionarioId = "11Lz_g6DlE-QyngqTWllr4CQyseq_njzP";
+const L = String.raw;
+
+const InfografiaId = "1A0N_9gSjwvIe410ZLUANNWkVNc1AnoAd";
+const ProblemasId = "1nZwn9Un7RnqDlORMrPo8Rm4FI0RdywvL";
+const SolucionarioId = "1YSVbvcYEiCqEwBrw2OKM6OdYiaLAyRpJ";
 ---
 
 <Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
   <h1>{titulo}</h1>
   <p>{descripcion}</p>
 
-  <Seccion titulo="Notación">
+  <Seccion titulo="Números y lenguaje algebraico" acento="dorado">
+    <p>El álgebra representa cantidades mediante símbolos.</p>
+  </Seccion>
+
+  <Etiqueta colorFondo="dorado">Los números reales</Etiqueta>
+  <p>
+    El conjunto de los números reales, {L`$\mathbb{R}$`}, incluye los racionales
+    y los irracionales.
+  </p>
+  <ul>
+    <li>
+      <strong>Naturales</strong> ({L`$\mathbb{N}$`}): números usados para
+      contar.
+    </li>
+    <li>
+      <strong>Enteros</strong> ({L`$\mathbb{Z}$`}): {
+        L`$\dots, -2, -1, 0, 1, 2, \dots$`
+      }.
+    </li>
+    <li>
+      <strong>Racionales</strong> ({L`$\mathbb{Q}$`}): números expresables como {
+        L`$\frac{a}{b}$`
+      }, con {L`$a, b \in \mathbb{Z}$`} y {L`$b \neq 0$`}.
+    </li>
+    <li>
+      <strong>Irracionales</strong>: no pueden expresarse como cociente de
+      enteros, por ejemplo {L`$\sqrt{2}$`} y $\pi$.
+    </li>
+    <li>
+      <strong>Reales</strong> ({L`$\mathbb{R}$`}): unión de racionales e
+      irracionales.
+    </li>
+  </ul>
+  <Tarjeta acento="dorado">
+    {L`$$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$`}
+  </Tarjeta>
+  <p>
+    Todo número racional o irracional es real, pero ningún número real es
+    simultáneamente racional e irracional.
+  </p>
+
+  <Etiqueta colorFondo="dorado">Variables y expresiones</Etiqueta>
+  <p>El álgebra representa cantidades mediante símbolos. En la expresión</p>
+  <p>$$3x^2 - 5x + 7$$</p>
+  <ul>
+    <li>$x$: variable.</li>
+    <li>$3$ y $-5$: coeficientes.</li>
+    <li>$7$: término constante.</li>
+    <li>$3x^2$, $-5x$ y $7$: términos.</li>
+    <li>$2$: exponente de la variable en el primer término.</li>
+  </ul>
+  <p>
+    <strong>Evaluación:</strong> sustituir la variable por un valor.
+  </p>
+  <Tarjeta titulo="Ejemplo" acento="dorado">
+    Si $x = 2$: $$3(2)^2 - 5(2) + 7 = 9$$ La expresión vale 9 para ese valor de
+    $x$.
+  </Tarjeta>
+
+  <Etiqueta colorFondo="dorado">Lenguaje algebraico</Etiqueta>
+  <Tabla
+    acento="dorado"
+    encabezados={["Lenguaje", "Expresión"]}
+    filas={[
+      ["Un número aumentado en cinco", "$x + 5$"],
+      ["El doble de un número", "$2x$"],
+      ["El cuadrado de un número", "$x^2$"],
+      ["La mitad de un número", L`$\frac{x}{2}$`],
+      ["El cuadrado de la suma de dos números", "$(x + y)^2$"],
+      ["La suma de sus cuadrados", "$x^2 + y^2$"],
+      ["Tres unidades menos que el triple de un número", "$3x - 3$"],
+    ]}
+  />
+  <Tarjeta titulo="Cuidado! Crimen contra la humanidad" acento="naranja">
+    El cuadrado de una suma no es igual a la suma de los cuadrados.
+    {L`$$(x + y)^2 = x^2 + 2xy + y^2$$`}
+  </Tarjeta>
+
+  <Etiqueta colorFondo="dorado">Términos semejantes</Etiqueta>
+  <p>
+    Dos términos son semejantes cuando tienen las mismas variables elevadas a
+    los mismos exponentes.
+  </p>
+  <p>$$3x^2 + 5x - 2x^2 + 4x$$</p>
+  <p>Se agrupan los términos semejantes:</p>
+  <p>
+    {L`$$\begin{aligned}(3 - 2)x^2 + (5 + 4)x &= x^2 + 9x\end{aligned}$$`}
+  </p>
+  <p>
+    Solo se suman o restan los coeficientes de términos semejantes. No se pueden
+    combinar directamente $x$ con $x^2$ ni con una constante.
+  </p>
+
+  <Seccion titulo="Propiedades y operaciones" acento="naranja">
+    <p>Para números reales $a, b, c$:</p>
+  </Seccion>
+
+  <Etiqueta colorFondo="naranja">Propiedades fundamentales</Etiqueta>
+  <Tabla
+    acento="naranja"
+    encabezados={["Propiedad", "Expresión"]}
+    filas={[
+      ["Conmutativa (suma)", "$a + b = b + a$"],
+      ["Conmutativa (producto)", "$ab = ba$"],
+      ["Asociativa (suma)", "$(a + b) + c = a + (b + c)$"],
+      ["Asociativa (producto)", "$(ab)c = a(bc)$"],
+      ["Distributiva", "$a(b + c) = ab + ac$"],
+      ["Elemento neutro (suma)", "$a + 0 = a$"],
+      ["Elemento neutro (producto)", "$a \\times 1 = a$"],
+      ["Inverso aditivo", "$a + (-a) = 0$"],
+      ["Inverso multiplicativo", L`$a \times \frac{1}{a} = 1$, si $a \neq 0$.`],
+    ]}
+  />
+
+  <Etiqueta colorFondo="naranja">Jerarquía de operaciones</Etiqueta>
+  <p>Orden convencional:</p>
+  <ol>
+    <li>Paréntesis y otros signos de agrupación.</li>
+    <li>Potencias y raíces.</li>
+    <li>Multiplicaciones y divisiones, de izquierda a derecha.</li>
+    <li>Sumas y restas, de izquierda a derecha.</li>
+  </ol>
+  <Tarjeta titulo="Ejemplo" acento="naranja">
+    {
+      L`$$\begin{aligned} 8 - 2 \times \frac{(3+1)^2}{4} &= 8 - 2 \times \frac{16}{4} \\ &= 8 - 8 \\ &= 0 \end{aligned}$$`
+    }
+  </Tarjeta>
+  <p>
+    Las operaciones del mismo nivel se resuelven de izquierda a derecha, salvo
+    que los signos de agrupación indiquen otra cosa.
+  </p>
+
+  <Etiqueta colorFondo="naranja">Suma de enteros</Etiqueta>
+  <ul>
+    <li>
+      <strong>Mismo signo:</strong> se suman los valores absolutos y se conserva el
+      signo.
+    </li>
+    <li>
+      <strong>Distinto signo:</strong> se restan los valores absolutos y se conserva
+      el signo del número de mayor valor absoluto.
+    </li>
+  </ul>
+
+  <Etiqueta colorFondo="naranja">Multiplicación y división</Etiqueta>
+  <ul>
+    <li>Signos iguales: positivo.</li>
+    <li>Signos distintos: negativo.</li>
+  </ul>
+  <p>$$(-a)(-b) = ab \qquad (-a)b = -ab$$</p>
+
+  <Etiqueta colorFondo="naranja">Distribución del signo negativo</Etiqueta>
+  <p>$$-(a + b) = -a - b \qquad -(a - b) = -a + b$$</p>
+  <p>
+    El signo negativo delante de un paréntesis cambia el signo de cada término
+    interior.
+  </p>
+
+  <Etiqueta colorFondo="naranja">Potencias: conceptos básicos</Etiqueta>
+  <p>Una potencia representa una multiplicación repetida:</p>
+  <p>
+    {
+      L`$$a^n = \underbrace{a \times a \times \dots \times a}_{n\text{ factores}}$$`
+    }
+  </p>
+  <ul>
+    <li>$a$: base.</li>
+    <li>$n$: exponente.</li>
+  </ul>
+  <p>Para exponentes enteros positivos:</p>
+  <Tarjeta acento="naranja">
+    {L`$$a^m a^n = a^{m+n} \qquad \frac{a^m}{a^n} = a^{m-n}\ (a \neq 0)$$`}
+    {
+      L`$$(a^m)^n = a^{mn} \qquad (ab)^n = a^n b^n \qquad \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}\ (b \neq 0)$$`
+    }
+  </Tarjeta>
+
+  <Seccion titulo="Exponentes, valor absoluto e intervalos" acento="azul">
     <p>
-      Un coeficiente es un número, o una letra que representa una constante
-      numérica, que multiplica una variable (el operador se omite). Un término
-      es un sumando, un grupo de coeficientes, variables, constantes y
-      exponentes que pueden separarse de los demás términos mediante los
-      operadores ($+$) y ($-$).<sup>1</sup> Las letras representan variables y constantes.
-      Por convención, las letras al principio del alfabeto (p. ej. $a,b,c$) se utilizan
-      normalmente para representar constantes, y las que están hacia el final del
-      alfabeto (p. ej. $x,y,z$) se utilizan para representar variables.<sup
-        >2</sup
-      >
-    </p>
-    <p>
-      Las operaciones algebraicas funcionan igual que las operaciones
-      aritméticas. Los símbolos de multiplicar se omiten usualmente, por ejemplo
-      $4\times x^6$ se escribe como $4x^6$.
+      Exponentes especiales, distancia al cero y notación para conjuntos de
+      números reales.
     </p>
   </Seccion>
 
-  <Seccion titulo="Conceptos">
-    <h3>Variables</h3>
-    <p></p>
+  <Etiqueta colorFondo="azul">Exponentes especiales</Etiqueta>
+  <p>Para $a \neq 0$:</p>
+  <p>{L`$$a^0 = 1 \qquad a^{-n} = \frac{1}{a^n}$$`}</p>
+  <p>Para $a \geq 0$ y un entero positivo $n$:</p>
+  <p>{L`$$a^{1/n} = \sqrt[n]{a}$$`}</p>
+  <p>
+    En general, los exponentes racionales se interpretan mediante radicales,
+    respetando las restricciones del dominio real.
+  </p>
+  <Tarjeta titulo="Ejemplos" acento="azul">
+    {
+      L`$$2^{-3} = \frac{1}{8} \qquad 16^{1/2} = 4 \qquad 8^{2/3} = \left(\sqrt[3]{8}\right)^2 = 4$$`
+    }
+  </Tarjeta>
+  <Tarjeta titulo="Importante" acento="naranja">
+    $0^0$ no se define como una potencia ordinaria en este contexto.
+  </Tarjeta>
 
-    <h3>Expresiones simplificadas</h3>
+  <Etiqueta colorFondo="azul">Valor absoluto</Etiqueta>
+  <p>El valor absoluto mide la distancia de un número al cero.</p>
+  <p>
+    {
+      L`$$|x| = \begin{cases} x & \text{si } x \geq 0 \\ -x & \text{si } x < 0 \end{cases}$$`
+    }
+  </p>
+  <p>Ejemplos: $|5| = 5$ y $|-5| = 5$.</p>
+  <p>Propiedades:</p>
+  <p>
+    {
+      L`$$|ab| = |a||b| \qquad \left|\frac{a}{b}\right| = \frac{|a|}{|b|}\ (b \neq 0)$$`
+    }
+  </p>
+  <ul>
+    <li>$|x| = c$ tiene dos soluciones, $x = c$ y $x = -c$, cuando $c > 0$.</li>
+    <li>
+      Si {L`$c < 0$`}, la ecuación $|x| = c$ no tiene soluciones reales.
+    </li>
+  </ul>
 
-    <h3>Ecuaciones</h3>
-  </Seccion>
+  <Etiqueta colorFondo="azul">Intervalos reales</Etiqueta>
+  <p>Los intervalos describen conjuntos de números reales.</p>
+  <ul>
+    <li><strong>Abierto:</strong> $(a, b)$, excluye ambos extremos.</li>
+    <li><strong>Cerrado:</strong> $[a, b]$, incluye ambos extremos.</li>
+    <li><strong>Semiabierto:</strong> $[a, b)$ o $(a, b]$.</li>
+    <li>
+      <strong>Semirrecta:</strong>
+      {L`$(a, \infty)$, $[a, \infty)$`} y sus equivalentes hacia {L`$-\infty$`}.
+    </li>
+  </ul>
+  <Tarjeta titulo="Equivalencias" acento="azul">
+    {
+      L`$$a < x < b \equiv x \in (a, b) \qquad a \leq x \leq b \equiv x \in [a, b]$$`
+    }
+    El infinito nunca se incluye como extremo de un intervalo.
+  </Tarjeta>
 
-  <Seccion titulo="Resolviendo ecuaciones" />
-
-  <Seccion titulo="Resolviendo sistemas de ecuaciones" />
-
-  <Seccion titulo="Bibliografía">
-    <ol>
-      <li>
-        Richard N. Aufmann, Joanne Lockwood, Introductory Algebra: An Applied
-        Approach, Publisher Cengage Learning, 2010, ISBN 1439046042,
-        9781439046043, p. 78
-      </li>
-      <li>
-        William L. Hosch (editor), The Britannica Guide to Algebra and
-        Trigonometry, Britannica Educational Publishing, The Rosen Publishing
-        Group, 2010, ISBN 1615302190, p. 71
-      </li>
-    </ol>
-  </Seccion>
+  <Etiqueta colorFondo="azul">Resumen de notación</Etiqueta>
+  <Tabla
+    acento="azul"
+    encabezados={["Símbolo", "Significado"]}
+    filas={[
+      [L`$\in$`, "Pertenece a un conjunto."],
+      [L`$\notin$`, "No pertenece."],
+      [L`$\subset$`, "Es subconjunto de."],
+      [L`$\cup$`, "Unión de conjuntos."],
+      [L`$\cap$`, "Intersección de conjuntos."],
+      [L`$\mathbb{R}$`, "Números reales."],
+      [L`$\neq$`, "Distinto de."],
+      [L`$\leq$ y $\geq$`, "Menor o igual y mayor o igual."],
+    ]}
+  />
 </Tema>

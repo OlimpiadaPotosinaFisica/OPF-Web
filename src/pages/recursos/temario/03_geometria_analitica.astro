@@ -1,37 +1,354 @@
 ---
-export const titulo = "Geometría analítica";
-export const descripcion =
-  "Líneas, parábolas y todas las figuras geométricas descritas a través de ecuaciones algebraicas.";
+export const titulo = "Geometría";
+export const descripcion = "Figuras planas, semejanza y geometría analítica.";
 export const subtemas = [
-  "El Plano y Parejas Ordenadas",
-  "Distancia entre dos puntos",
-  "La Recta",
-  "Las Cónicas (Circunferencia, Elipse, Parábola, Hipérbola)",
+  "Fundamentos",
+  "Figuras bidimensionales",
+  "Semejanza y proporcionalidad",
+  "Geometría analítica",
 ];
-export const disponible = false;
-import Layout from "../../../layouts/Layout.astro";
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const L = String.raw;
+
+const InfografiaId = "1JRmU7CRjEh3bCDB-eQj2d9jwuUo5mJjk";
+const ProblemasId = "1ncetymYhb5HKXedxB1KfP-Dyw29Iz8eT";
+const SolucionarioId = "1Ej6vVDHByQIxyWybpRs01KN0A43YDCuJ";
 ---
 
-<Layout>
-  <main class="contenedor-tema">
-    <h1>{titulo}</h1>
-    <p class="intro">{descripcion}</p>
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
 
-    <Seccion titulo="El Plano y Parejas Ordenadas" />
+  <Seccion titulo="Fundamentos" acento="dorado">
+    <p>Elementos básicos, ángulos y rectas en el plano.</p>
+  </Seccion>
 
-    <Seccion titulo="Distancia entre dos puntos" />
+  <Etiqueta colorFondo="dorado">Elementos básicos</Etiqueta>
+  <ul>
+    <li><strong>Punto:</strong> indica una posición, sin dimensiones.</li>
+    <li>
+      <strong>Recta:</strong> sucesión infinita de puntos en una dirección.
+    </li>
+    <li><strong>Plano:</strong> superficie bidimensional.</li>
+    <li>
+      <strong>Segmento:</strong> parte de una recta limitada por dos extremos. Se
+      denota {L`$\overline{AB}$`}.
+    </li>
+    <li>
+      <strong>Semirrecta:</strong> tiene un origen y se prolonga infinitamente en
+      una dirección.
+    </li>
+  </ul>
 
-    <Seccion titulo="La Recta" />
+  <Etiqueta colorFondo="dorado">Ángulos</Etiqueta>
+  <p>Se forman por dos semirrectas con un origen común, llamado vértice.</p>
+  <ul>
+    <li>Agudo: {L`$0^\circ < \theta < 90^\circ$`}</li>
+    <li>Recto: {L`$\theta = 90^\circ$`}</li>
+    <li>Obtuso: {L`$90^\circ < \theta < 180^\circ$`}</li>
+    <li>Llano: {L`$\theta = 180^\circ$`}</li>
+  </ul>
+  <Tarjeta titulo="Relaciones importantes" acento="dorado">
+    <strong>Complementarios:</strong> suman {L`$90^\circ$`}.
+    <br />
+    <strong>Suplementarios:</strong> suman {L`$180^\circ$`}.
+    <br />
+    <strong>Opuestos por el vértice:</strong> son iguales.
+  </Tarjeta>
 
-    <Seccion titulo="Cónicas (Circunferencia, Elipse, Parábola, Hipérbola)" />
-  </main>
-</Layout>
+  <Etiqueta colorFondo="dorado">Rectas paralelas y perpendiculares</Etiqueta>
+  <p><strong>Paralelas:</strong> no se intersectan en el plano.</p>
+  <p>
+    <strong>Perpendiculares:</strong> se cortan formando cuatro ángulos rectos.
+  </p>
+  <p>
+    Si una transversal corta dos rectas paralelas, los ángulos correspondientes
+    y alternos internos son iguales. Para dos rectas paralelas se escribe {
+      L`$a \parallel b$`
+    }.
+  </p>
 
-<style>
-  .contenedor-tema {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>
+  <Seccion titulo="Figuras bidimensionales" acento="naranja">
+    <p>Triángulos, cuadriláteros, polígonos y circunferencias.</p>
+  </Seccion>
+
+  <Etiqueta colorFondo="naranja">Triángulos</Etiqueta>
+  <p>Polígonos de tres lados.</p>
+  <ul>
+    <li>Equilátero: tres lados iguales.</li>
+    <li>Isósceles: al menos dos lados iguales.</li>
+    <li>Escaleno: todos sus lados distintos.</li>
+    <li>Rectángulo: contiene un ángulo de {L`$90^\circ$`}.</li>
+  </ul>
+  <Tarjeta titulo="Fórmulas del triángulo" acento="naranja">
+    <strong>Suma angular</strong>
+    {L`$$\alpha + \beta + \gamma = 180^\circ$$`}
+    <strong>Área</strong>
+    {L`$$A = \frac{bh}{2}$$`}
+    <strong>Teorema de Pitágoras.</strong> Para un triángulo rectángulo:
+    {L`$$a^2 + b^2 = c^2$$`}
+    donde $c$ es la hipotenusa.
+  </Tarjeta>
+
+  <Etiqueta colorFondo="naranja">Cuadriláteros</Etiqueta>
+  <p>
+    Tienen cuatro lados y la suma de sus ángulos interiores es {L`$360^\circ$`}.
+  </p>
+  <ul>
+    <li>
+      <strong>Cuadrado:</strong> cuatro lados iguales y cuatro ángulos rectos.
+    </li>
+    <li><strong>Rectángulo:</strong> cuatro ángulos rectos.</li>
+    <li><strong>Rombo:</strong> cuatro lados iguales.</li>
+    <li><strong>Paralelogramo:</strong> lados opuestos paralelos.</li>
+    <li>
+      <strong>Trapecio:</strong> un par de lados paralelos, según la convención escolar
+      usual.
+    </li>
+  </ul>
+  <Tabla
+    acento="naranja"
+    encabezados={["Figura", "Área"]}
+    filas={[
+      ["Rectángulo", "$A = bh$"],
+      ["Paralelogramo", "$A = bh$"],
+      ["Trapecio", L`$A = \frac{(B + b)h}{2}$`],
+      ["Rombo", L`$A = \frac{Dd}{2}$`],
+    ]}
+  />
+
+  <Etiqueta colorFondo="naranja">Polígonos</Etiqueta>
+  <p>Figuras planas cerradas formadas por segmentos rectos.</p>
+  <p>Para un polígono convexo de $n$ lados:</p>
+  <Tabla
+    acento="naranja"
+    encabezados={["Cantidad", "Fórmula"]}
+    filas={[
+      ["Suma de ángulos interiores", L`$S = (n - 2)180^\circ$`],
+      ["Número de diagonales", L`$d = \frac{n(n-3)}{2}$`],
+      [
+        "Ángulo interior de un polígono regular",
+        L`$\alpha = \frac{(n-2)180^\circ}{n}$`,
+      ],
+      ["Perímetro regular", "$P = nl$"],
+    ]}
+  />
+  <p>
+    donde $l$ es la longitud de cada lado. Ejemplo: el pentágono tiene cinco
+    lados.
+  </p>
+
+  <Etiqueta colorFondo="naranja">Circunferencia y círculo</Etiqueta>
+  <p>
+    <strong>Circunferencia:</strong> conjunto de puntos a distancia fija $r$ de un
+    centro.
+  </p>
+  <p>
+    <strong>Círculo:</strong> región interior delimitada por la circunferencia.
+  </p>
+  <ul>
+    <li>Radio: $r$</li>
+    <li>Diámetro: $d = 2r$</li>
+    <li>Longitud de circunferencia: $C = 2\pi r = \pi d$</li>
+    <li>Área del círculo: $A = \pi r^2$</li>
+    <li>Longitud de arco, con $\theta$ en radianes: $s = r\theta$</li>
+    <li>
+      Área de sector circular: {L`$A_s = \frac{r^2\theta}{2}$`}
+    </li>
+  </ul>
+  <p>
+    <strong>Sector circular:</strong> parte del círculo limitada por dos radios y
+    un arco.
+  </p>
+
+  <Etiqueta colorFondo="naranja">Ángulos en la circunferencia</Etiqueta>
+  <ul>
+    <li><strong>Central:</strong> su vértice está en el centro.</li>
+    <li>
+      <strong>Inscrito:</strong> su vértice está sobre la circunferencia.
+    </li>
+  </ul>
+  <p>Si ambos interceptan el mismo arco:</p>
+  <p>
+    {L`$$\theta_\text{central} = 2\,\theta_\text{inscrito}$$`}
+  </p>
+  <p>El ángulo inscrito que abarca un diámetro mide {L`$90^\circ$`}.</p>
+
+  <Etiqueta colorFondo="naranja">Figuras compuestas</Etiqueta>
+  <p>
+    Para calcular el área de una figura irregular construida con figuras
+    conocidas:
+  </p>
+  <ol>
+    <li>Descomponerla en regiones simples.</li>
+    <li>Calcular el área de cada región.</li>
+    <li>Sumar las regiones interiores.</li>
+    <li>Restar los huecos cuando existan.</li>
+  </ol>
+  <Tarjeta titulo="Ejemplo: anillo circular" acento="naranja">
+    {L`$$A = \pi R^2 - \pi r^2 = \pi\left(R^2 - r^2\right)$$`}
+    El radio exterior $R$ debe ser mayor que el radio interior $r$.
+  </Tarjeta>
+
+  <Seccion titulo="Semejanza y proporcionalidad" acento="azul">
+    <p>Razones, proporciones, Teorema de Tales y semejanza de triángulos.</p>
+  </Seccion>
+
+  <Etiqueta colorFondo="azul">Razones y proporciones</Etiqueta>
+  <p>Una razón compara dos cantidades mediante un cociente.</p>
+  <p>{L`$$\frac{a}{b} = \frac{c}{d}$$`}</p>
+  <p>Si se cumple una proporción:</p>
+  <p>$$ad = bc$$</p>
+  <p>
+    Las proporciones permiten calcular longitudes desconocidas en figuras
+    geométricas.
+  </p>
+
+  <Etiqueta colorFondo="azul">Teorema de Tales</Etiqueta>
+  <p>
+    Un conjunto de rectas paralelas que corta dos transversales determina
+    segmentos proporcionales. En un triángulo, una recta paralela a uno de sus
+    lados divide los otros dos lados proporcionalmente.
+  </p>
+  <Tarjeta titulo="Si DE ∥ BC" acento="azul">
+    {
+      L`$$\frac{AD}{AB} = \frac{AE}{AC} \qquad \text{y} \qquad \frac{AD}{DB} = \frac{AE}{EC}$$`
+    }
+  </Tarjeta>
+  <p>
+    Estas relaciones sirven para calcular distancias inaccesibles mediante
+    medidas indirectas.
+  </p>
+
+  <Etiqueta colorFondo="azul">Semejanza de triángulos</Etiqueta>
+  <p>
+    Dos triángulos son semejantes cuando tienen la misma forma, aunque no
+    necesariamente el mismo tamaño. Criterios:
+  </p>
+  <ul>
+    <li><strong>AA:</strong> dos ángulos correspondientes iguales.</li>
+    <li><strong>LLL:</strong> lados correspondientes proporcionales.</li>
+    <li>
+      <strong>LAL:</strong> dos lados proporcionales y el ángulo comprendido igual.
+    </li>
+  </ul>
+  <Tarjeta titulo="Razón de semejanza $k$" acento="azul">
+    {
+      L`$$\frac{l_2}{l_1} = k \qquad \frac{P_2}{P_1} = k \qquad \frac{A_2}{A_1} = k^2$$`
+    }
+    Las longitudes escalan por $k$, pero las áreas por {L`$k^2$`}.
+  </Tarjeta>
+
+  <Etiqueta colorFondo="azul">Escalas y aplicaciones</Etiqueta>
+  <p>La escala relaciona una medida representada con su medida real.</p>
+  <p>
+    {L`$$k = \frac{\text{medida en dibujo}}{\text{medida real}}$$`}
+  </p>
+  <p>
+    Si un plano usa escala 1 : 100, una longitud de 2 u representa 200 u reales.
+    La semejanza también se aplica a:
+  </p>
+  <ul>
+    <li>Mapas y planos.</li>
+    <li>Altura de edificios mediante sombras.</li>
+    <li>Ampliaciones y reducciones.</li>
+    <li>Modelos a escala.</li>
+  </ul>
+
+  <Etiqueta colorFondo="azul">Congruencia y semejanza</Etiqueta>
+  <ul>
+    <li><strong>Congruentes:</strong> misma forma y mismo tamaño.</li>
+    <li>
+      <strong>Semejantes:</strong> misma forma, pero pueden tener tamaños distintos.
+    </li>
+  </ul>
+  <p>
+    Todo par de triángulos congruentes es semejante con razón $k = 1$. La
+    semejanza conserva los ángulos y las proporciones de los lados, pero no
+    necesariamente las longitudes.
+  </p>
+
+  <Seccion titulo="Geometría analítica" acento="verde">
+    <p>
+      Las coordenadas permiten traducir problemas geométricos al lenguaje
+      algebraico.
+    </p>
+  </Seccion>
+
+  <Etiqueta colorFondo="verde">Plano cartesiano</Etiqueta>
+  <p>Un punto se representa mediante un par ordenado:</p>
+  <p>$$P = (x, y)$$</p>
+  <ul>
+    <li>Eje $x$: abscisas.</li>
+    <li>Eje $y$: ordenadas.</li>
+    <li>Origen: $(0, 0)$.</li>
+    <li>Los ejes dividen el plano en cuatro cuadrantes.</li>
+  </ul>
+
+  <Etiqueta colorFondo="verde">Distancia entre dos puntos</Etiqueta>
+  <p>Para $A = (x_1, y_1)$ y $B = (x_2, y_2)$:</p>
+  <p>{L`$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$`}</p>
+  <p>
+    La fórmula se obtiene aplicando el teorema de Pitágoras a las diferencias
+    horizontal y vertical.
+  </p>
+
+  <Etiqueta colorFondo="verde">Punto medio</Etiqueta>
+  <p>El punto medio divide un segmento en dos partes iguales.</p>
+  <p>
+    {L`$$M = \left(\frac{x_1 + x_2}{2},\, \frac{y_1 + y_2}{2}\right)$$`}
+  </p>
+  <p>Se obtiene promediando las coordenadas correspondientes.</p>
+
+  <Etiqueta colorFondo="verde">Pendiente de una recta</Etiqueta>
+  <p>
+    La pendiente mide la inclinación de una recta. Para dos puntos distintos:
+  </p>
+  <p>{L`$$m = \frac{y_2 - y_1}{x_2 - x_1}$$`}</p>
+  <p>Si $x_2 = x_1$, la recta es vertical y su pendiente no está definida.</p>
+  <ul>
+    <li>{L`$m > 0$`}: recta creciente.</li>
+    <li>{L`$m < 0$`}: recta decreciente.</li>
+    <li>$m = 0$: recta horizontal.</li>
+  </ul>
+  <p>
+    Para rectas no verticales, pendientes iguales indican paralelismo;
+    pendientes cuyo producto es $-1$ indican perpendicularidad.
+  </p>
+
+  <Etiqueta colorFondo="verde">Ecuación de la recta</Etiqueta>
+  <Tabla
+    acento="verde"
+    encabezados={["Forma", "Ecuación"]}
+    filas={[
+      ["Pendiente-intersección", "$y = mx + b$"],
+      ["Punto-pendiente", "$y - y_1 = m(x - x_1)$"],
+      ["General", "$Ax + By + C = 0$"],
+    ]}
+  />
+  <p>
+    En la forma pendiente-intersección, $m$ es la pendiente y $b$ es la ordenada
+    al origen. La forma punto-pendiente se utiliza cuando se conoce un punto y
+    la pendiente. Estas formas permiten representar rectas, hallar
+    intersecciones y resolver problemas geométricos algebraicamente.
+  </p>
+
+  <Etiqueta colorFondo="verde">Circunferencia en el plano</Etiqueta>
+  <p>
+    Una circunferencia es el conjunto de puntos a distancia constante $r$ de un
+    centro $(h, k)$. Su ecuación es:
+  </p>
+  <p>{L`$$(x - h)^2 + (y - k)^2 = r^2$$`}</p>
+  <p>Si el centro es el origen:</p>
+  <p>$$x^2 + y^2 = r^2$$</p>
+  <p>
+    La ecuación permite identificar el centro y el radio, así como estudiar
+    intersecciones con rectas.
+  </p>
+</Tema>
