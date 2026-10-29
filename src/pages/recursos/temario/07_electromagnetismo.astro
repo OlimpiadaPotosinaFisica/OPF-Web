@@ -9,30 +9,165 @@ export const subtemas = [
   "Magnetismo",
   "Ley de Faraday (Inducción)",
 ];
-export const disponible = false;
-import Layout from "../../../layouts/Layout.astro";
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const InfografiaId = "1WZd7cjkQKrsgZV2Qi8MJgcujALs-BRKT";
+const ProblemasId = "1CNj1UoQy_Mp1bTuMRtjJ9yLdneNQ_u9Q";
+const SolucionarioId = "1kTP52uKwdNj4EHFo8ndPle-RCsBI9ncD";
 ---
 
-<Layout>
-  <main class="contenedor-tema">
-    <h1>{titulo}</h1>
-    <p class="intro">{descripcion}</p>
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
+  <Seccion titulo="Unidades" acento="naranja">
+    <p>
+      Las siguientes unidades son necesarias para el estudio del
+      electromagnetismo
+    </p>
+  </Seccion>
 
-    <Seccion titulo="Titulo" />
+  <ul>
+    <li><strong>Coulomb</strong> (C): Carga eléctrica.</li>
+    <li><strong>Newton</strong> (N): Fuerza.</li>
+    <li><strong>Metro</strong> (m): Distancia.</li>
+    <li><strong>Faradios</strong> (F): capacitancia.</li>
+    <li><strong>Volts</strong> (V): diferencia de potencial.</li>
+  </ul>
 
-    <Seccion titulo="Titulo" />
+  <Seccion titulo="Carga y Ley de Coulomb" acento="azulUaslp">
+    <p>Dos de los conceptos mas importantes del electromagnetismo.</p>
+  </Seccion>
 
-    <Seccion titulo="Titulo" />
+  <Etiqueta colorFondo="azulUaslp">Carga</Etiqueta>
+  <p>
+    La <strong>Carga Electrica</strong> es una propiedad física de la materia que
+    permite que las partículas experimenten fuerzas eléctricas de atracción o repulsión,
+    esto dependiendo de si su carga es positiva o negativa, las cargas iguales se
+    atraen y las contrarias se atraen .
+  </p>
+  <Etiqueta colorFondo="azulUaslp">Ley de Coulomb</Etiqueta>
+  <p>
+    La <strong>Ley de Coulomb</strong> establece que la fuerza eléctrica entre dos
+    cargas puntuales es directamente proporcional al producto de las magnitudes de
+    sus cargas e inversamente proporcional al cuadrado de la distancia que las separa
+  </p>
+  <p>
+    {String.raw`$$F = k \frac{|q_1 q_2|}{r^2}$$`}
+  </p>
 
-    <Seccion titulo="Titulo" />
-  </main>
-</Layout>
+  <Seccion titulo="Campo Eléctrico" acento="azul">
+    <p>
+      El <strong>campo eléctrico</strong> es una magnitud física vectorial que describe
+      la influencia que una carga eléctrica ejerce sobre el espacio que la rodea.
+    </p>
+  </Seccion>
 
-<style>
-  .contenedor-tema {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>
+  <p>
+    El <strong>campo eléctrico</strong> se representa mediante el vector {
+      String.raw`$\vec{E} $`
+    } y se define como:
+  </p>
+  <p>
+    {String.raw`$$\vec{E} = \frac{\vec{F}}{q}$$`}
+  </p>
+
+  <p>
+    Su unidad en el Sistema Internacional es el newton por coulomb (N/C),
+    equivalente a volt por metro (V/m).
+  </p>
+
+  <p>
+    Para el caso de el campo electrico generado por una sola particula tenemos:
+  </p>
+  <Tarjeta acento="azul" titulo="Campo electrico">
+    Campo electrico para la carga: {
+      String.raw`$E_\text{Carga} = k\dfrac{{|Q|}}{r²}$`
+    }
+  </Tarjeta>
+
+  <Seccion titulo="Potencial Eléctrico y Voltaje" acento="verde">
+    <p>
+      Estos conceptos son importantes para entender el funcionamiento de las
+      corrientes electricas.
+    </p>
+  </Seccion>
+
+  <Etiqueta colorFondo="verde">Potencial electrico</Etiqueta>
+
+  <p>
+    El <strong>Potencial eléctrico</strong> es la energía potencial eléctrica que
+    tiene una carga por cada unidad de carga en un punto determinado del espacio,
+    en palabras sencillas, nos indica cuánta energía potencial eléctrica corresponde
+    a cada coulomb de carga en un lugar, siendo representado por la ecuacion:
+  </p>
+
+  <p>{String.raw`$$V = \frac{U}{q_0}$$`}</p>
+
+  <Etiqueta colorFondo="verde">Voltaje</Etiqueta>
+
+  <p>
+    El <strong>voltaje o diferencia de potencial</strong> es la diferencia de potencial
+    eléctrico entre dos puntos. Nos indica cuánto cambia la energía potencial eléctrica
+    por unidad de carga al pasar de un punto a otro, siendo su formula:
+  </p>
+
+  <p>
+    {String.raw`$$\Delta V = V_B - V_A = \frac{\Delta U}{q}$$`}
+  </p>
+
+  <p>Donde:</p>
+
+  <Tarjeta titulo="Magnitudes fisicas" acento="verde" colorTitulo="crema">
+    <ul>
+      <li><strong>Volts</strong> (V): Potencial electrico.</li>
+      <li><strong>Joules</strong> (J): Energía potencial eléctrica.</li>
+      <li><strong>coulombs</strong> (C): Carga eléctrica</li>
+    </ul>
+  </Tarjeta>
+
+  <Seccion titulo="Magnetismo" acento="dorado">
+    <p>
+      El <strong>magnetismo</strong> es un fenómeno físico producido por las cargas
+      eléctricas en movimiento y por las propiedades magnéticas de ciertos materiales.
+    </p>
+  </Seccion>
+
+  <p>
+    Los efectos fiscos del del <strong>magnetismo</strong> pueden ser calculados al
+    medir su <strong>Fuerza magnetica</strong>
+    la cual modifica la direccion de las partículas con carga eléctrica, esta fuerza
+    se calcula mediante la siguiente ecuacion:
+  </p>
+
+  <p>{String.raw`$$F = |q|vB \sin(\theta)$$`}</p>
+
+  <Seccion titulo="Capacitancia" acento="dorado">
+    <p>
+      Es la capacidad de un sistema de conductores para almacenar carga y
+      energía midiendose en Faradios (f).
+    </p>
+  </Seccion>
+
+  <p>
+    Esto se utiliza en capacitores el cual es un dispositivo que permite
+    almacenar carga y energía eléctrica, siendo sus principales ecuaciones las
+    siguientes:
+  </p>
+  <Tarjeta
+    titulo="Ecuaciones de Capacitancia"
+    acento="dorado"
+    colorTitulo="crema"
+  >
+    <p>Capacitancia: {String.raw`$$C = \frac{Q}{\Delta V}$$`}</p>
+    <p>
+      Energía almacenada: {
+        String.raw`$$U = \frac{1}{2} \frac{Q^2}{C} = \frac{1}{2} C (\Delta V)^2 = \frac{1}{2} Q \Delta V$$`
+      }
+    </p>
+  </Tarjeta>
+</Tema>
