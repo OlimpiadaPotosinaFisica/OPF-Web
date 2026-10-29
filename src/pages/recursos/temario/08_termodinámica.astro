@@ -8,39 +8,128 @@ export const subtemas = [
   "Variables de Estado",
   "Las 4 Leyes de la Termodinámica",
 ];
-export const disponible = false;
-
-import Layout from "../../../layouts/Layout.astro";
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const InfografiaId = "1-oGQ2pwr0VyijxcoxyRTd3wub2_wtFmA";
+const ProblemasId = "1GdOe_8LlGJaFUc_JzhhLLJ9zj7xuCJ8C";
+const SolucionarioId = "1-uQarRrICI3aYsE4iplAJnbsOd1UKN_p";
 ---
 
-<Layout>
-  <main class="contenedor-tema">
-    <h1>{titulo}</h1>
-    <p class="intro">{descripcion}</p>
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
+  <Seccion titulo="Unidades" acento="naranja">
+    <p>
+      Las siguientes unidades son las mas basicas para el estudio de la termodinamica
+    </p>
+  </Seccion>
 
-    <Seccion titulo="Calor y temperatura">
-      <p>La energía no se crea ni se destruye...</p>
-    </Seccion>
+  <ul>
+    <li><strong>Kelvin</strong> (K): Temperatura.</li>
+    <li><strong>Kilogramo</strong> (kg): Masa.</li>
+    <li><strong>Segundo</strong> (s): Tiempo.</li>
+    <li><strong>Metro</strong> (m): Longitud.</li>
+    <li><strong>Mol</strong> (Mol): Cantidad de sustancia.</li>
+  </ul>
 
-    <Seccion titulo="Modelo de Gas Ideal">
-      <p>El desorden del universo siempre aumenta...</p>
-    </Seccion>
+  <Seccion titulo="Calor y Temperatura" acento="azulUaslp">
+    <p>Dos de los conceptos mas importantes del electromagnetismo.</p>
+  </Seccion>
 
-    <Seccion titulo="Variables de estado">
-      <p>El cero absoluto es inalcanzable...</p>
-    </Seccion>
+  <Etiqueta colorFondo="azulUaslp">Calor</Etiqueta>
+  <p>
+    El <strong>Calor</strong> es la energía que se transfiere entre dos cuerpos o sistemas debido a una diferencia de temperatura,
+    esta transferencia ocurre espontáneamente desde el cuerpo de mayor temperatura hacia el de menor temperatura, hasta alcanzar el equilibrio térmico, esto de secribe en la sigueinte ecuacion:
+  </p>
+  <p>
+    {String.raw`$$Q = mc\Delta T$$`}
+  </p>
+  <Etiqueta colorFondo="azulUaslp">Temperatura</Etiqueta>
+  <p>
+    La <strong>Temperatura</strong> es una magnitud física que caracteriza el estado térmico de un sistema y determina la dirección 
+    en la que se transfiere espontáneamente el calor desde una perspectiva microscópica, en un gas ideal la temperatura está relacionada 
+    con la energía cinética promedio de sus partículas, lo cual se puede representar con esta ecuacion:
+  </p>
+  <p>
+    {String.raw`$$E_c = \frac{3}{2} k_B T$$`}
+  </p>
 
-    <Seccion titulo="Las 4 Leyes de la Termodinámica">
-      <p>La entropía de un cristal perfecto es cero a 0 K...</p>
-    </Seccion>
-  </main>
-</Layout>
+  <p>
+    donde sus magnitudes son: 
+  </p>
 
-<style>
-  .contenedor-tema {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>
+  <Tarjeta acento="azulUaslp" titulo="Magnitudes Calor y temperatura">
+    <ul>
+    <li><strong>Calor transferido</strong> (Q): Joules (J).</li>
+    <li><strong>Masa del cuerpo</strong> (m): Kilogramo (kg).</li>
+    <li><strong>Cambio de temperatura (C) </strong> : {String.raw`$$\Delta T = T_f - T_i$$`} el cual se mide en Kelvins (k)</li>
+    <li><strong>Constante de Boltzmann(K_B) </strong> : {String.raw`$$1.38 X 10^{-23} J/K $$`}</li>
+  </ul>
+  </Tarjeta>
+
+  <Seccion titulo="Modelo de Gas Ideal" acento="azul">
+    <p>
+      El <strong>modelo de gas ideal</strong> es una representación 
+      teórica que permite estudiar y predecir el comportamiento de los gases
+    </p>
+  </Seccion>
+
+  <p>
+    Este modelo considera que un gas está formado por partículas muy pequeñas que se mueven 
+    constantemente y chocan entre sí y contra las paredes del recipiente, se puede medir mediante la relación 
+    entre su presión, volumen, temperatura y cantidad de sustancia:
+  </p>
+   <p>
+    {String.raw`$$PV = nRT$$`}
+  </p>
+
+  <p>Donde sus unidades son:</p>
+  <Tarjeta acento="azul" titulo="Magnitudes gas Ideal">
+    <ul>
+    <li><strong>presión del gas</strong> (P): Pascales (Pa).</li>
+    <li><strong>volumen del gas</strong> (V): Metros cubicos (m³ ).</li>
+    <li><strong>cantidad de sustancia</strong> (n): Moles (mol) </li>
+    <li><strong>temperatura absoluta</strong> (T): kelvin (K) </li>
+    <li><strong> constante universal de los gases </strong> (R): {String.raw`$$ 8.314 J/(mol * K)$$`}</li>
+  </ul>
+  </Tarjeta>
+
+  <Seccion titulo="Variables de Estado" acento="verde">
+    <p>
+      Las <strong>Variables de Estado</strong> son magnitudes físicas que permiten describir las condiciones en 
+      las que se encuentra un sistema termodinámico.
+    </p>
+  </Seccion>
+  <p>
+    Estas variables nos ayudan a conocer cómo se comporta un sistema y cómo cambia cuando recibe calor, 
+    realiza trabajo o modifica sus condiciones las tres variables más importantes para comenzar a estudiar 
+    termodinámica son la presión, el volumen y la temperatura.
+  </p>
+  <Tarjeta titulo="Magnitudes fisicas" acento="verde" colorTitulo="crema">
+    <ul>
+    <li><strong>Volumen</strong> (V): La cantidad de espacio que ocupa un sistema.</li>
+    <li><strong>Temperatura</strong> (T): magnitud física que indica el estado térmico de un sistema y determina la dirección en la que se transfiere espontáneamente el calor.</li>
+    <li><strong>Presión</strong> (P): la fuerza ejercida perpendicularmente sobre una superficie por unidad de área</li>
+  </ul>
+  </Tarjeta>
+
+  <Seccion titulo="Las 4 Leyes de la Termodinámica" acento="dorado">
+    <p>Las <strong>cuatro leyes de la termodinámica </strong>explican cómo se transfiere y conserva la energía, 
+    cómo ocurren los procesos naturales y cuáles son sus límites.</p>
+  </Seccion>
+
+  <Tarjeta titulo="Magnitudes fisicas" acento="dorado" colorTitulo="crema">
+    <ul>
+    <li><strong>Ley cero-Equilibrio térmico</strong>: si dos cuerpos tienen la misma temperatura, no intercambiarán calor de manera neta al ponerse en contacto.</li>
+    <li><strong>Primera ley-Conservación de la energía</strong>: a energía no se crea ni se destruye, únicamente se transforma o transfiere.</li>
+    <li><strong>Segunda ley-Entropía</strong>: En los procesos naturales la entropía total de un sistema aislado nunca disminuye. </li>
+    <li><strong>Tercera ley-Cero absoluto</strong>: En los procesos naturales la entropía total de un sistema aislado nunca disminuye. </li>
+  </ul>
+  </Tarjeta>
+
+</Tema>
