@@ -41,7 +41,7 @@ if (resultadosPublicados) {
     .from("OPF Resultados")
     .select("nombre, escuela, cal")
     .order("cal", { ascending: false });
-  
+
   const { data: RawCal, error } = TOPs
     ? await consulta.limit(4)
     : await consulta;
@@ -52,13 +52,15 @@ if (resultadosPublicados) {
 
   if (RawCal) {
     const ParticipantesOrdenados = [...RawCal].sort(
-      (a: Participante, b: Participante) => b.cal - a.cal
+      (a: Participante, b: Participante) => b.cal - a.cal,
     );
 
-    Selec = ParticipantesOrdenados.slice(0, 4).map((participante: Participante) => ({
-      nombre: participante.nombre,
-      escuela: participante.escuela,
-    }));
+    Selec = ParticipantesOrdenados.slice(0, 4).map(
+      (participante: Participante) => ({
+        nombre: participante.nombre,
+        escuela: participante.escuela,
+      }),
+    );
 
     if (!TOPs) {
       podiog = ParticipantesOrdenados.slice(0, 3).map(
@@ -69,7 +71,7 @@ if (resultadosPublicados) {
           nombre: participante.nombre,
           escuela: participante.escuela,
           medalla: Medallas[index],
-        })
+        }),
       );
 
       const ordenVisual = [1, 0, 2].filter((i) => podiog[i]);
@@ -99,80 +101,77 @@ if (resultadosPublicados) {
             <strong>Conoce a los perfiles destacados de esta edición.</strong>
           </Seccion>
 
-          {
-            TOPs ? (
-              <Tarjeta titulo="¡Felicidades a seleccionados!" acento="azulUaslp">
-                <ul>
-                  {Selec.map((participante) => (
-                    <li>
-                      {participante.nombre} -{" "}
-                      {participante.escuela}
-                    </li>
-                  ))}
-                </ul>
-              </Tarjeta>
-            ) : (
-              <>
-                <h1 class="titulo-podio">Podio</h1>
+          {TOPs ? (
+            <Tarjeta titulo="¡Felicidades a seleccionados!" acento="azulUaslp">
+              <ul>
+                {Selec.map((participante) => (
+                  <li>
+                    {participante.nombre} - {participante.escuela}
+                  </li>
+                ))}
+              </ul>
+            </Tarjeta>
+          ) : (
+            <>
+              <h1 class="titulo-podio">Podio</h1>
 
-                <div class="escenario-podio">
-                  <section class="podio">
-                    {podiog.map((participante) => (
+              <div class="escenario-podio">
+                <section class="podio">
+                  {podiog.map((participante) => (
+                    <div
+                      class={`columna-podio puesto-${participante.posicion + 1}`}
+                    >
                       <div
-                        class={`columna-podio puesto-${participante.posicion + 1}`}
-                      >
-                        <div
-                          class="pilar-fondo"
-                          style={`--gradiente: ${participante.gradiente}`}
+                        class="pilar-fondo"
+                        style={`--gradiente: ${participante.gradiente}`}
+                      />
+                      <div class="info-ganador">
+                        <Image
+                          src={participante.medalla}
+                          alt={`medalla de ${participante.puesto}`}
+                          class="img-medalla"
                         />
-                        <div class="info-ganador">
-                          <Image
-                            src={participante.medalla}
-                            alt={`medalla de ${participante.puesto}`}
-                            class="img-medalla"
-                          />
-                          <h2 class="nombre-ganador">{participante.nombre}</h2>
-                          <p class="escuela-ganador">{participante.escuela}</p>
-                          <Etiqueta colorFondo="negro" decoraciones={false}>
-                            {participante.puesto}
-                          </Etiqueta>
-                        </div>
+                        <h2 class="nombre-ganador">{participante.nombre}</h2>
+                        <p class="escuela-ganador">{participante.escuela}</p>
+                        <Etiqueta colorFondo="negro" decoraciones={false}>
+                          {participante.puesto}
+                        </Etiqueta>
                       </div>
-                    ))}
-                  </section>
-
-                  <section class="seccion-tabla">
-                    <Etiqueta colorFondo="blanco" colorTexto="negro">
-                      Tabla General de Posiciones
-                    </Etiqueta>
-
-                    <div class="tabla-responsiva">
-                      <table class="tabla-resultados">
-                        <thead>
-                          <tr>
-                            <th>Posición</th>
-                            <th>Nombre</th>
-                            <th>Escuela</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {GRes.map((alumno) => (
-                            <tr>
-                              <td>
-                                <strong>{alumno.posicion}</strong>
-                              </td>
-                              <td>{alumno.nombre}</td>
-                              <td>{alumno.escuela}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
                     </div>
-                  </section>
-                </div>
-              </>
-            )
-          }
+                  ))}
+                </section>
+
+                <section class="seccion-tabla">
+                  <Etiqueta colorFondo="blanco" colorTexto="negro">
+                    Tabla General de Posiciones
+                  </Etiqueta>
+
+                  <div class="tabla-responsiva">
+                    <table class="tabla-resultados">
+                      <thead>
+                        <tr>
+                          <th>Posición</th>
+                          <th>Nombre</th>
+                          <th>Escuela</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {GRes.map((alumno) => (
+                          <tr>
+                            <td>
+                              <strong>{alumno.posicion}</strong>
+                            </td>
+                            <td>{alumno.nombre}</td>
+                            <td>{alumno.escuela}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </>
+          )}
         </>
       ) : (
         /* --- VISTA DE ESPERA (Si es FALSE) --- */
