@@ -12,6 +12,9 @@ import Bronce from "../assets/medallas/OPFBronce.png";
 // CAMBIAR A TRUE PARA PUBLICAR RESULTADOS
 const resultadosPublicados = true;
 
+//Hijos de perra, me hicieron hacer esto otro, cabrones.
+const TOPs = true; // Cambia a false para cambiar a la otra visualización
+
 interface Participante {
   nombre: string;
   escuela: string;
@@ -20,6 +23,7 @@ interface Participante {
 
 let podiog: any[] = [];
 let GRes: any[] = [];
+let Selec: Pick<Participante, "nombre" | "escuela">[] = [];
 const Medallas = [Oro, Plata, Bronce];
 const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
 const Gradientes = [
@@ -33,9 +37,14 @@ const supabaseKey = import.meta.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 if (resultadosPublicados) {
-  const { data: RawCal, error } = await supabase
+  const consulta = supabase
     .from("OPF Resultados")
-    .select("nombre, escuela, cal");
+    .select("nombre, escuela, cal")
+    .order("cal", { ascending: false });
+  
+  const { data: RawCal, error } = TOPs
+    ? await consulta.limit(4)
+    : await consulta;
 
   if (error) {
     console.error("Error al obtener datos de Supabase:", error);
@@ -43,29 +52,35 @@ if (resultadosPublicados) {
 
   if (RawCal) {
     const ParticipantesOrdenados = [...RawCal].sort(
-      (a: Participante, b: Participante) => b.cal - a.cal,
+      (a: Participante, b: Participante) => b.cal - a.cal
     );
 
-    podiog = ParticipantesOrdenados.slice(0, 3).map(
-      (participante: Participante, index: number) => ({
-        puesto: NPodio[index],
-        posicion: index,
-        gradiente: Gradientes[index],
-        nombre: participante.nombre,
-        escuela: participante.escuela,
-        medalla: Medallas[index],
-      }),
-    );
-
-    // Ordenar el podio por tradicion 2,1,3
-    const ordenVisual = [1, 0, 2].filter((i) => podiog[i]);
-    podiog = ordenVisual.map((i) => podiog[i]);
-
-    GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
-      posicion: index + 4,
+    Selec = ParticipantesOrdenados.slice(0, 4).map((participante: Participante) => ({
       nombre: participante.nombre,
       escuela: participante.escuela,
     }));
+
+    if (!TOPs) {
+      podiog = ParticipantesOrdenados.slice(0, 3).map(
+        (participante: Participante, index: number) => ({
+          puesto: NPodio[index],
+          posicion: index,
+          gradiente: Gradientes[index],
+          nombre: participante.nombre,
+          escuela: participante.escuela,
+          medalla: Medallas[index],
+        })
+      );
+
+      const ordenVisual = [1, 0, 2].filter((i) => podiog[i]);
+      podiog = ordenVisual.map((i) => podiog[i]);
+
+      GRes = ParticipantesOrdenados.slice(3).map((participante, index) => ({
+        posicion: index + 4,
+        nombre: participante.nombre,
+        escuela: participante.escuela,
+      }));
+    }
   }
 }
 ---
@@ -75,7 +90,7 @@ if (resultadosPublicados) {
     {
       resultadosPublicados ? (
         <>
-          <Seccion titulo="Resultados del Segundo Selectivo" acento="azulUaslp">
+          <Seccion titulo="Resultados del Tercer Selectivo" acento="azulUaslp">
             <p>
               Felicitamos a todas y todos los participantes del Segundo
               Selectivo por su dedicación y entusiasmo. Su esfuerzo refleja una
@@ -84,63 +99,80 @@ if (resultadosPublicados) {
             <strong>Conoce a los perfiles destacados de esta edición.</strong>
           </Seccion>
 
-          <h1 class="titulo-podio">Podio</h1>
+          {
+            TOPs ? (
+              <Tarjeta titulo="¡Felicidades a seleccionados!" acento="azulUaslp">
+                <ul>
+                  {Selec.map((participante) => (
+                    <li>
+                      {participante.nombre} -{" "}
+                      {participante.escuela}
+                    </li>
+                  ))}
+                </ul>
+              </Tarjeta>
+            ) : (
+              <>
+                <h1 class="titulo-podio">Podio</h1>
 
-          <div class="escenario-podio">
-            <section class="podio">
-              {podiog.map((participante) => (
-                <div
-                  class={`columna-podio puesto-${participante.posicion + 1}`}
-                >
-                  <div
-                    class="pilar-fondo"
-                    style={`--gradiente: ${participante.gradiente}`}
-                  />
-                  <div class="info-ganador">
-                    <Image
-                      src={participante.medalla}
-                      alt={`medalla de ${participante.puesto}`}
-                      class="img-medalla"
-                    />
-                    <h2 class="nombre-ganador">{participante.nombre}</h2>
-                    <p class="escuela-ganador">{participante.escuela}</p>
-                    <Etiqueta colorFondo="negro" decoraciones={false}>
-                      {participante.puesto}
-                    </Etiqueta>
-                  </div>
-                </div>
-              ))}
-            </section>
-
-            <section class="seccion-tabla">
-              <Etiqueta colorFondo="blanco" colorTexto="negro">
-                Tabla General de Posiciones
-              </Etiqueta>
-
-              <div class="tabla-responsiva">
-                <table class="tabla-resultados">
-                  <thead>
-                    <tr>
-                      <th>Posición</th>
-                      <th>Nombre</th>
-                      <th>Escuela</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {GRes.map((alumno) => (
-                      <tr>
-                        <td>
-                          <strong>{alumno.posicion}</strong>
-                        </td>
-                        <td>{alumno.nombre}</td>
-                        <td>{alumno.escuela}</td>
-                      </tr>
+                <div class="escenario-podio">
+                  <section class="podio">
+                    {podiog.map((participante) => (
+                      <div
+                        class={`columna-podio puesto-${participante.posicion + 1}`}
+                      >
+                        <div
+                          class="pilar-fondo"
+                          style={`--gradiente: ${participante.gradiente}`}
+                        />
+                        <div class="info-ganador">
+                          <Image
+                            src={participante.medalla}
+                            alt={`medalla de ${participante.puesto}`}
+                            class="img-medalla"
+                          />
+                          <h2 class="nombre-ganador">{participante.nombre}</h2>
+                          <p class="escuela-ganador">{participante.escuela}</p>
+                          <Etiqueta colorFondo="negro" decoraciones={false}>
+                            {participante.puesto}
+                          </Etiqueta>
+                        </div>
+                      </div>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </div>
+                  </section>
+
+                  <section class="seccion-tabla">
+                    <Etiqueta colorFondo="blanco" colorTexto="negro">
+                      Tabla General de Posiciones
+                    </Etiqueta>
+
+                    <div class="tabla-responsiva">
+                      <table class="tabla-resultados">
+                        <thead>
+                          <tr>
+                            <th>Posición</th>
+                            <th>Nombre</th>
+                            <th>Escuela</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {GRes.map((alumno) => (
+                            <tr>
+                              <td>
+                                <strong>{alumno.posicion}</strong>
+                              </td>
+                              <td>{alumno.nombre}</td>
+                              <td>{alumno.escuela}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                </div>
+              </>
+            )
+          }
         </>
       ) : (
         /* --- VISTA DE ESPERA (Si es FALSE) --- */
