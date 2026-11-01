@@ -8,12 +8,13 @@ import Seccion from "../components/Seccion.astro";
 import Oro from "../assets/medallas/OPFOro.png";
 import Plata from "../assets/medallas/OPFPlata.png";
 import Bronce from "../assets/medallas/OPFBronce.png";
+import { colores } from "../config/colores";
 
 // CAMBIAR A TRUE PARA PUBLICAR RESULTADOS
 const resultadosPublicados = true;
 
-//Hijos de perra, me hicieron hacer esto otro, cabrones.
-const TOPs = true; // Cambia a false para cambiar a la otra visualización
+// CAMBIA A FALSE PARA MOSTRARLOS RESULTADOS DE LOS 4 SELECCIONADOS
+const TOPs = true;
 
 interface Participante {
   nombre: string;
@@ -23,13 +24,21 @@ interface Participante {
 
 let podiog: any[] = [];
 let GRes: any[] = [];
-let Selec: Pick<Participante, "nombre" | "escuela">[] = [];
+let Selec: (Pick<Participante, "nombre" | "escuela"> & { color: string })[] =
+  [];
 const Medallas = [Oro, Plata, Bronce];
 const NPodio = ["1er Lugar", "2do Lugar", "3er Lugar"];
 const Gradientes = [
   "linear-gradient(135deg, #ffd700, #fdb931)", // oro
   "linear-gradient(135deg, #e0e0e0, #9e9e9e)", // plata
   "linear-gradient(135deg, #fb995d, #c6704e)", // bronce
+];
+// Colores neutrales para los seleccionados
+const ColoresTOPs = [
+  colores.azulUaslp,
+  colores.verde,
+  colores.naranja,
+  colores.azul,
 ];
 
 const supabaseUrl = import.meta.env.SUPABASE_URL;
@@ -56,9 +65,10 @@ if (resultadosPublicados) {
     );
 
     Selec = ParticipantesOrdenados.slice(0, 4).map(
-      (participante: Participante) => ({
+      (participante: Participante, index: number) => ({
         nombre: participante.nombre,
         escuela: participante.escuela,
+        color: ColoresTOPs[index],
       }),
     );
 
@@ -94,23 +104,38 @@ if (resultadosPublicados) {
         <>
           <Seccion titulo="Resultados del Tercer Selectivo" acento="azulUaslp">
             <p>
-              Felicitamos a todas y todos los participantes del Segundo
-              Selectivo por su dedicación y entusiasmo. Su esfuerzo refleja una
-              verdadera pasión por el conocimiento y la ciencia.
+              Felicitamos a todas y todos los participantes del Tercer Selectivo
+              por su dedicación y entusiasmo. Su esfuerzo refleja una verdadera
+              pasión por el conocimiento y la ciencia.
             </p>
-            <strong>Conoce a los perfiles destacados de esta edición.</strong>
+            <strong>
+              {TOPs
+                ? "Estas son las cuatro personas seleccionadas de esta edición."
+                : "Conoce a los perfiles destacados de esta edición."}
+            </strong>
           </Seccion>
 
           {TOPs ? (
-            <Tarjeta titulo="¡Felicidades a seleccionados!" acento="azulUaslp">
-              <ul>
+            <>
+              <h1 class="titulo-podio">
+                <Etiqueta colorFondo="gradienteNaranja">Seleccionados</Etiqueta>
+              </h1>
+
+              <section class="bases-tops">
                 {Selec.map((participante) => (
-                  <li>
-                    {participante.nombre} - {participante.escuela}
-                  </li>
+                  <div class="columna-top">
+                    <div
+                      class="base-top"
+                      style={`--color-base: ${participante.color}`}
+                    />
+                    <div class="info-top">
+                      <h2 class="nombre-top">{participante.nombre}</h2>
+                      <p class="escuela-top">{participante.escuela}</p>
+                    </div>
+                  </div>
                 ))}
-              </ul>
-            </Tarjeta>
+              </section>
+            </>
           ) : (
             <>
               <h1 class="titulo-podio">Podio</h1>
@@ -325,6 +350,79 @@ if (resultadosPublicados) {
     @media (max-width: 768px) {
       order: 3;
     }
+  }
+
+  /* bases de seleccionados
+   * misma altura para todos */
+  .bases-tops {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+    padding-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .columna-top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .base-top {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-base),
+      color-mix(in srgb, var(--color-base), black 25%)
+    );
+    border-radius: 60px 60px 0 0;
+    z-index: 1;
+    mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent);
+    box-shadow:
+      inset 0 4px 15px rgba(255, 255, 255, 0.4),
+      0 10px 20px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 480px) {
+      mask-image: none;
+      border-radius: 16px;
+    }
+  }
+
+  .info-top {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding: 3rem 1rem 14rem;
+    text-align: center;
+    color: var(--blanco);
+
+    @media (max-width: 480px) {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  .nombre-top {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+    color: inherit;
+  }
+
+  .escuela-top {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    opacity: 0.9;
   }
 
   /* TABLA */
