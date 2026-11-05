@@ -9,32 +9,199 @@ export const subtemas = [
   "Círculo Unitario y Radianes",
   "Leyes de Senos y Cosenos",
 ];
-import Layout from "../../../layouts/Layout.astro";
+export const disponible = true;
+import Tema from "../../../layouts/Tema.astro";
 import Seccion from "../../../components/Seccion.astro";
-export const disponible = false;
+import Tarjeta from "../../../components/Tarjeta.astro";
+import Etiqueta from "../../../components/Etiqueta.astro";
+import Tabla from "../../../components/Tabla.astro";
+
+const L = String.raw;
+
+const InfografiaId = "1JRmU7CRjEh3bCDB-eQj2d9jwuUo5mJjk";
+const ProblemasId = "1v1Uz9cPaxDfnAqo8n-HhvD417ZqnJaau";
+const SolucionarioId = "1jTJ23ao2TufCuow-C3SwevA1U0qwM05-";
 ---
 
-<Layout>
-  <main class="contenedor-tema">
-    <h1>{titulo}</h1>
-    <p class="intro">{descripcion}</p>
+<Tema latex={true} {InfografiaId} {ProblemasId} {SolucionarioId}>
+  <h1>{titulo}</h1>
+  <p>{descripcion}</p>
 
-    <Seccion titulo="Triangulos Rectángulos" />
+  <Seccion titulo="Fundamentos" acento="dorado">
+    <p>Para trigonometria es necesario el concepto de angulos</p>
+  </Seccion>
+  <Etiqueta colorFondo="dorado">Ángulos</Etiqueta>
+  <p>
+    Un ángulo es la abertura formada por dos semirrectas que parten de un mismo
+    punto, llamado vértice, los cuales se clasifican de la siguiente manera:
+  </p>
+  <ul>
+    <li>Agudo: {L`$0^\circ < \theta < 90^\circ$`}</li>
+    <li>Recto: {L`$\theta = 90^\circ$`}</li>
+    <li>Obtuso: {L`$90^\circ < \theta < 180^\circ$`}</li>
+    <li>Llano: {L`$\theta = 180^\circ$`}</li>
+  </ul>
+  <Tarjeta titulo="Relaciones importantes" acento="dorado">
+    <strong>Complementarios:</strong> suman {L`$90^\circ$`}.
+    <br />
+    <strong>Suplementarios:</strong> suman {L`$180^\circ$`}.
+    <br />
+    <strong>Opuestos por el vértice:</strong> son iguales.
+  </Tarjeta>
 
-    <Seccion titulo="Razones Trigonométricas" />
+  <Seccion titulo="Triángulos Rectángulos" acento="naranja">
+    <p>
+      Un <strong>Triángulos Rectángulos</strong> es una figura geométrica de tres
+      lados que se caracteriza por tener un ángulo recto, es decir, un ángulo de 90°
+    </p>
+  </Seccion>
 
-    <Seccion titulo="Identidades Pitagóricas" />
+  <p>
+    Este tiene la propiedad que al sumar sus angulos siempre dan 90° y se
+    compone de 3 lineas llamadas:
+  </p>
 
-    <Seccion titulo="Círculo Unitario y Radianes" />
+  <Tarjeta
+    titulo="Lineas que conforman el triangulo rectangulo"
+    acento="naranja"
+  >
+    <ul>
+      <li>
+        <strong>Hipotenusa</strong>: Es el lado más largo del triángulo y se
+        encuentra frente al ángulo de 90°.
+      </li>
+      <li>
+        <strong>Cateto opuesto</strong>: Es el lado que se encuentra frente al
+        ángulo que estamos estudiando.
+      </li>
+      <li>
+        <strong>Cateto adyacente</strong>: Es el cateto que está junto al ángulo
+        que estamos estudiando.
+      </li>
+    </ul>
+  </Tarjeta>
+  <p>
+    Nótese que siempre esto sera relativo al angulo que estudiemos,al igual que
+    con las razones trigonométricas que son las siguientes:
+  </p>
 
-    <Seccion titulo="Leyes de Senos y Cosenos" />
-  </main>
-</Layout>
+  <Tarjeta titulo="Razones trigonometricas" acento="naranja">
+    <ul>
+      <li>
+        <strong
+          >{
+            String.raw`$$\sin \theta = \frac{\text{Cateto opuesto}}{\text{Hipotenusa}}$$`
+          }</strong
+        >
+      </li>
+      <li>
+        <strong
+          >{
+            String.raw`$$\cos \theta = \frac{\text{Cateto adyacente}}{\text{Hipotenusa}}$$`
+          }</strong
+        >
+      </li>
+      <li>
+        <strong
+          >{
+            String.raw`$$\tan \theta = \frac{\text{Cateto opuesto}}{\text{Cateto adyacente}}$$`
+          }</strong
+        >
+      </li>
+    </ul>
+  </Tarjeta>
 
-<style>
-  .contenedor-tema {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>
+  <Seccion titulo="Identidades Pitagóricas" acento="azul">
+    <p>
+      Las <strong>identidades pitagóricas </strong> son igualdades trigonométricas
+      que relacionan el seno, coseno, tangente, secante, cotangente y cosecante de
+      un ángulo.
+    </p>
+  </Seccion>
+  <p>Las mas importantes son las siguientes:</p>
+
+  <Tarjeta titulo="Identidades Pitagóricas" acento="azul">
+    <ul>
+      <li>
+        <strong>{String.raw`$$\sin^2 \theta + \cos^2 \theta = 1$$`}</strong>
+      </li>
+      <li>
+        <strong>{String.raw`$$1 + \tan^2 \theta = \sec^2 \theta$$`}</strong>
+      </li>
+      <li>
+        <strong>{String.raw`$$1 + \cot^2 \theta = \csc^2 \theta$$`}</strong>
+      </li>
+    </ul>
+  </Tarjeta>
+  <p>
+    Estas expresiones son útiles cuando conocemos una razón trigonométrica y
+    queremos calcular otra.
+  </p>
+
+  <Seccion titulo="Círculo Unitario y Radianes" acento="verde">
+    <p>
+      El <strong>círculo unitario </strong> es una circunferencia de radio igual a
+      1, cuyo centro se encuentra en el origen de un plano cartesiano
+    </p>
+  </Seccion>
+
+  <p>
+    Es una herramienta fundamental de la trigonometría porque permite
+    representar ángulos y relacionarlos con las funciones seno y coseno, este se
+    representa matematicamente como:
+  </p>
+
+  <p>{String.raw`$$x² + y² = 1$$`}</p>
+
+  <p>
+    Y aunque para representar los angulos podemos usar grados tambien podemos
+    usar una nueva herramienta llamada Radianes, estos son muy utiles ya que sus
+    numeros son mas pequeños que con los grados, lo que podemos observar en la
+    siguiente tabla:
+  </p>
+
+  <Tabla
+    acento="verde"
+    encabezados={["Grados", "Radianes"]}
+    filas={[
+      ["30°", "$π/6 $ rad"],
+      ["45°", "$π/4$ rad"],
+      ["90°", "$π/2$ rad"],
+      ["180°", "$π$ rad"],
+      ["360°", "$2π$ rad"],
+    ]}
+  />
+
+  <Seccion titulo="Leyes de Senos y Cosenos" acento="azulUaslp">
+    <p>
+      Las <strong>leyes de senos y cosenos </strong> son dos herramientas fundamentales
+      de la trigonometría que permiten calcular lados y ángulos desconocidos de cualquier
+      triángulo
+    </p>
+  </Seccion>
+
+  <Etiqueta colorFondo="azulUaslp">Ley de senos</Etiqueta>
+  <p>
+    La <strong>ley de senos</strong> establece que, en cualquier triángulo, la relación
+    entre la longitud de un lado y el seno de su ángulo opuesto es constante, matemáticamente
+    se expresa como:
+  </p>
+
+  <p>
+    {String.raw`$$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$$`}
+  </p>
+  <Etiqueta colorFondo="azulUaslp">Ley de cosenos</Etiqueta>
+  <p>
+    La <strong>ley de cosenos</strong> establece una relación entre los tres lados
+    de un triángulo y el coseno de uno de sus ángulos, es una generalización del teorema
+    de Pitágoras que puede utilizarse en cualquier triángulo, esto se puede reprsentar
+    matematicamente como:
+  </p>
+  <p>{String.raw`$$c^2 = a^2 + b^2 - 2ab \cos C$$`}</p>
+  <p>
+    esto aplica para cualquier lado del triangulo asi que estas versiones de la
+    ecuacion son tambien validas:
+  </p>
+  <p>{String.raw`$$a^2 = b^2 + c^2 - 2bc \cos A $$`}</p>
+  <p>{String.raw`$$b^2 = a^2 + c^2 - 2ac \cos B$$`}</p>
+</Tema>
